@@ -22,6 +22,8 @@ that did well, and is checked with `check.py --reel`:
    to 2.5 s every 6 to 8 s so the craft can be seen.
 4. Hook text from 0.0 s: 3 to 6 whole words (never typed letter by letter), cap height 6 to 9% of the frame height
    (115 to 170 px at 1920), inside the band 14 to 65% from the top. It names the claim; the picture proves it.
+   White words on a bright or busy frame get a soft dark scrim under them: 4.5:1 or more against the pixels around
+   the letters (`check.py` gate hookread measures frame 0 even when the reel has no meta).
 5. Sound from 0.00 s, with a hit on the first big change.
 6. No logo, handle or URL before 3 s. The brand goes on the last 2 s card and in the caption.
 7. 15 to 30 s, with an ending that loops into frame 0.

@@ -179,6 +179,21 @@ class Gates(unittest.TestCase):
         code, g, out = check(later, str(self.tmp / "c18"), "--reel")
         self.assertEqual((g["frame0"], g["hook"]), ("PASS", "PASS"), out)
 
+    def test_hookread(self):
+        # A reel with no meta: white hook words on a pale, busy-free background are unreadable (FAIL); the same words on
+        # a dark bed pass; a wide white area with no words (a sky, a flower) is not taken for words (INFO).
+        strokes = ",".join(f"drawbox=x={60 + 22 * i}:y=200:w=8:h=110:color=white:t=fill" for i in range(18))
+        cases = {"pale": ("0xa8b894", strokes, "FAIL"), "dark": ("0x1c2633", strokes, "PASS"),
+                 "sky": ("0xa8b894", "drawbox=x=100:y=180:w=320:h=220:color=white:t=fill", "INFO")}
+        own = self.tmp / "hookread"  # its own folder: another test's meta.json next to the film would skip the gate
+        own.mkdir(exist_ok=True)
+        for i, (name, (bg, draw, want)) in enumerate(cases.items()):
+            film = own / f"hook_{name}.mp4"
+            ff("-f", "lavfi", "-i", f"color=c={bg}:s=540x960:r=30:d=2", "-vf", draw, "-c:v", "libx264", "-pix_fmt",
+               "yuv420p", str(film))
+            code, g, out = check(film, str(own / f"c{i}"), "--reel")
+            self.assertEqual(g["hookread"], want, f"{name}: {out}")
+
     def test_loop_gate(self):
         code, g, out = check(self.good, str(self.tmp / "c4"), "--loop")
         self.assertEqual(g["loop"], "FAIL", out)

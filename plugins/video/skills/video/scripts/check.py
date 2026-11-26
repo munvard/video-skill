@@ -18,6 +18,8 @@ Gates (numbers come from the file, never from the plan):
   textsize    every word is at least 14 px tall when the frame is 360 px wide
   overlap     no two texts on screen together for 0.5 s or more with their boxes overlapping
   contrast    every line at least 4.5:1 against the background around its letters (text colours from the meta)
+  hookread    9:16 with no meta: light hook words found on frame 0 (thin near-white strokes in the 14 to 65% band)
+              are at least 4.5:1 against the pixels around them. A FAIL only with --reel; no words found is INFO
   band        9:16 only: no empty band (no edges, no change) over 30% of the height for more than 1 s
   safearea    9:16 only: text stays inside the area the Reels, Shorts and TikTok buttons and captions leave free
   loudness    -14 LUFS within 1, true peak at or under -1.0 dBTP
@@ -175,6 +177,42 @@ def contrast(img, box, colors):
     return worst
 
 
+def morph(mask, k, grow):
+    """Separable square dilation (grow) or erosion of a bool mask by a k x k box."""
+    from numpy.lib.stride_tricks import sliding_window_view as win
+    r = k // 2
+    for ax in (0, 1):
+        pad = [(0, 0), (0, 0)]
+        pad[ax] = (r, r)
+        w = win(np.pad(mask, pad, constant_values=not grow), k, axis=ax)
+        mask = w.any(axis=-1) if grow else w.all(axis=-1)
+    return mask
+
+
+def hook_words(img):
+    """Light hook words on frame 0, found without meta: near-white thin strokes in the hook band (14 to 65% of the
+    height, x 60 to 1020 at 1080 wide). Wide light areas (sky, a white flower, a lit cloud) survive an opening with a
+    box wider than any letter stroke and are not words. Returns (text luminance, median luminance of the pixels just
+    around the strokes, share of the band that is strokes) or None when there are no words."""
+    H, W = img.shape[:2]
+    st = max(1, W // 540)
+    im = img[::st, ::st]
+    h, w = im.shape[:2]
+    band = im[int(0.14 * h):int(0.65 * h), int(w * 60 / 1080):int(w * 1020 / 1080)]
+    lum = rel_lum(band)
+    light = lum > 0.75
+    k = max(5, round(0.02 * h)) | 1  # wider than a stroke of a 9% capital (about 0.012 of the height)
+    wide = morph(morph(light, k, False), k, True)
+    strokes = light & ~wide
+    share = strokes.mean()
+    if share < 0.004:
+        return None
+    ring = morph(strokes, max(3, round(0.008 * h)) | 1, True) & ~morph(strokes, 3, True) & ~wide
+    if ring.sum() < 50:
+        return None
+    return float(np.median(lum[strokes])), float(np.median(lum[ring])), float(share)
+
+
 def main():
     args = sys.argv[1:]
     if not args or args[0] in ("-h", "--help"):
@@ -228,6 +266,18 @@ def main():
     gate("frame0", ok0, f"mean luma {f0.mean():.0f} (40+), contrast {f0.std():.0f} (18+), sharpness {s0:.0f} "
          f"vs opening {sop:.0f} (50%+) and film {s90:.0f} (25%+)"
          + (f", words at frame 0: {len(words0)}" if meta else ", no meta: words not checked"))
+
+    if H > W and not texts:  # no meta: still measure light hook words on frame 0 against what is right around them
+        img0 = frame_rgb(film, 0.0, W, H)
+        hw = hook_words(img0) if img0 is not None else None
+        if hw is None:
+            gate("hookread", None, "no light hook words found on frame 0 (dark words or none): check by eye")
+        else:
+            lt, lb, sh_ = hw
+            r = (max(lt, lb) + 0.05) / (min(lt, lb) + 0.05)
+            gate("hookread", (r >= 4.5) if reel else None,
+                 f"frame 0 hook words {r:.1f}:1 against the median of the pixels around their strokes (4.5:1 or more)"
+                 + ("" if r >= 4.5 else ": put a soft dark scrim or a shadow behind the words"))
 
     flat = (g.std(axis=(1, 2)) < 1.5) & ((g.max(axis=(1, 2)) - g.min(axis=(1, 2))) < 8)
     bad = [(s, l) for s, l in runs(flat) if l > 3]
