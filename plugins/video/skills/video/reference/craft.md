@@ -41,6 +41,11 @@ What fails, from experience:
   fails the gate.
 - The subject of every beat fills at least 70% of the frame width. A slab at 20% of the width with tiny content is a fail.
 - Real UI or rebuilt UI lives inside the world (on a device, as a lit glass layer), never pasted flat on top.
+- Fewer, cleaner materials with real light beat busy procedural detail. Two or three surfaces (a soft gradient, one
+  material with a light and a shadow) look premium; noise painted over the whole ground looks like a game map.
+- Every texture is made at or above the output size with smooth filtering. Never stretch small noise, never sample with
+  nearest neighbour. Particles and sparkles are soft round dots at sub-pixel positions, never square specks. Look at
+  the 100% crops from `check.py`: any visible block or square speck is a fail.
 
 ## 4. Motion
 - The camera follows something, then settles on what must be read. Motion added to reach "energy" is a fault, and so is a
@@ -61,6 +66,8 @@ What fails, from experience:
 - One text idea at a time near the action. Each line stays fully on screen at least 0.3 s a word plus 0.4 s, and never
   under 1 s. A subtitle never covers the action it talks about. White text on a bright screen needs a scrim.
 - One type family for the whole film. Big, short, plain words; no slogans.
+- Contrast: every line at least 4.5:1 against the background around its letters (`check.py` measures it). Coloured
+  words on a busy world need a soft dark shadow or a scrim; muted or pastel words on a mid-tone world fail.
 
 ## 6. Sound
 - Music made on a beat grid (`sound.py`), so every cut, hit and word lands on it. It builds: quiet, rise, main, break,

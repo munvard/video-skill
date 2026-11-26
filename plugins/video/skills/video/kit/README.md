@@ -23,7 +23,7 @@ A film is one HTML page (or several, joined later). The page sets:
 - `window.READY` (optional): a promise that resolves when fonts, images and models are loaded.
 - `window.EV` (optional): sound events `[{t, type, gain, pan}]`. Types: whoosh, hit, impact, click, tick, pop, swish,
   riser, drop, shimmer, thud, type, glass, bell. `scripts/sound.py sfx` turns them into sound.
-- `window.TEXTS(t)` (optional but expected): every text on screen at `t`, `[{id, text, x0, y0, x1, y1, px}]`. For
+- `window.TEXTS(t)` (optional but expected): every text on screen at `t`, `[{id, text, x0, y0, x1, y1, px, colors}]` (`colors`: the CSS colours of the words, for the contrast gate; `domTexts` and `say()` fill it in). For
   HTML text, mark elements with `data-say="id"` and set `window.TEXTS = domTexts`. For canvas text, draw it with
   `say(c, id, text, x, y, px, font, fill, align)`. `scripts/check.py` uses it for reading time, text size and safe area.
 

@@ -96,8 +96,8 @@ yourself, write the verdict in `concept.md`, and continue. A look that is not cl
 ## 7. Check
 1. `python SK/scripts/check.py film.mp4 --meta draft.meta.json` (with `--loop` for a loop). Every gate prints PASS or FAIL
    with its numbers. Fix every FAIL.
-2. Then look at every sheet yourself: the beauty pass first, then `reference/checklist.md` on exact frames. Numbers
-   passing never means the film is good.
+2. Then look at every sheet and every 100% crop yourself: the beauty pass first, then `reference/checklist.md` on exact
+   frames. Numbers passing never means the film is good.
 3. A fix never makes the film flatter, darker or more ordinary: re-render bigger instead of swapping a scene for a flat
    panel. Compare each scene with the last version the user liked.
 4. QUICK films get the beauty pass too. Write down what you would change next. Every item a viewer would see (a flat or

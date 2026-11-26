@@ -218,8 +218,9 @@ if (out) {
       if (r.lost) { abort ??= `the WebGL context (${r.lost}) was lost at frame ${f}: every later frame would be blank. Use fewer WebGL canvases or fewer workers.`; break; }
       if (r.texts) for (const x of r.texts) {
         const key = String(x.id) + '\u0000' + x.text, inside = x.x0 >= 0 && x.y0 >= 0 && x.x1 <= W && x.y1 <= H;
-        const s = texts.get(key) || { id: String(x.id), text: x.text, frames: [], box: null, px: x.px ?? null, pass: !!x.pass };
+        const s = texts.get(key) || { id: String(x.id), text: x.text, frames: [], box: null, boxes: new Map(), px: x.px ?? null, pass: !!x.pass, colors: x.colors || [] };
         s.frames.push([f, inside ? 1 : 0]); if (inside && !s.box) s.box = [x.x0, x.y0, x.x1, x.y1];
+        if (inside) s.boxes.set(f, [x.x0, x.y0, x.x1, x.y1]);
         if (x.px != null) s.px = s.px == null ? x.px : Math.min(s.px, x.px);
         if (!s.allBox) s.allBox = [x.x0, x.y0, x.x1, x.y1]; else s.allBox = [Math.min(s.allBox[0], x.x0), Math.min(s.allBox[1], x.y0), Math.max(s.allBox[2], x.x1), Math.max(s.allBox[3], x.y1)];
         texts.set(key, s);
@@ -242,7 +243,8 @@ if (out) {
     s.frames.sort((p, q) => p[0] - q[0]);
     const firstIn = s.frames.find(x => x[1]); let run = 0, start = null, last = null;
     if (firstIn) { start = firstIn[0]; last = start; for (const [f, ins] of s.frames) { if (f < start) continue; if (f === last || f === last + 1) { if (!ins) break; last = f; } else if (f > last + 1) break; } run = (last - start + 1) / fps; }
-    spans.push({ id: s.id, text: s.text, t0: (start ?? s.frames[0][0]) / fps, t1: ((last ?? s.frames.at(-1)[0]) + 1) / fps, run: +run.toFixed(3), full: !!firstIn, pass: s.pass, px: s.px, box: s.box || s.allBox });
+    const mid = start == null ? null : Math.round((start + last) / 2), midBox = mid == null ? null : s.boxes.get(mid) || s.box;
+    spans.push({ id: s.id, text: s.text, t0: (start ?? s.frames[0][0]) / fps, t1: ((last ?? s.frames.at(-1)[0]) + 1) / fps, run: +run.toFixed(3), full: !!firstIn, pass: s.pass, px: s.px, box: s.box || s.allBox, colors: s.colors, tm: mid == null ? null : +(mid / fps).toFixed(4), boxm: midBox });
   }
   spans.sort((p, q) => p.t0 - q.t0);
   const meta = { w: W, h: H, fps, dur: DUR, frames: total, from: A / fps, to: B / fps, events: events.map(e => ({ type: 'hit', gain: 1, pan: 0, ...e, t: +(e.t - A / fps).toFixed(4) })).filter(e => e.t >= 0 && e.t <= total / fps), texts: spans, page: path.basename(pageFile) };

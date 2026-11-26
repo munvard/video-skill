@@ -83,7 +83,7 @@ function say(c, id, s, x, y, px, font = `800 ${px}px Inter`, fill = '#fff', alig
   const k = c.canvas === S.out ? 1 : (S.ss || 1), m = c.getTransform(), w = c.measureText(s).width, x0 = align === 'center' ? x - w / 2 : align === 'right' ? x - w : x;
   const p = (X, Y) => [(m.a * X + m.c * Y + m.e) / k, (m.b * X + m.d * Y + m.f) / k];
   const a = p(x0, y - px * .78), b = p(x0 + w, y + px * .22), sc = Math.hypot(m.a, m.b) / k;
-  if ((o.alpha ?? c.globalAlpha) > .5) TX.set(id + '|' + s, { id, text: s, x0: Math.min(a[0], b[0]), y0: Math.min(a[1], b[1]), x1: Math.max(a[0], b[0]), y1: Math.max(a[1], b[1]), px: px * sc, pass: !!o.pass });
+  if ((o.alpha ?? c.globalAlpha) > .5) TX.set(id + '|' + s, { id, text: s, x0: Math.min(a[0], b[0]), y0: Math.min(a[1], b[1]), x1: Math.max(a[0], b[0]), y1: Math.max(a[1], b[1]), px: px * sc, pass: !!o.pass, colors: typeof fill === 'string' ? [fill] : [] });
 }
 async function boot() {
   if (window.USER_READY) await window.USER_READY;
@@ -126,7 +126,9 @@ function domTexts() {
     if (op <= .5) continue;
     const rg = document.createRange(); rg.selectNodeContents(el); const r = rg.getBoundingClientRect(); if (r.width < 1 || r.height < 1) continue;
     let sc = 1; for (let e = el; e && e.nodeType === 1; e = e.parentElement) { const t = getComputedStyle(e).transform; if (t && t !== 'none') { const q = new DOMMatrix(t); sc *= Math.hypot(q.a, q.b); } }
-    out.push({ id: el.dataset.say, text: el.innerText.trim().replace(/\s+/g, ' '), x0: r.left, y0: r.top, x1: r.right, y1: r.bottom, px: parseFloat(cs.fontSize) * sc, pass: el.hasAttribute('data-pass') });
+    const colors = new Set(), tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (let n = tw.nextNode(); n; n = tw.nextNode()) if (n.textContent.trim() && n.parentElement) { const ps = getComputedStyle(n.parentElement); colors.add(ps.webkitTextFillColor && ps.webkitTextFillColor !== ps.color && !/rgba\(0, 0, 0, 0\)/.test(ps.webkitTextFillColor) ? ps.webkitTextFillColor : ps.color); }
+    out.push({ id: el.dataset.say, text: el.innerText.trim().replace(/\s+/g, ' '), x0: r.left, y0: r.top, x1: r.right, y1: r.bottom, px: parseFloat(cs.fontSize) * sc, pass: el.hasAttribute('data-pass'), colors: [...colors] });
   }
   return out;
 }

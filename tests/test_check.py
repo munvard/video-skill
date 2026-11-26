@@ -64,6 +64,22 @@ class Gates(unittest.TestCase):
         self.assertEqual(check(film, str(self.tmp / "c5"))[1]["slab"], "FAIL")
         self.assertEqual(check(self.good, str(self.tmp / "c6"))[1]["slab"], "PASS")
 
+    def test_contrast(self):
+        # "Letters" (bars) in a text box: pale teal on teal fails, white on navy passes.
+        def film(name, bg, fg):
+            f = self.tmp / f"{name}.mp4"
+            bars = ",".join(f"drawbox=x={100 + i * 40}:y=400:w=20:h=80:color=0x{fg}:t=fill" for i in range(8))
+            ff("-f", "lavfi", "-i", f"color=c=0x{bg}:s=540x960:r=30:d=2", "-vf", bars, "-c:v", "libx264", "-pix_fmt", "yuv420p", str(f))
+            meta = {"w": 540, "h": 960, "fps": 30, "dur": 2, "frames": 60, "events": [], "texts": [
+                {"id": "a", "text": "Stay out", "t0": 0, "t1": 2, "run": 2, "full": True, "pass": False, "px": 80,
+                 "box": [90, 390, 430, 490], "boxm": [90, 390, 430, 490], "tm": 1.0, "colors": [f"#{fg}"]}]}
+            (self.tmp / f"{name}.meta.json").write_text(json.dumps(meta), encoding="utf-8")
+            return check(f, str(self.tmp / f"c_{name}"), "--meta", str(self.tmp / f"{name}.meta.json"))
+        code, g, out = film("lowc", "3c8c96", "96bec8")
+        self.assertEqual(g["contrast"], "FAIL", out)
+        code, g, out = film("highc", "142850", "ffffff")
+        self.assertEqual(g["contrast"], "PASS", out)
+
     def test_meta_gates(self):
         meta = {"w": 540, "h": 960, "fps": 30, "dur": 4, "frames": 120, "events": [], "texts": [
             {"id": "a", "text": "Fine line here", "t0": 0, "t1": 4, "run": 4, "full": True, "px": 60, "box": [40, 200, 460, 270]},

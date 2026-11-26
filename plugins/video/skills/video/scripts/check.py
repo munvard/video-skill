@@ -16,10 +16,12 @@ Gates (numbers come from the file, never from the plan):
   slab        no flat dark area (a dark panel, an empty dark sky) over 25% of the frame for more than 1.5 s
   reading     every line stays fully on screen long enough to read: 0.3 s a word plus 0.4 s, at least 1.0 s
   textsize    every word is at least 14 px tall when the frame is 360 px wide
+  contrast    every line at least 4.5:1 against the background around its letters (text colours from the meta)
   safearea    9:16 only: text stays inside the area the Reels, Shorts and TikTok buttons and captions leave free
   loudness    -14 LUFS within 1, true peak at or under -1.0 dBTP
   loop        with --loop: the last frame flows into frame 0 (PSNR at least 30 dB)
-Also written to out_folder: sheet_*.jpg (1 frame a second at phone size, with the 9:16 safe area drawn), frame0_360.png,
+Also written to out_folder: sheet_*.jpg (1 frame a second at phone size, with the 9:16 safe area drawn), crop_*.png
+(the most detailed 512 px square at four moments, at 100%: look for blocky or pixelated texture), frame0_360.png,
 check.json. Look at every sheet yourself: the gates catch numbers, not beauty.
 Exit code 1 when any gate fails.
 """
@@ -92,6 +94,71 @@ def find_meta(film, frames):
         except (OSError, ValueError):
             continue
     return best
+
+
+NAMED = {"white": (255, 255, 255), "black": (0, 0, 0)}
+
+
+def parse_color(c):
+    """CSS colour (#rgb, #rrggbb, rgb(), rgba(), white, black) to (r, g, b), or None."""
+    c = str(c).strip().lower()
+    if c in NAMED:
+        return NAMED[c]
+    m = re.fullmatch(r"#([0-9a-f]{3}|[0-9a-f]{6})([0-9a-f]{2})?", c)
+    if m:
+        h = m.group(1)
+        h = "".join(ch * 2 for ch in h) if len(h) == 3 else h
+        return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+    m = re.fullmatch(r"rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)(?:[\s,/]+([\d.]+%?))?\s*\)", c)
+    if m:
+        a = m.group(4)
+        if a is not None and (float(a.rstrip("%")) / (100 if a.endswith("%") else 1)) < 0.5:
+            return None
+        return tuple(round(float(m.group(i))) for i in (1, 2, 3))
+    return None
+
+
+def rel_lum(rgb):
+    """WCAG relative luminance of sRGB values (0 to 255), works on arrays."""
+    x = np.asarray(rgb, np.float32) / 255
+    x = np.where(x <= 0.04045, x / 12.92, ((x + 0.055) / 1.055) ** 2.4)
+    return x[..., 0] * 0.2126 + x[..., 1] * 0.7152 + x[..., 2] * 0.0722
+
+
+def frame_rgb(film, t, W, H):
+    p = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.3f}", "-i", str(film), "-frames:v", "1", "-f", "rawvideo",
+                        "-pix_fmt", "rgb24", "-"], capture_output=True)
+    a = np.frombuffer(p.stdout, np.uint8)
+    return a[: W * H * 3].reshape(H, W, 3) if a.size >= W * H * 3 else None
+
+
+def contrast(img, box, colors):
+    """Worst contrast ratio between each text colour and the typical (median) background around and between its letters.
+    Pixels near a text colour, and 2 px around them (anti-aliasing), are not background."""
+    H, W = img.shape[:2]
+    x0, y0, x1, y1 = box
+    pad = 0.1 * (y1 - y0)
+    x0, y0, x1, y1 = (max(0, int(x0 - pad)), max(0, int(y0 - pad)), min(W, int(x1 + pad)), min(H, int(y1 + pad)))
+    reg = img[y0:y1, x0:x1].astype(np.float32)
+    if reg.size == 0:
+        return None
+    near = np.zeros(reg.shape[:2], bool)
+    for c in colors:
+        near |= np.abs(reg - np.array(c, np.float32)).max(axis=2) < 48
+    grow = near.copy()
+    for dy in (-2, -1, 0, 1, 2):
+        for dx in (-2, -1, 0, 1, 2):
+            grow |= np.roll(np.roll(near, dy, 0), dx, 1)
+    bg = rel_lum(reg[~grow])
+    if bg.size < 50:
+        return None
+    worst = None
+    for c in colors:
+        lt = float(rel_lum(c))
+        lb = float(np.median(bg))
+        r = (max(lt, lb) + 0.05) / (min(lt, lb) + 0.05)
+        worst = r if worst is None else min(worst, r)
+    return worst
 
 
 def main():
@@ -187,6 +254,24 @@ def main():
             x0, x1, y0, y1 = 60 / 1080 * W, 940 / 1080 * W, 250 / 1920 * H, 1450 / 1920 * H
             out_t = [t for t in texts if t.get("box") and (t["box"][0] * sx < x0 - 1 or t["box"][2] * sx > x1 + 1 or t["box"][1] * sx < y0 - 1 or t["box"][3] * sx > y1 + 1)]
             gate("safearea", not out_t, "all text inside x 60 to 940, y 250 to 1450 (at 1080x1920)" if not out_t else "outside: " + "; ".join(f"'{t['text'][:22]}' box {[round(v) for v in t['box']]}" for t in out_t[:6]))
+        lows, seen = [], []
+        for t in texts:
+            cols = [c for c in (parse_color(x) for x in t.get("colors") or []) if c]
+            box = t.get("boxm") or t.get("box")
+            if not cols or not box or t.get("tm") is None:
+                continue
+            img = frame_rgb(film, t["tm"], W, H)
+            r = contrast(img, [v * sx for v in box], cols) if img is not None else None
+            if r is None:
+                continue
+            seen.append(f"'{t['text'][:18]}' {r:.1f}")
+            if r < 4.5:
+                lows.append(f"'{t['text'][:24]}' {r:.1f}:1 at {t['tm']:.1f} s")
+        if seen:
+            gate("contrast", not lows, ("every line 4.5:1 or more against the background around its letters: " + ", ".join(seen[:10])) if not lows else
+                 "under 4.5:1: " + "; ".join(lows[:8]) + ". Use a stronger colour, a soft shadow or a scrim behind the words")
+        else:
+            gate("contrast", None, "no text colours in the meta (render with the current kit/render.mjs); check contrast by eye")
     else:
         gate("reading", None, "no meta.json from kit/render.mjs: reading time, text size and safe area are not checked; check them by eye")
 
@@ -223,9 +308,27 @@ def main():
         old.unlink()
     run(["ffmpeg", "-v", "error", "-y", "-i", str(film), "-vf", vf, "-q:v", "3", str(out / "sheet_%02d.jpg")])
     run(["ffmpeg", "-v", "error", "-y", "-i", str(film), "-frames:v", "1", "-vf", "scale=360:-2", str(out / "frame0_360.png")])
+    # 100% crops: the most detailed 512 px square at a few moments, at full size, to see blocky or pixelated texture.
+    for old_c in out.glob("crop_*.png"):
+        old_c.unlink()
+    cs = min(512, W, H)
+    for k, tt in enumerate(np.linspace(0.15, 0.85, 4) * vdur):
+        img = frame_rgb(film, float(tt), W, H)
+        if img is None:
+            continue
+        gy = img.mean(axis=2)
+        st = max(16, cs // 4)
+        best, bx, by = -1.0, 0, 0
+        for y in range(0, H - cs + 1, st):
+            for x in range(0, W - cs + 1, st):
+                d = float(np.abs(np.diff(gy[y:y + cs:4, x:x + cs:4], axis=1)).mean())
+                if d > best:
+                    best, bx, by = d, x, y
+        run(["ffmpeg", "-v", "error", "-y", "-ss", f"{tt:.3f}", "-i", str(film), "-frames:v", "1", "-vf",
+             f"crop={cs}:{cs}:{bx}:{by}", str(out / f"crop_{k + 1}_{tt:.1f}s.png")])
     failed = [r["gate"] for r in RES if r["ok"] is False]
     (out / "check.json").write_text(json.dumps({"film": str(film), "meta": str(meta_path) if meta else None, "gates": RES, "failed": failed}, indent=1), encoding="utf-8")
-    print(("FAILED: " + ", ".join(failed)) if failed else "ALL GATES PASS", f"| sheets in {out}: look at every one (beauty first), then reference/checklist.md")
+    print(("FAILED: " + ", ".join(failed)) if failed else "ALL GATES PASS", f"| sheets and 100% crops in {out}: look at every one (beauty first), then reference/checklist.md")
     sys.exit(1 if failed else 0)
 
 
