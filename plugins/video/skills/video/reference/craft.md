@@ -83,6 +83,9 @@ What fails, from experience:
   x 60 to 940 and y 250 to 1450: the platform's name, caption and buttons cover the rest.
 - 16:9 (1920x1080): hook 120 to 130 px, name about 200, lines about 76, URL about 96.
 - Minimum: every word at least 14 px tall when the frame is 360 px wide (42 px font at 1080 wide, 75 px at 1920 wide).
+- A 9:16 cut of a 16:9 screen (a web page, a dashboard, a desktop app) never shows the whole screen small: crop to
+  regions that read at 1:1 pixels or larger at phone width (a sidebar, one card, the hero headline), each filling the
+  frame, and pan or cut across them. A before and after uses the same crop in the same framing, joined by a wipe.
 - One text idea at a time near the action. Each line stays fully on screen at least 0.3 s a word plus 0.4 s, and never
   under 1 s. A subtitle never covers the action it talks about. White text on a bright screen needs a scrim.
 - One type family for the whole film. Big, short, plain words; no slogans.
