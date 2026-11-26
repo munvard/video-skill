@@ -57,8 +57,13 @@ it to a friend. Take the winner and add the best part of another. Write it to `.
 The rules every concept and every frame keeps (`reference/craft.md` has the numbers):
 - **Beauty first.** Rich, lit, colourful worlds that move. A film of dark rooms, grey slabs, floating panels and caption
   bands fails even when every number passes.
+- **The product is the hero.** Every beat shows the product's real output or real UI (for a tool that makes films:
+  its films; for an app: its screens). Abstract 3D is only the stage around it, never the subject. An empty screen on
+  a device, or a world of shapes that stands for the product, fails. Use the user's own footage and screenshots when
+  the project has them.
 - **One spine**: one object, light, line or camera that IS the product's point and carries every beat.
 - **The hook is the payoff**: frame 0 to 2 s shows the best moment already happening, bright and full, with big words.
+  In a reel, frame 0 shows the product or its real output plus the hook line.
   No logo intro, no fade from black.
 - **No list.** No caption card between beats, no row of "IT DOES X" headlines. Beats flow inside one move.
 - **A world per act**: its own light, scale and colour. One build to one peak at about 75%, then a calm end card (name,
@@ -70,7 +75,8 @@ The rules every concept and every frame keeps (`reference/craft.md` has the numb
   one object into the next beat. A film of flat 2D cards and fades is a social post, not a launch film. For hardware and
   physical products, the product itself is a lit 3D model.
 - **Professional detailed 3D** when 3D: real materials, real light, high-detail models. No voxel, pixel or blocky toy
-  characters unless the user asks for that look. No photoreal people.
+  characters unless the user asks for that look. No photoreal people. Primitives (spheres, rings, slabs, cube fields)
+  never carry a shot on their own.
 - **Craft surprise, never jokes**: hidden joins, a screen that becomes the next world, a perfect loop, a sound motif. No
   winking mascot, no fake testimonial, no "revolutionary", no line built to sound clever.
 - **No labels burned into the picture** ("3D render", "Real app", "Sped up"). Disclosure goes in the post text and the
@@ -90,8 +96,9 @@ Before the full build, render 3 hero stills at final quality and a 6 s moving te
 .video/<film>/look/move.mp4`. Judge them first by the beauty pass (`reference/checklist.md`, section 1) and the taste
 file. Show them to the user and wait for their yes. If the user said not to stop (or nobody is there), judge them
 yourself, write the verdict in `concept.md`, and continue. A look that is not clearly beautiful is redone now, not later.
-The gate has not run until `move.mp4` exists and was judged: never start a full render without it, even when nobody is
-there. With Blender, the stills and the test are the frames a viewer sees (plates with the type and UI on top), never
+The gate has not run until `move.mp4` exists and was judged: never start a full render without it. "Do not stop" skips
+waiting for the user, never the gate itself: judge the moving test by the beauty pass and redo the look if it is not
+clearly beautiful. With Blender, the stills and the test are the frames a viewer sees (plates with the type and UI on top), never
 raw plates. Frame 0 shows the product or its result on screen, not an empty device.
 
 ## 6. Build
