@@ -27,6 +27,11 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 
+def asks(f):
+    n = len(f.get("notes", []))
+    return "One prompt" + (f" and {n} round{'s' if n > 1 else ''} of notes" if n else "")
+
+
 def mins(f):
     return f"{f['minutes']:.0f} min" if f["minutes"] >= 10 else f"{f['minutes']:.1f} min"
 
@@ -82,7 +87,7 @@ for i in range(0, len(films), 2):
         cells += (f'<td width="50%" valign="top"><a href="{PAGES}/films/{f["slug"]}.html">'
                   f'<img src="{f["poster"]}" width="100%" alt="{esc(f["alt"])}"></a><br>'
                   f'<b>{esc(f["title"])}</b>: {esc(f["kind"])}<br>'
-                  f'<sub>One prompt, {mins(f)}, {esc(f["model"])}. {cuts}.</sub></td>\n')
+                  f'<sub>{asks(f)}, {mins(f)},{esc(f["model"])}. {cuts}.</sub></td>\n')
     cells += "</tr>\n"
 
 cmp = ""
@@ -107,8 +112,8 @@ readme = f"""<h1 align="center"><code>/video</code></h1>
 Advanced motion design and 3D, with sound, checked frame by frame. 9:16 for Reels, Shorts and TikTok, 16:9 for your
 site and X.<br>Free and open source (MIT). Runs on your computer. Needs Claude Code.</p>
 
-Every film below was made by this skill from **one prompt** in a clean folder, with no editing by hand. Click one to
-watch it with sound and see its prompt, its plan and its gate numbers.
+Every film below was made by this skill from **one prompt** in a clean folder, with no editing by hand (a film that
+also got a round of notes says so). Click one to watch it with sound and see its prompt, its plan and its gate numbers.
 
 <table>
 {cells}</table>
@@ -203,7 +208,7 @@ docs = ROOT / "docs"
 (docs / "style.css").write_text(CSS + "\n", encoding="utf-8", newline="\n")
 grid = "".join(
     f'<a class="card" href="films/{f["slug"]}.html"><img src="{f["poster"].removeprefix("docs/")}" alt="{esc(f["alt"])}">'
-    f'<div><b>{esc(f["title"])}</b><br><small>{esc(f["kind"])}. One prompt, {mins(f)}.</small></div></a>'
+    f'<div><b>{esc(f["title"])}</b><br><small>{esc(f["kind"])}. {asks(f)}, {mins(f)}.</small></div></a>'
     for f in films + ([compare] if compare else []))
 (docs / "index.html").write_text(page("/video: launch videos made in Claude Code", f"""
 <h1><code>/video</code></h1>
@@ -223,6 +228,7 @@ for f in films + ([compare] if compare else []):
     inner = f"""<p><a href="../index.html">All films</a></p><h1>{esc(f['title'])}</h1>
 <p class="sub">{esc(f['about'])}</p><div class="cuts">{vids}</div>
 <h2>The prompt</h2><pre>{esc(f['prompt'])}</pre>
+{"".join(f"<h2>Notes after the first cut</h2><pre>{esc(n)}</pre>" for n in f.get("notes", []))}
 <h2>The run</h2><table>{facts}</table>
 {f'<h2>What it planned</h2><p>{esc(f["plan_note"])}</p>' if f.get("plan_note") else ""}
 {f'<h2>Gate numbers</h2><table>{gates}</table>' if gates else ""}
