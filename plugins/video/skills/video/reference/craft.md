@@ -66,6 +66,10 @@ What fails, from experience:
 - One text idea at a time near the action. Each line stays fully on screen at least 0.3 s a word plus 0.4 s, and never
   under 1 s. A subtitle never covers the action it talks about. White text on a bright screen needs a scrim.
 - One type family for the whole film. Big, short, plain words; no slogans.
+- Every word a viewer can see is registered: `data-say` in HTML or `say()` on canvas, UI rows and labels included. Text
+  that only flies past is marked `data-pass` (or `pass: true`). Unregistered words skip the reading, size, contrast and
+  overlap gates, which is how unreadable UI and text sitting on text get through. In a settled frame text never sits on
+  other text.
 - Contrast: every line at least 4.5:1 against the background around its letters (`check.py` measures it). Coloured
   words on a busy world need a soft dark shadow or a scrim; muted or pastel words on a mid-tone world fail.
 

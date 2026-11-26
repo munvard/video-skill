@@ -88,6 +88,14 @@ class Gates(unittest.TestCase):
         code, g, out = film("highc", "142850", "ffffff")
         self.assertEqual(g["contrast"], "PASS", out)
 
+    def test_overlap(self):
+        meta = {"w": 540, "h": 960, "fps": 30, "dur": 4, "frames": 120, "events": [], "texts": [
+            {"id": "a", "text": "Fixed rows", "t0": 0, "t1": 3, "run": 3, "full": True, "pass": False, "px": 60, "box": [100, 300, 440, 380]},
+            {"id": "b", "text": "Added rows", "t0": 1, "t1": 4, "run": 3, "full": True, "pass": False, "px": 60, "box": [120, 320, 460, 400]}]}
+        mp = self.tmp / "ov.meta.json"
+        mp.write_text(json.dumps(meta), encoding="utf-8")
+        self.assertEqual(check(self.good, str(self.tmp / "c9"), "--meta", str(mp))[1]["overlap"], "FAIL")
+
     def test_meta_gates(self):
         meta = {"w": 540, "h": 960, "fps": 30, "dur": 4, "frames": 120, "events": [], "texts": [
             {"id": "a", "text": "Fine line here", "t0": 0, "t1": 4, "run": 4, "full": True, "px": 60, "box": [40, 200, 460, 270]},

@@ -16,6 +16,7 @@ Gates (numbers come from the file, never from the plan):
   slab        no flat dark area (a dark panel, an empty dark sky) over 25% of the frame for more than 1.5 s
   reading     every line stays fully on screen long enough to read: 0.3 s a word plus 0.4 s, at least 1.0 s
   textsize    every word is at least 14 px tall when the frame is 360 px wide
+  overlap     no two texts on screen together for 0.5 s or more with their boxes overlapping
   contrast    every line at least 4.5:1 against the background around its letters (text colours from the meta)
   band        9:16 only: no empty band (no edges, no change) over 30% of the height for more than 1 s
   safearea    9:16 only: text stays inside the area the Reels, Shorts and TikTok buttons and captions leave free
@@ -274,6 +275,18 @@ def main():
             x0, x1, y0, y1 = 60 / 1080 * W, 940 / 1080 * W, 250 / 1920 * H, 1450 / 1920 * H
             out_t = [t for t in texts if t.get("box") and (t["box"][0] * sx < x0 - 1 or t["box"][2] * sx > x1 + 1 or t["box"][1] * sx < y0 - 1 or t["box"][3] * sx > y1 + 1)]
             gate("safearea", not out_t, "all text inside x 60 to 940, y 250 to 1450 (at 1080x1920)" if not out_t else "outside: " + "; ".join(f"'{t['text'][:22]}' box {[round(v) for v in t['box']]}" for t in out_t[:6]))
+        over = []
+        for i, a1 in enumerate(texts):
+            for b1 in texts[i + 1:]:
+                ta, tb = a1.get("boxm") or a1.get("box"), b1.get("boxm") or b1.get("box")
+                both = min(a1["t1"], b1["t1"]) - max(a1["t0"], b1["t0"])
+                if not ta or not tb or both < 0.5:
+                    continue
+                iw, ih = min(ta[2], tb[2]) - max(ta[0], tb[0]), min(ta[3], tb[3]) - max(ta[1], tb[1])
+                small = min((ta[2] - ta[0]) * (ta[3] - ta[1]), (tb[2] - tb[0]) * (tb[3] - tb[1])) or 1
+                if iw > 0 and ih > 0 and iw * ih / small > 0.15:
+                    over.append(f"'{a1['text'][:18]}' and '{b1['text'][:18]}' at {max(a1['t0'], b1['t0']):.1f} s")
+        gate("overlap", not over, "no text sits on other text for 0.5 s or more" if not over else "text on text: " + "; ".join(over[:6]))
         lows, seen = [], []
         for t in texts:
             cols = [c for c in (parse_color(x) for x in t.get("colors") or []) if c]

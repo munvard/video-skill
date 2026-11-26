@@ -9,7 +9,9 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 1. Look at the 1 fps sheet at phone size. Would a stranger stop on each frame for its picture alone?
 2. A sheet that reads as grey, black or beige panels with caption bands is a BLOCKER, even with every gate green.
 3. Is every world rich, lit and coloured? Does the light change between acts?
-4. Does the subject fill the frame (70% of the width or more), with real materials, depth and detail?
+4. Does the hero of every beat fill 70% of the width or more (in 9:16 push the camera in until it does), with real
+   materials, depth and detail? Any UI it shows must be readable at 360 px wide, or it is decoration and must not
+   look like text to read.
 5. Anything that looks cheap: a toy or voxel kit, flat clip art, a default gradient, a stock-looking icon row, a
    placeholder, square corners where the design is round, line-art hands?
 6. Put frame 0 next to the end card: are they both postable on their own?
