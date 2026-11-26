@@ -58,6 +58,11 @@ frame 0, the turn and the last frame. Remove any that would work for another pro
 a stranger with the sound off, is there one idea, can it be beautiful with the tools here, is it true, would someone send
 it to a friend. Take the winner and add the best part of another. Write it to `.video/<film>/concept.md`.
 
+The bar for a reel, an ad or any post made for views: a stranger scores it 9 or 10 out of 10 on all six questions of
+`reference/checklist.md` section 0 (stop, clarity, hold, beauty, share, trust). Write the six in `concept.md` with the
+planned answer to each and the second it happens. A concept that cannot honestly reach 9 on all six is replaced now:
+notes rounds and fixes do not lift a weak concept or a weak look to 9.
+
 The rules every concept and every frame keeps (`reference/craft.md` has the numbers):
 - **Beauty first.** Rich, lit, colourful worlds that move. A film of dark rooms, grey slabs, floating panels and caption
   bands fails even when every number passes.
@@ -132,6 +137,10 @@ full render without the gate. Frame 0 shows the product or its result on screen,
    before delivery. Only what needs the user (a real asset, a taste call) goes in the delivery note. The motion line of
    check.py under 3 means the film feels static: add a camera move, parallax or a moving light, unless the style is calm
    on purpose.
+5. A reel, an ad or a post made for views: score it on the six questions of `reference/checklist.md` section 0 as a
+   stranger who has never heard of the product, on the film at phone size, sound off first. Every score names the
+   second it rests on; a score you cannot point to a frame for is not a 9. Fix and render again anything under 9. If it
+   still cannot reach 9, write the six scores and why in `NOTE.md` and tell the user plainly. Never round up.
 
 ## 8. Deliver
 In `.video/<film>/deliver/`: each master (9:16, and 16:9 when made), the poster frame as a JPG, subtitles when there is a

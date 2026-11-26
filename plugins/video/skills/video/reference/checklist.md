@@ -5,6 +5,21 @@ numbers; this list covers what only eyes can judge. **Blocker:** false claim, pr
 sound, a needed word that cannot be read, or a film that is not beautiful. **Major:** a stranger would scroll,
 misunderstand or feel something is cheap. Fix both. Note the rest.
 
+## 0. The stranger's six (reels, ads, posts made for views)
+Score each 0 to 10 as a stranger scrolling a phone who has never heard of the product. The bar is 9 or 10 on all six.
+A score of 9 or 10 needs a second you can name; when in doubt, score lower. Never round up.
+1. **Stop.** At 0.0 s, sound off: is frame 0 big, striking and already moving, so a fast thumb stops? No empty band, no
+   title card, no slow fade in.
+2. **Clarity.** By 2 s, sound off: does the stranger know what this is and what it does for them?
+3. **Hold.** Is there a second where they would swipe? Name it. Something new happens at least every 2 s, and the best
+   moment is still ahead until the end.
+4. **Beauty.** Is every frame worth looking at for its picture alone, at phone size? Is the payoff the most striking
+   frame of the film, not smaller or plainer than the setup?
+5. **Share.** Who would send it, to whom, and why does sending it make the sender look good? "Nobody outside the field"
+   is a fail.
+6. **Trust.** Is every claim shown, not told, and true? Does anything look faked, inflated, AI-made or like an ad
+   template?
+
 ## 1. The beauty pass (first, before any number)
 1. Look at the 1 fps sheet at phone size. Would a stranger stop on each frame for its picture alone, and send the film
    to a friend? "It is fine" is a fail.
