@@ -28,6 +28,9 @@ that did well, and is checked with `check.py --reel`:
 8. A claim the viewer could doubt is shown, not said, by about 1 s: the real input (the exact prompt, the command,
    the file) readable on screen next to its real result. A frame 0 that looks like any other ad of its kind (devices
    on a shelf, a phone on a desk) gets swiped at 0.5 to 1 s; open on the thing only this product can show.
+9. A before and after opens on the after, full bleed, with nothing covering it; the before is one short flash (about
+   1.5 s) with one true mark, and the film returns to the after and never goes back. Labels are small corner tags,
+   never a band over the payoff. Each side keeps its own sound.
 A calm launch film for a site or a store page may be one slow take; it is not a reel and skips `--reel`.
 
 What fails, from experience:
