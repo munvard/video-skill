@@ -7,8 +7,8 @@ Use what ships in the kit first. Measure before you promise a render time.
 | Motion design, type, UI, product screens, 2D worlds | HTML page + `kit/render.mjs` (DOM, CSS, canvas, SVG) | often 0.02 to 0.1 s a frame with 3 workers |
 | Canvas scenes with real motion blur | `scene({...})` in `kit.js` | 0.05 to 0.5 s a frame (blur samples cost) |
 | Depth with live screens, abstract 3D | WebGL in the page (your own shaders, or `ray.js`) | `ray.js` path tracing: seconds a frame at 1080x1920 |
-| Real objects, rich 3D worlds, products | Blender EEVEE (`reference/blender.md`) with CC0 assets | about 1 to 5 s a frame |
-| Two or three hero shots with physical light | Blender Cycles | about 30 to 150 s a frame at 1080x1920 |
+| Real objects, rich 3D worlds, products | Blender EEVEE (`reference/blender.md`) with CC0 assets | measured 2.2 s a frame at 1080x1920 on a desktop GPU; more for heavy scenes |
+| Two or three hero shots with physical light | Blender Cycles | measured 43 s a frame at 1080x1920, 256 samples, desktop GPU |
 | Real proof (the app doing the job) | a scripted screen recording on a test account, played inside the film | real time |
 | Music, effects, voice, master | `scripts/sound.py`, `voice.py`, `finish.py` | seconds |
 | Checks | `scripts/check.py`, `study.py` | seconds |
