@@ -52,6 +52,9 @@ import sys
 import zlib
 
 import numpy as np
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 try:  # scipy only makes the FFTs a little faster; numpy does the same job without it
     import scipy.fft as _fft

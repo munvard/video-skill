@@ -673,6 +673,10 @@ def move(cam, f0, f1, start, end, center=None, kind="smooth", handheld=0.0):
                 setattr(owner, attr, start[k] + (end[k] - start[k]) * t)
                 owner.keyframe_insert(attr, frame=f)
     if handheld > 0:
+        if not ("aim" in start and "aim" in end):
+            # The drift rides on the aim target's location curves: key it where it stands so they exist.
+            for f in (f0, f1):
+                aim_ob.keyframe_insert("location", frame=f)
         for fc in fcurves(aim_ob):
             if fc.data_path == "location":
                 n = fc.modifiers.new("NOISE")

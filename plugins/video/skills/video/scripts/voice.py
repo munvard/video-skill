@@ -25,6 +25,8 @@ Models and licences (checked November 26, 2026 at the primary sources):
     The release lists no checksums, so the sizes come from the GitHub API and the SHA-256 values below
     were computed from the first download.
   - faster-whisper: MIT, https://github.com/SYSTRAN/faster-whisper
+  - Pulled in by kokoro-onnx at run time (downloaded by uv, never shipped here): phonemizer and espeakng-loader,
+    which bundles espeak-ng. Both are GPL-3.0. The skill only runs them as tools; no GPL code is in this repo.
   - Systran/faster-whisper-small.en (the check model, downloaded by faster-whisper from Hugging Face): MIT,
     https://huggingface.co/Systran/faster-whisper-small.en (model card).
 Files are cached once in %LOCALAPPDATA%/video-skill (Windows), ~/Library/Caches/video-skill (macOS) or
@@ -45,6 +47,9 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import sound  # noqa: E402  (same folder: WAV writer and resampler)
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 RELEASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/"
 FILES = {

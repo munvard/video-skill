@@ -118,8 +118,8 @@
         "Lowest text contrast": "5.4:1",
         "All gates": "9:16 PASS. 16:9: end hold FAIL (the end card is almost still for 4 s)"
       },
-      "turns": 9,
-      "output_tokens": 7239
+      "turns": 118,
+      "output_tokens": 106435
     }
   ],
   "compare": {

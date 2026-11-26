@@ -92,6 +92,8 @@ if compare:
 
 The same 15 second brief (five lines of copy, 1920x1080, no voice), given to Claude Code twice in a clean folder:
 once with nothing installed, once with `/video`. Same model, one prompt each, no help.
+This brief was also used while the skill was built (two of its rules came from an earlier run of it), so read it
+as a fair test of the result, not a blind one.
 
 <a href="{PAGES}/films/{compare['slug']}.html"><img src="{compare['poster']}" width="100%" alt="{esc(compare['alt'])}"></a>
 
@@ -121,7 +123,7 @@ Inside Claude Code:
 ```
 
 > **You need**
-> - Claude Code with a paid Claude plan (Pro or Max)
+> - Claude Code, with a Claude plan (Pro, Max, Team or Enterprise) or an API account
 > - ffmpeg and Python 3 with numpy
 > - Optional: Node 22 and Chrome for motion design, Blender for 3D
 >

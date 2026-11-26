@@ -78,9 +78,12 @@ class Render(unittest.TestCase):
 
     def test_bad_page_fails_clearly(self):
         (self.tmp / "bad.html").write_text("<script>window.DUR=1</script>", encoding="utf-8")
+        before = set(Path(tempfile.gettempdir()).glob("vs-chrome-*"))
         p = subprocess.run(["node", str(KIT / "render.mjs"), str(self.tmp / "bad.html"), "--out", str(self.tmp / "b.mp4")], capture_output=True, text=True, timeout=120)
         self.assertNotEqual(p.returncode, 0)
         self.assertIn("render(t)", p.stderr)
+        left = set(Path(tempfile.gettempdir()).glob("vs-chrome-*")) - before
+        self.assertEqual(left, set(), "a failed render must remove its Chrome profile")
 
 
 if __name__ == "__main__":

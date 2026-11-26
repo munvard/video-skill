@@ -76,10 +76,11 @@ const FLAGS = [...(process.env.CHROME_FLAGS ? process.env.CHROME_FLAGS.split(' '
 // ---------- a tiny file server: / is the page's folder, /kit/ is this kit ----------
 const TYPES = { '.js': 'text/javascript', '.mjs': 'text/javascript', '.html': 'text/html', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf', '.otf': 'font/otf', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.gif': 'image/gif', '.mp4': 'video/mp4', '.webm': 'video/webm', '.glb': 'model/gltf-binary', '.gltf': 'model/gltf+json', '.bin': 'application/octet-stream', '.hdr': 'application/octet-stream', '.wav': 'audio/wav', '.mp3': 'audio/mpeg' };
 const server = createServer((q, r) => {
-  const u = decodeURIComponent(q.url.split('?')[0]);
+  let u; try { u = decodeURIComponent(q.url.split('?')[0]); } catch { r.writeHead(400); return r.end(); }
   const base = u.startsWith('/kit/') ? KIT : ROOT, rel = u.startsWith('/kit/') ? u.slice(5) : u.slice(1);
   const p = path.resolve(base, rel);
-  if (!p.startsWith(path.resolve(base)) || !fs.existsSync(p) || fs.statSync(p).isDirectory()) { r.writeHead(404); return r.end(); }
+  const b0 = path.resolve(base);
+  if (!(p === b0 || p.startsWith(b0 + path.sep)) || !fs.existsSync(p) || fs.statSync(p).isDirectory()) { r.writeHead(404); return r.end(); }
   r.writeHead(200, { connection: 'close', 'content-type': TYPES[path.extname(p).toLowerCase()] || 'application/octet-stream', 'cache-control': 'no-store' }); r.end(fs.readFileSync(p));
 }).listen(0, '127.0.0.1');
 await new Promise(r => server.once('listening', r));
@@ -151,6 +152,10 @@ const DRAW = t => `(async () => {
 
 const kill = () => { for (const p of procs) try { p.kill(); } catch {} server.close(); setTimeout(() => { for (const p of profiles) try { fs.rmSync(p, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); } catch {} }, 300); };
 process.on('SIGINT', () => { kill(); process.exit(130); });
+// Every way out (done, die(), Ctrl-C, a crash) kills Chrome and removes its temporary profiles, so nothing is left
+// running or in the temp folder. Retries cover Windows holding the folder for a moment after the kill.
+const killTree = p => { if (p.exitCode !== null || p.signalCode !== null) return; try { if (process.platform === 'win32') execFileSync('taskkill', ['/T', '/F', '/PID', String(p.pid)], { stdio: 'ignore' }); else p.kill('SIGKILL'); } catch {} };
+process.on('exit', () => { for (const p of procs) killTree(p); for (const p of profiles) try { fs.rmSync(p, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 }); } catch {} });
 
 async function shot(b, fmt) {
   const r = await b.call('Page.captureScreenshot', { format: fmt, quality: fmt === 'jpeg' ? QUALITY : undefined, clip: { x: 0, y: 0, width: W, height: H, scale: 1 }, captureBeyondViewport: false, optimizeForSpeed: fmt === 'jpeg' });
@@ -247,7 +252,7 @@ if (out) {
     spans.push({ id: s.id, text: s.text, t0: (start ?? s.frames[0][0]) / fps, t1: ((last ?? s.frames.at(-1)[0]) + 1) / fps, run: +run.toFixed(3), full: !!firstIn, pass: s.pass, px: s.px, box: s.box || s.allBox, colors: s.colors, tm: mid == null ? null : +(mid / fps).toFixed(4), boxm: midBox });
   }
   spans.sort((p, q) => p.t0 - q.t0);
-  const meta = { w: W, h: H, fps, dur: DUR, frames: total, from: A / fps, to: B / fps, events: events.map(e => ({ type: 'hit', gain: 1, pan: 0, ...e, t: +(e.t - A / fps).toFixed(4) })).filter(e => e.t >= 0 && e.t <= total / fps), texts: spans, page: path.basename(pageFile) };
+  const meta = { w: W, h: H, fps, dur: DUR, frames: total, from: A / fps, to: B / fps, events: events.map(e => ({ type: 'hit', gain: 1, pan: 0, ...e, t: +(e.t - A / fps).toFixed(4) })).filter(e => e.t >= 0 && e.t <= total / fps), texts: spans.map(x => ({ ...x, t0: +(x.t0 - A / fps).toFixed(4), t1: +(x.t1 - A / fps).toFixed(4), tm: x.tm == null ? null : +(x.tm - A / fps).toFixed(4) })), page: path.basename(pageFile) };
   fs.writeFileSync(out.replace(/\.[^.]+$/, '') + '.meta.json', JSON.stringify(meta, null, 1));
   clean(); kill();
   const s = (Date.now() - t0) / 1000;

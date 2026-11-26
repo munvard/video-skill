@@ -2,8 +2,9 @@
 
 ## v2.0.0
 
-`/video` now makes the film itself, on your computer, and proves it: every film in the README was made by this
-version from one prompt in a clean Claude Code session, with the prompt, the minutes and the model shown.
+`/video` now makes the film itself, on your computer, and proves it: every film in the README was made by the v2
+skill from one prompt in a clean Claude Code session, with the prompt, the minutes, the model and the skill commit
+shown on its page. Their gate results were checked again with this release's `check.py`.
 
 ### New
 

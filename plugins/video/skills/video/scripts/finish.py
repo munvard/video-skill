@@ -32,6 +32,9 @@ import subprocess
 import sys
 import tempfile
 from fractions import Fraction
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 TARGET_I = -14.0
 FIRST_TP = -1.5

@@ -69,13 +69,14 @@ What the kit gives you:
 4. Render the final frames into their own folder.
 
 ```
-blender -b -P SK/scripts/blender/shot_example.py -- --frames 1,45,90 --res 0.3 --out renders/tests/hero
+blender -b -P SK/scripts/blender/shot_example.py -- --frames 1,45,90 --res 0.3 --out .video/<film>/renders/tests/hero
 blender -b -P SK/scripts/blender/shot_example.py -- --measure 10
-blender -b -P SK/scripts/blender/shot_example.py -- --engine eevee --frames 1-90 --out renders/hero
-blender -b -P SK/scripts/blender/shot_example.py -- --engine cycles --frames 45 --out renders/hero_still
+blender -b -P SK/scripts/blender/shot_example.py -- --engine eevee --frames 1-90 --out .video/<film>/renders/hero
+blender -b -P SK/scripts/blender/shot_example.py -- --engine cycles --frames 45 --out .video/<film>/renders/hero_still
 ```
 
-Run them from the project folder (assets go to `.video/assets`). Each frame folder gets `render.log`, `.shot.json`
+Run them from the project folder (assets go to `.video/assets`). Frames go next to the film page in
+`.video/<film>/renders/`, because the renderer serves only the page's own folder. Each frame folder gets `render.log`, `.shot.json`
 and a `.done` marker. A stopped render resumes: frames already there are skipped.
 
 The kit refuses to write a test render (`--res` below 1) into a final folder, frames of one shot into another

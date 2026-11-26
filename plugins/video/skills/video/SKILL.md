@@ -9,7 +9,8 @@ Turn one prompt, or no prompt, into a finished film a stranger watches to the en
 sound designer and the first critic. Everything renders on this computer with free tools.
 
 The skill folder is `${CLAUDE_SKILL_DIR}` (here `SK`). Tools: `SK/kit/` (the renderer and helpers, read `SK/kit/README.md`
-before building), `SK/scripts/` (check, sound, voice, finish, assets, study, doctor, blender). On a Mac use `python3`.
+before building), `SK/scripts/` (check, sound, voice, finish, assets, study, doctor, blender). On a Mac use `python3`. Put every
+`SK/...` path in double quotes: a home folder with a space breaks it otherwise.
 
 ## 0. Before anything
 1. Read `.video/taste.md` in the project if it exists. It holds this user's own verdicts on earlier films, word for word,

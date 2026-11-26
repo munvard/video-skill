@@ -17,6 +17,9 @@ import pathlib
 import re
 import subprocess
 import sys
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 try:
     import numpy as np

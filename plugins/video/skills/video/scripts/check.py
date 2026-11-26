@@ -32,6 +32,9 @@ import pathlib
 import re
 import subprocess
 import sys
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 try:
     import numpy as np
@@ -84,18 +87,24 @@ def sharp(img):
     return float(lap.var())
 
 
-def find_meta(film, frames):
+def same_shape(m, w, h):
+    return bool(m.get("w")) and bool(m.get("h")) and round(m["w"] / m["h"], 2) == round(w / h, 2)
+
+
+def find_meta(film, frames, w, h):
+    # The film's own meta first; else the newest meta with the same frame count AND the same aspect, so the 16:9 cut
+    # of a film never reads the 9:16 cut's text boxes.
     for cand in (film.with_suffix(".meta.json"), film.parent / (film.stem + ".meta.json")):
         if cand.is_file():
             return cand
-    best = None
     for cand in sorted(film.parent.glob("*.meta.json"), key=lambda p: p.stat().st_mtime, reverse=True):
         try:
-            if json.loads(cand.read_text(encoding="utf-8")).get("frames") == frames:
-                return cand
+            m = json.loads(cand.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
-    return best
+        if m.get("frames") == frames and same_shape(m, w, h):
+            return cand
+    return None
 
 
 NAMED = {"white": (255, 255, 255), "black": (0, 0, 0)}
@@ -192,8 +201,11 @@ def main():
     same_len = a is None or abs(adur - vdur) <= 1.5 / fps + 0.03
     gate("format", same_len and nf > 0, f"{W}x{H} {fps:g} fps, {nf} frames, {nf / fps:.2f} s" + (f", sound {adur:.2f} s" if a else ", no sound") + ("" if same_len else "  (picture and sound differ)"))
 
-    meta_path = pathlib.Path(opt("--meta")) if opt("--meta") else find_meta(film, nf)
+    meta_path = pathlib.Path(opt("--meta")) if opt("--meta") else find_meta(film, nf, W, H)
     meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path and meta_path.is_file() else None
+    if meta and not same_shape(meta, W, H):
+        sys.exit(f"check.py: {meta_path} is for a {meta['w']}x{meta['h']} render, this film is {W}x{H}. "
+                 "Give the meta of this cut with --meta.")
     texts = [t for t in (meta or {}).get("texts", []) if not t.get("pass")]
     sx = W / meta["w"] if meta else 1.0
 

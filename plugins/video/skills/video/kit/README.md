@@ -33,10 +33,10 @@ The page is served from its own folder at `/`, and the kit at `/kit/`, so a page
 ## Commands
 
 ```
-node kit/render.mjs film.html --out out/draft1.mp4                 # the whole film, 3 workers
-node kit/render.mjs film.html --out out/test.mp4 --from 4 --to 10  # a 6 s moving test
-node kit/render.mjs film.html --stills 0,3.5,9 --still-dir out/look   # full size stills for the look gate
-node kit/render.mjs --scene my_scene.js --png-dir out/frames          # a kit scene() to PNG frames
+node SK/kit/render.mjs film.html --out out/draft1.mp4                 # the whole film, 3 workers
+node SK/kit/render.mjs film.html --out out/test.mp4 --from 4 --to 10  # a 6 s moving test
+node SK/kit/render.mjs film.html --stills 0,3.5,9 --still-dir out/look   # full size stills for the look gate
+node SK/kit/render.mjs --scene my_scene.js --png-dir out/frames          # a kit scene() to PNG frames
 ```
 
 Options: `--fps`, `--size 1080x1920`, `--workers N` (use 1 or 2 for heavy WebGL), `--crf`, `--jpeg`. Set `CHROME` if

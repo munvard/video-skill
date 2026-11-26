@@ -36,3 +36,5 @@ awesome-claude-video-skills harness, MIT).
   Python; no code is copied. https://github.com/lemomo-ai/lemo-opuscar
 - `scripts/voice.py` downloads at first use, and does not ship: the Kokoro-82M voice model (Apache-2.0, hexgrad) as the
   kokoro-onnx release files (MIT, thewh1teagle), and the faster-whisper small.en model (MIT, Systran).
+  kokoro-onnx itself pulls in phonemizer and espeakng-loader (with espeak-ng), both GPL-3.0, at run time; they are
+  downloaded by uv on the user's computer and are not part of this repository.

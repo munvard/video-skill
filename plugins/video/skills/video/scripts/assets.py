@@ -25,6 +25,7 @@ Standard library only.
 """
 import argparse
 import hashlib
+import http.client
 import json
 import os
 import shutil
@@ -35,6 +36,9 @@ import urllib.parse
 import urllib.request
 import zipfile
 from pathlib import Path
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 USER_AGENT = "video-skill/1.0"
 PH_API = "https://api.polyhaven.com"
@@ -98,8 +102,12 @@ def _open(url):
 
 
 def get_json(url):
-    with _open(url) as r:
-        return json.loads(r.read().decode("utf-8"))
+    # A cut-off body, a timeout while reading or an HTML error page all mean "offline" here, never a traceback.
+    try:
+        with _open(url) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except (OSError, http.client.HTTPException, ValueError) as e:
+        raise Offline(f"bad answer from {urllib.parse.urlparse(url).netloc} ({e}). Try again in a minute.")
 
 
 def download(url, path, size=None, md5=None):
@@ -119,7 +127,7 @@ def download(url, path, size=None, md5=None):
                         break
                     f.write(chunk)
                     h.update(chunk)
-        except (OSError, urllib.error.URLError) as e:
+        except (OSError, urllib.error.URLError, http.client.HTTPException) as e:
             if attempt == RETRIES - 1:
                 raise Offline(f"download of {url} failed: {e}")
             time.sleep(2 ** attempt)
@@ -201,6 +209,8 @@ def _get_polyhaven(asset_id, kind, res, fmt):
         fmt = fmt or "hdr"
         res = _pick_res(files["hdri"], res, asset_id)
         folder = cache_root() / "polyhaven" / asset_id / res
+        if fmt not in files["hdri"][res]:
+            raise NotFound(f"{asset_id} has no {fmt} file at {res} (has {', '.join(files['hdri'][res])})")
         e = files["hdri"][res][fmt]
         main = download(e["url"], folder / e["url"].rsplit("/", 1)[1], e.get("size"), e.get("md5"))
     elif kind == "model":

@@ -19,7 +19,7 @@ def ff(*a):
 
 
 def check(film, *a):
-    p = subprocess.run([sys.executable, str(SCRIPTS / "check.py"), str(film), *a], capture_output=True, text=True, timeout=300)
+    p = subprocess.run([sys.executable, str(SCRIPTS / "check.py"), str(film), *a], capture_output=True, text=True, encoding="utf-8", timeout=300)
     gates = {line.split()[1]: line.split()[0] for line in p.stdout.splitlines() if line[:4] in ("PASS", "FAIL", "INFO")}
     return p.returncode, gates, p.stdout
 
@@ -123,19 +123,31 @@ class Gates(unittest.TestCase):
         self.assertEqual(g["safearea"], "FAIL", out)
         self.assertIn("far too short", out)
 
+    def test_any_script_in_texts(self):
+        # Text outside cp1252 (an arrow, an emoji, Armenian, CJK) must not crash check.py on a Windows pipe.
+        line = "Try it → now ✨ Բարև 你好"
+        meta = {"w": 540, "h": 960, "fps": 30, "dur": 4, "frames": 120, "events": [], "texts": [
+            {"id": "a", "text": line, "t0": 0, "t1": 4, "run": 4, "full": True, "px": 60, "box": [60, 300, 480, 370]}]}
+        mp = self.tmp / "u.meta.json"
+        mp.write_text(json.dumps(meta), encoding="utf-8")
+        code, g, out = check(self.good, str(self.tmp / "c11"), "--meta", str(mp))
+        self.assertIn(code, (0, 1), out)
+        self.assertNotIn("Traceback", out)
+        self.assertTrue((self.tmp / "c11/check.json").exists(), out)
+
     def test_loop_gate(self):
         code, g, out = check(self.good, str(self.tmp / "c4"), "--loop")
         self.assertEqual(g["loop"], "FAIL", out)
 
     def test_study(self):
-        p = subprocess.run([sys.executable, str(SCRIPTS / "study.py"), str(self.bad), str(self.tmp / "st")], capture_output=True, text=True, timeout=300)
+        p = subprocess.run([sys.executable, str(SCRIPTS / "study.py"), str(self.bad), str(self.tmp / "st")], capture_output=True, text=True, encoding="utf-8", timeout=300)
         self.assertEqual(p.returncode, 0, p.stderr)
         s = json.loads((self.tmp / "st/study.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(s["shots"]["count"], 2)
         self.assertAlmostEqual(s["seconds"], 4.0, delta=0.1)
 
     def test_doctor_runs(self):
-        p = subprocess.run([sys.executable, str(SCRIPTS / "doctor.py")], capture_output=True, text=True, timeout=120)
+        p = subprocess.run([sys.executable, str(SCRIPTS / "doctor.py")], capture_output=True, text=True, encoding="utf-8", timeout=120)
         self.assertIn("ffmpeg", p.stdout)
 
 

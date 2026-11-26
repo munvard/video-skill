@@ -13,6 +13,9 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+for _s in (sys.stdout, sys.stderr):  # user and web text (arrows, emoji, any script) on a Windows pipe
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 
 OS = platform.system()  # Windows, Darwin, Linux
 HINT = {
