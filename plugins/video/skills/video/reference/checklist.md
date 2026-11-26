@@ -9,7 +9,8 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 1. Look at the 1 fps sheet at phone size. Would a stranger stop on each frame for its picture alone?
 2. A sheet that reads as grey, black or beige panels with caption bands is a BLOCKER, even with every gate green.
 3. Is every world rich, lit and coloured? Does the light change between acts?
-4. Does the hero of every beat fill 70% of the width or more (in 9:16 push the camera in until it does), with real
+4. Does the hero of every beat fill 70% of the width or more (in 9:16 push the camera in until it does), title beats and
+   wides included: a device at 5% of a bare wall is a dead shot, push in or cut it. With real
    materials, depth and detail? Any UI it shows must be readable at 360 px wide, or it is decoration and must not
    look like text to read.
 5. Anything that looks cheap: bare 3D primitives in a plain room, a toy or voxel kit, flat clip art, a default
@@ -19,7 +20,9 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 
 ## 2. Story
 8. Frame 0 alone on a phone, sound off: would a stranger stop? Do they know what the film is about by 2 s?
-9. By the middle, do they know what the product is? By the end, where to get it?
+9. By the middle, do they know what the product is? By the end, where to get it? Every command or link on screen works
+   as typed on a fresh machine: copy it from the README with every step it needs (add a plugin marketplace before the
+   install), or show the plain link. A command that fails on first try is a false claim.
 10. One idea, one spine, one peak. No caption cards between beats, no headline list.
 11. Nothing small, expected or about safety is shown. Nothing cringe: no slogan, no wink, no fake quote.
     The picture shows what the line says: a line that names a colour, a count or a state is checked on its frame.
