@@ -1,7 +1,7 @@
 {
   "name": "video",
-  "version": "0.1.0",
-  "description": "A director for code-made video: 46 styles, craft rules and frame checks.",
+  "version": "2.0.0",
+  "description": "Launch videos and product videos for your app: motion design and 3D, sound made in code, every frame checked. 9:16 and 16:9.",
   "license": "MIT",
   "author": {
     "name": "munvard"

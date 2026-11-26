@@ -1,6 +1,6 @@
 {
   "name": "video-skill",
-  "description": "Make finished videos with Claude Code",
+  "description": "Launch videos and product videos for your app, made in Claude Code",
   "owner": {
     "name": "munvard"
   },
@@ -8,7 +8,7 @@
     {
       "name": "video",
       "source": "./plugins/video",
-      "description": "A director for code-made video: styles, craft rules and frame checks."
+      "description": "Launch and product videos: motion design and 3D, sound made in code, every frame checked."
     }
   ]
 }

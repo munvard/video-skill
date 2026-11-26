@@ -24,3 +24,15 @@ These projects shaped ideas only; none of their text or code is copied: the read
 (lemo-opuscar docs, CC BY-NC 4.0), the safe-area sheet and poster frame idea (brag, claude-animation-skills), shot
 continuity and reference analysis ideas (onetake, PolyForm Noncommercial), the end-to-end test brief (the
 awesome-claude-video-skills harness, MIT).
+
+## Sound scripts
+
+- `scripts/sound.py`: the bell partial table, the three burst clap, the chord voice leading cost and the keyboard
+  typing pattern are ported from explainroo (`engine/audio/instruments.js`, `sfx.js`, `theory.js`), Copyright (c) 2026
+  Vincent Schmalbach, MIT License. The full notice is at the top of the file. https://github.com/vincentsch/explainroo
+- `scripts/finish.py`: the method (two-pass loudnorm, measure the true peak after the AAC encode, encode the audio again
+  with the picture copied up to 3 times, write to a temporary name and rename) follows lemo-opuscar
+  (`core/render/mux.sh`), Copyright (c) 2026 SecondFirst Pty Ltd, trading as LemoLab, MIT License. It is rewritten in
+  Python; no code is copied. https://github.com/lemomo-ai/lemo-opuscar
+- `scripts/voice.py` downloads at first use, and does not ship: the Kokoro-82M voice model (Apache-2.0, hexgrad) as the
+  kokoro-onnx release files (MIT, thewh1teagle), and the faster-whisper small.en model (MIT, Systran).
