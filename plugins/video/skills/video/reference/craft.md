@@ -14,6 +14,19 @@ breaking it once cost a version.
 | 82 to 100% | END CARD and LOOP | Name, one plain line, where to get it, held at least 2.5 s over a calm background with a slow drift; then the last frame flows into frame 0. |
 A 15 s post keeps hook, one act, peak, end card. A 60 s hero film keeps the shape and adds acts, never filler.
 
+A reel made for views (an ad, a post for Reels, Shorts or TikTok) follows the hook rules below, measured on reels
+that did well, and is checked with `check.py --reel`:
+1. Frame 0 is the payoff: the best settled frame of the film, full-bleed, never black, a logo or a title card.
+2. Something moves by 0.3 s. The first big change (a cut, whip or reveal) comes at 0.8 to 1.2 s, never after 2.0 s.
+3. 2 to 3 cuts in the first 3 s (shots of 0.5 to 1.2 s). After that 4 to 7 cuts per 10 s, with one held shot of 1.5
+   to 2.5 s every 6 to 8 s so the craft can be seen.
+4. Hook text from 0.0 s: 3 to 6 whole words (never typed letter by letter), cap height 6 to 9% of the frame height
+   (115 to 170 px at 1920), inside the band 14 to 65% from the top. It names the claim; the picture proves it.
+5. Sound from 0.00 s, with a hit on the first big change.
+6. No logo, handle or URL before 3 s. The brand goes on the last 2 s card and in the caption.
+7. 15 to 30 s, with an ending that loops into frame 0.
+A calm launch film for a site or a store page may be one slow take; it is not a reel and skips `--reel`.
+
 What fails, from experience:
 - A feature tour: beat, caption card, beat, caption card. It reads like a list and nobody finishes it.
 - One dark void with floating panels for the whole film. No change of world means no feeling of travel.

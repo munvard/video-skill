@@ -1,6 +1,6 @@
 """check.py: the gates every film passes before anyone sees it. Each gate prints PASS or FAIL with its numbers.
 
-    python check.py film.mp4 [out_folder] [--meta film.meta.json] [--loop] [--silent-ok] [--night A-B] [--hold 1.4]
+    python check.py film.mp4 [out_folder] [--meta film.meta.json] [--loop] [--reel] [--silent-ok] [--night A-B] [--hold 1.4]
 
 Needs ffmpeg, ffprobe and numpy (uv run --with numpy python check.py ...). The meta file is written by kit/render.mjs
 next to each render; when the film went through finish.py, give the meta of the silent render with --meta (it is also
@@ -22,6 +22,8 @@ Gates (numbers come from the file, never from the plan):
   safearea    9:16 only: text stays inside the area the Reels, Shorts and TikTok buttons and captions leave free
   loudness    -14 LUFS within 1, true peak at or under -1.0 dBTP
   loop        with --loop: the last frame flows into frame 0 (PSNR at least 30 dB)
+  hook        9:16: something moves by 0.3 s, the first big change by 2.0 s (best 0.8 to 1.2), 2 to 4 big changes
+              before 3 s. A FAIL only with --reel (an ad or post made for views on Reels, Shorts, TikTok); else INFO
 Also written to out_folder: sheet_*.jpg (1 frame a second at phone size, with the 9:16 safe area drawn), crop_*.png
 (the most detailed 512 px square at four moments, at 100%: look for blocky or pixelated texture), frame0_360.png,
 check.json. Look at every sheet yourself: the gates catch numbers, not beauty.
@@ -183,6 +185,7 @@ def main():
         sys.exit(f"no such file: {film}")
     out.mkdir(parents=True, exist_ok=True)
     loop, silent_ok, hold_max = "--loop" in args, "--silent-ok" in args, float(opt("--hold", 1.4))
+    reel = "--reel" in args
     night = [tuple(float(x) for x in r.split("-")) for r in (opt("--night") or "").split(",") if r]
 
     info = json.loads(run(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(film)]))
@@ -344,6 +347,22 @@ def main():
     motion = float(np.median(diff)) if len(diff) else 0.0
     cuts = int((diff > np.median(diff) * 6 + 6).sum()) if len(diff) else 0
     gate("motion", None, f"median change {motion:.1f} a frame (human-made films are often about 4 to 10), about {cuts} hard cuts")
+
+    # hook: the first 3 s of a 9:16 reel. A big change is a cut, whip or reveal: mean change over 12 of 255 in a frame.
+    if H > W and len(diff):
+        t_move = next(((i + 1) / fps for i, x in enumerate(diff) if x >= 0.35), None)
+        big = diff > 12
+        big[0] = False  # frame 0 to 1 is the baked poster frame joining the film, not a cut the viewer reads
+        edges = [(i + 1) / fps for i in range(1, len(big)) if big[i] and not big[i - 1]]
+        early = [t for t in edges if t < 3.0]
+        late = [t for t in edges if t >= 3.0]
+        per10 = len(late) / max(0.1, nf / fps - 3.0) * 10
+        ok_h = (t_move is not None and t_move <= 0.3 and bool(edges) and edges[0] <= 2.0 and 2 <= len(early) <= 4)
+        fmt = lambda t: "none" if t is None else f"{t:.2f} s"
+        gate("hook", ok_h if reel else None,
+             f"first motion {fmt(t_move)} (0.3 s or less), first big change {fmt(edges[0] if edges else None)} "
+             f"(0.8 to 1.2 s, 2.0 s at most), {len(early)} big changes before 3 s (2 to 4), then {per10:.1f} per 10 s "
+             "(4 to 7)" + ("" if reel else "; pass --reel for a film made for views"))
 
     # Sheets at phone size, one frame a second, with the 9:16 safe area drawn on each tile.
     tw = 270

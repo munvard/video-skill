@@ -16,7 +16,8 @@ shown on its page. Their gate results were checked again with this release's `ch
   optional local voice (Kokoro) checked word by word with faster-whisper, and a two-pass master to -14 LUFS under
   -1 dBTP.
 - **Gates with numbers.** `scripts/check.py` prints PASS or FAIL for the format, frame 0, flat and frozen stretches, the
-  end hold, dark stretches, large flat dark areas, reading time per line, text height at 360 px wide, overlapping
+  end hold, dark stretches, large flat dark areas, the hook of a reel (`--reel`), reading time per line, text height
+  at 360 px wide, overlapping
   text, text contrast per line, empty bands and the safe area in 9:16, loudness and true peak, and the loop seam. It also writes 1 fps sheets and 100% crops for
   the beauty pass.
 - **QUICK and STUDIO modes.** QUICK is one concept and a render in minutes. STUDIO writes four concepts, renders a look

@@ -135,6 +135,17 @@ class Gates(unittest.TestCase):
         self.assertNotIn("Traceback", out)
         self.assertTrue((self.tmp / "c11/check.json").exists(), out)
 
+    def test_hook_gate(self):
+        # A 9:16 reel that cuts at 1 s and 2 s passes the hook with --reel; one long take with no cut fails it there,
+        # and without --reel the hook only reports (INFO).
+        a, b = "testsrc2=s=540x960:r=30:d=1", "testsrc2=s=540x960:r=30:d=1,negate"
+        reel = self.tmp / "reel.mp4"
+        ff("-f", "lavfi", "-i", a, "-f", "lavfi", "-i", b, "-f", "lavfi", "-i", a, "-f", "lavfi", "-i", b,
+           "-filter_complex", "[0][1][2][3]concat=n=4:v=1[v]", "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(reel))
+        self.assertEqual(check(reel, str(self.tmp / "c12"), "--reel")[1]["hook"], "PASS")
+        self.assertEqual(check(self.good, str(self.tmp / "c13"), "--reel")[1]["hook"], "FAIL")
+        self.assertEqual(check(self.good, str(self.tmp / "c14"))[1]["hook"], "INFO")
+
     def test_loop_gate(self):
         code, g, out = check(self.good, str(self.tmp / "c4"), "--loop")
         self.assertEqual(g["loop"], "FAIL", out)

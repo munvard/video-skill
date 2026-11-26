@@ -40,6 +40,9 @@ With no request in a project folder, the film is this project's launch film. Wit
 Default: a 9:16 master (1080x1920, 30 fps) of 20 to 30 s, and for a launch film also a 16:9 cut (1920x1080) composed for
 16:9, never cropped from the other. One page can render both: lay it out from `innerWidth` and `innerHeight` and render
 twice with `--size`. A short format is shorter, never cheaper looking.
+An ad or a post made for views on Reels, Shorts or TikTok is a reel: plan its first 3 s by the hook rules in
+`reference/craft.md` section 1 (payoff on frame 0, a big change by about 1 s, 2 to 3 cuts before 3 s, brand only at the
+end) and check it with `--reel`.
 
 ## 3. Concepts
 Read `styles/index.md` and open only the cards you might use. Use one style, mix several (`reference/mixing.md`), invent
@@ -99,7 +102,8 @@ yourself, write the verdict in `concept.md`, and continue. A look that is not cl
    which masters to -14 LUFS and under -1 dBTP and bakes that frame in as frame 0.
 
 ## 7. Check
-1. `python SK/scripts/check.py film.mp4 --meta draft.meta.json` (with `--loop` for a loop). Every gate prints PASS or FAIL
+1. `python SK/scripts/check.py film.mp4 --meta draft.meta.json` (with `--loop` for a loop, and `--reel` for an ad or a
+   post made for views: see the hook rules in `reference/craft.md` section 1). Every gate prints PASS or FAIL
    with its numbers. Fix every FAIL in every cut before you deliver. Never ship a FAIL with a reason why it is fine:
    the viewer sees what the gate measured (a frozen end is frozen on a phone). If the fix is a re-render, do it.
 2. Then look at every sheet and every 100% crop yourself: the beauty pass first, then `reference/checklist.md` on exact
