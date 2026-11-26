@@ -23,7 +23,8 @@ Gates (numbers come from the file, never from the plan):
   loudness    -14 LUFS within 1, true peak at or under -1.0 dBTP
   loop        with --loop: the last frame flows into frame 0 (PSNR at least 30 dB)
   hook        9:16: something moves by 0.3 s, the first big change by 2.0 s (best 0.8 to 1.2), 2 to 4 big changes
-              before 3 s. A FAIL only with --reel (an ad or post made for views on Reels, Shorts, TikTok); else INFO
+              before 3 s, then 4 to 7 per 10 s (3 to 9 passes; measured when 5 s or more follow the first 3 s).
+              A FAIL only with --reel (an ad or post made for views on Reels, Shorts, TikTok); else INFO
 Also written to out_folder: sheet_*.jpg (1 frame a second at phone size, with the 9:16 safe area drawn), crop_*.png
 (the most detailed 512 px square at four moments, at 100%: look for blocky or pixelated texture), frame0_360.png,
 check.json. Look at every sheet yourself: the gates catch numbers, not beauty.
@@ -358,6 +359,8 @@ def main():
         late = [t for t in edges if t >= 3.0]
         per10 = len(late) / max(0.1, nf / fps - 3.0) * 10
         ok_h = (t_move is not None and t_move <= 0.3 and bool(edges) and edges[0] <= 2.0 and 2 <= len(early) <= 4)
+        if nf / fps - 3.0 >= 5.0:  # the pace after the hook, once there is enough film to measure it
+            ok_h = ok_h and 3.0 <= per10 <= 9.0
         fmt = lambda t: "none" if t is None else f"{t:.2f} s"
         gate("hook", ok_h if reel else None,
              f"first motion {fmt(t_move)} (0.3 s or less), first big change {fmt(edges[0] if edges else None)} "

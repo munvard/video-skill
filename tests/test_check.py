@@ -146,6 +146,19 @@ class Gates(unittest.TestCase):
         self.assertEqual(check(self.good, str(self.tmp / "c13"), "--reel")[1]["hook"], "FAIL")
         self.assertEqual(check(self.good, str(self.tmp / "c14"))[1]["hook"], "INFO")
 
+    def test_hook_pace(self):
+        # After the hook a reel keeps 4 to 7 big changes per 10 s: a 10 s reel that cuts every 2 s passes, one that
+        # flips four times a second fails with --reel.
+        src = "testsrc2=s=540x960:r=30:d=10"
+        calm, frantic = self.tmp / "calm.mp4", self.tmp / "frantic.mp4"
+        ff("-f", "lavfi", "-i", src, "-vf", "negate=enable='between(t,1,2)+between(t,3,5)+between(t,7,9)'",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", str(calm))
+        ff("-f", "lavfi", "-i", src, "-vf", "negate=enable='between(t,1,2)+gte(t,3)*lt(mod(t,0.5),0.25)'",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", str(frantic))
+        self.assertEqual(check(calm, str(self.tmp / "c15"), "--reel")[1]["hook"], "PASS")
+        code, g, out = check(frantic, str(self.tmp / "c16"), "--reel")
+        self.assertEqual(g["hook"], "FAIL", out)
+
     def test_loop_gate(self):
         code, g, out = check(self.good, str(self.tmp / "c4"), "--loop")
         self.assertEqual(g["loop"], "FAIL", out)
