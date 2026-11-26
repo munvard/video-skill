@@ -200,7 +200,7 @@ docs = ROOT / "docs"
 (docs / "films").mkdir(parents=True, exist_ok=True)
 (docs / "style.css").write_text(CSS + "\n", encoding="utf-8", newline="\n")
 grid = "".join(
-    f'<a class="card" href="films/{f["slug"]}.html"><img src="../{f["poster"]}" alt="{esc(f["alt"])}">'
+    f'<a class="card" href="films/{f["slug"]}.html"><img src="{f["poster"].removeprefix("docs/")}" alt="{esc(f["alt"])}">'
     f'<div><b>{esc(f["title"])}</b><br><small>{esc(f["kind"])}. One prompt, {mins(f)}.</small></div></a>'
     for f in films + ([compare] if compare else []))
 (docs / "index.html").write_text(page("/video: launch videos made in Claude Code", f"""
@@ -212,7 +212,7 @@ checked frame by frame. Free and open source (MIT). <a href="https://github.com/
 for f in films + ([compare] if compare else []):
     vids = "".join(
         f'<figure><video class="{"v916" if c["h"] > c["w"] else "v169"}" controls playsinline preload="metadata" '
-        f'poster="../../{f["poster"]}" src="{RELEASE}/{c["file"]}"></video><figcaption>{esc(c["label"])}, '
+        f'poster="../{f["poster"].removeprefix("docs/")}" src="{RELEASE}/{c["file"]}"></video><figcaption>{esc(c["label"])}, '
         f'{c["w"]}x{c["h"]}, {c["dur"]:.1f} s</figcaption></figure>' for c in f["cuts"])
     gates = "".join(f"<tr><td>{esc(k)}</td><td>{esc(v)}</td></tr>" for k, v in f.get("gates", {}).items())
     facts = "".join(f"<tr><td>{esc(k)}</td><td>{esc(v)}</td></tr>" for k, v in (

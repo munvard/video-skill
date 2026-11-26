@@ -1,5 +1,86 @@
 {
   "release": "v2.0.0",
-  "films": [],
+  "films": [
+    {
+      "slug": "mossbook",
+      "title": "Mossbook",
+      "kind": "a mobile app (invented)",
+      "about": "Launch film for an invented plant journal app, made from its README and two source files.",
+      "alt": "A monstera grows in a round photo that becomes the app's plant screen",
+      "prompt": "/video Make the launch film for this project: one 9:16 cut for Reels and TikTok and one 16:9 cut for the site. I am away, so do not stop to ask; make it beautiful.",
+      "minutes": 31.1,
+      "model": "Opus 5.5",
+      "plan": "Claude Max 20x",
+      "mode": "",
+      "input": "README.md, src/screens/Today.tsx, src/theme.ts (an invented app)",
+      "commit": "a775268",
+      "cuts": [
+        {
+          "label": "9:16",
+          "file": "mossbook-9x16.mp4",
+          "w": 1080,
+          "h": 1920,
+          "dur": 26.4
+        },
+        {
+          "label": "16:9",
+          "file": "mossbook-16x9.mp4",
+          "w": 1920,
+          "h": 1080,
+          "dur": 26.4
+        }
+      ],
+      "poster": "docs/films/media/mossbook.webp",
+      "plan_note": "One circle carries the film: a weekly plant photo becomes the phone's Plant screen, opens onto a windowsill, dives into a sick leaf, and pulls back to a room map as the sun moves through the seasons.",
+      "gates": {
+        "Loudness": "-13.8 LUFS, -2.4 dBTP",
+        "Smallest text at 360 px": "14.0 px",
+        "Lowest text contrast": "5.2:1",
+        "All gates": "PASS (both cuts)"
+      },
+      "turns": 57,
+      "output_tokens": 138409
+    },
+    {
+      "slug": "quillstack",
+      "title": "quillstack",
+      "kind": "a developer tool (invented)",
+      "about": "Launch film for an invented command line tool that writes release notes from git commits, made from its README and source.",
+      "alt": "Commit messages fly past in a tunnel of light and land as a clean changelog",
+      "prompt": "/video Make the launch film for this project: one 9:16 cut for Reels and TikTok and one 16:9 cut for the site. I am away, so do not stop to ask; make it beautiful.",
+      "minutes": 31.9,
+      "model": "Opus 5.5",
+      "plan": "Claude Max 20x",
+      "mode": "",
+      "input": "README.md, src/quillstack/cli.py (an invented tool)",
+      "commit": "3e2eb2a",
+      "cuts": [
+        {
+          "label": "9:16",
+          "file": "quillstack-9x16.mp4",
+          "w": 1080,
+          "h": 1920,
+          "dur": 24.0
+        },
+        {
+          "label": "16:9",
+          "file": "quillstack-16x9.mp4",
+          "w": 1920,
+          "h": 1080,
+          "dur": 24.0
+        }
+      ],
+      "poster": "docs/films/media/quillstack.webp",
+      "plan_note": "The camera flies through a storm of commit messages; they sort themselves into Added, Fixed and Changed and pour into a clean changelog card, which stacks into versions and becomes the quill logo.",
+      "gates": {
+        "Loudness": "-13.9 LUFS, -1.4 dBTP",
+        "Smallest text at 360 px": "15.0 px",
+        "Lowest text contrast": "5.9:1",
+        "All gates": "PASS (both cuts)"
+      },
+      "turns": 66,
+      "output_tokens": 92460
+    }
+  ],
   "compare": null
 }
