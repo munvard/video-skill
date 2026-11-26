@@ -99,7 +99,9 @@ yourself, write the verdict in `concept.md`, and continue. A look that is not cl
 The gate has not run until `move.mp4` exists and was judged: never start a full render without it. "Do not stop" skips
 waiting for the user, never the gate itself: judge the moving test by the beauty pass and redo the look if it is not
 clearly beautiful. With Blender, the stills and the test are the frames a viewer sees (plates with the type and UI on top), never
-raw plates. Frame 0 shows the product or its result on screen, not an empty device.
+raw plates. The Blender moving test is its own small render: only the frames of those 6 s, at half size (`--res 0.5`),
+made and judged before any full plate render starts. Rendering the full plates first and cutting the test from them is a
+full render without the gate. Frame 0 shows the product or its result on screen, not an empty device.
 
 ## 6. Build
 1. Copy `SK/kit/templates/film.html` into `.video/<film>/` and build the film there. Every frame is a pure function of
