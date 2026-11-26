@@ -12,9 +12,6 @@ watch it with sound and see its prompt, its plan and its gate numbers.
 <td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/mossbook.html"><img src="docs/films/media/mossbook.webp" width="100%" alt="A monstera grows in a round photo that becomes the app&#x27;s plant screen"></a><br><b>Mossbook</b>: a mobile app (invented)<br><sub>One prompt, 31 min, Opus 5.5. 9:16 and 16:9.</sub></td>
 <td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/quillstack.html"><img src="docs/films/media/quillstack.webp" width="100%" alt="Commit messages fly past in a tunnel of light and land as a clean changelog"></a><br><b>quillstack</b>: a developer tool (invented)<br><sub>One prompt, 32 min, Opus 5.5. 9:16 and 16:9.</sub></td>
 </tr>
-<tr>
-<td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/orbel.html"><img src="docs/films/media/orbel.webp" width="100%" alt="A frosted glass orb on a wooden desk glows warm, drains as time passes, then breathes blue"></a><br><b>Orbel</b>: a hardware gadget (invented)<br><sub>One prompt, 98 min, Opus 5.5. 9:16 and 16:9.</sub></td>
-</tr>
 </table>
 
 ## With and without the skill
