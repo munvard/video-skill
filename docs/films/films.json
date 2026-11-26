@@ -2,44 +2,6 @@
   "release": "v2.0.0",
   "films": [
     {
-      "slug": "munu",
-      "title": "Munu",
-      "kind": "a real desktop voice assistant",
-      "about": "Launch film for Munu, a voice assistant for Windows and Mac, made only from its public web page and its Google Play listing. The droid is modelled and lit in Blender (EEVEE); the type and UI are HTML.",
-      "alt": "A glossy 3D droid with a black glass face smiles under the words Say Munu",
-      "prompt": "/video Make a launch film for Munu, the desktop voice assistant at https://munetic.net/munu. Use only public facts from that page and its Google Play page. One 9:16 cut and one 16:9 cut. I am away, so do not stop to ask; make it beautiful.",
-      "minutes": 117.5,
-      "model": "Opus 5.5",
-      "plan": "Claude Max 20x",
-      "mode": "",
-      "input": "the product's public web page and Google Play listing (a URL in the prompt)",
-      "commit": "3e410a2",
-      "cuts": [
-        {
-          "label": "9:16",
-          "file": "munu-9x16.mp4",
-          "w": 1080,
-          "h": 1920,
-          "dur": 28.0
-        },
-        {
-          "label": "16:9",
-          "file": "munu-16x9.mp4",
-          "w": 1920,
-          "h": 1080,
-          "dur": 28.0
-        }
-      ],
-      "poster": "docs/films/media/munu.webp",
-      "plan_note": "The film follows the app's own droid: it hears its name, listens and thinks, then the camera dives into its eye and each world shows one ability (notes you own, a pointer moved by hand, a job sent from the phone) before it comes back to the droid and the end card.",
-      "gates": {
-        "Loudness": "-13.8 LUFS, -1.1 dBTP",
-        "All gates": "PASS (both cuts)"
-      },
-      "turns": 108,
-      "output_tokens": 112623
-    },
-    {
       "slug": "mossbook",
       "title": "Mossbook",
       "kind": "a mobile app (invented)",
