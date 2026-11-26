@@ -17,6 +17,7 @@ Gates (numbers come from the file, never from the plan):
   reading     every line stays fully on screen long enough to read: 0.3 s a word plus 0.4 s, at least 1.0 s
   textsize    every word is at least 14 px tall when the frame is 360 px wide
   contrast    every line at least 4.5:1 against the background around its letters (text colours from the meta)
+  band        9:16 only: no empty band (no edges, no change) over 30% of the height for more than 1 s
   safearea    9:16 only: text stays inside the area the Reels, Shorts and TikTok buttons and captions leave free
   loudness    -14 LUFS within 1, true peak at or under -1.0 dBTP
   loop        with --loop: the last frame flows into frame 0 (PSNR at least 30 dB)
@@ -233,6 +234,25 @@ def main():
     gate("slab", not sl, f"largest flat dark area {slab.max() * 100:.0f}% of the frame (25% or less)" if not sl else
          "flat dark area over 25% of the frame at " + ", ".join(f"{s / fps:.2f} to {(s + l) / fps:.2f} s (up to {slab[s:s + l].max() * 100:.0f}%)" for s, l in sl[:6])
          + ": light it, texture it or fill it with the subject")
+
+    # band (9:16): an empty band (no edges, no change) over 30% of the height for more than 1 s: the subject group should
+    # fill the frame from the top to the bottom of the safe area.
+    if H > W * 1.5:
+        dx = np.abs(np.diff(g, axis=2)).mean(axis=2)
+        rm = g.mean(axis=2)
+        dm = np.abs(np.diff(rm, axis=1, prepend=rm[:, :1]))
+        empty = (dx < 0.8) & (dm < 3)
+        band = np.zeros(nf)
+        for i in range(nf):
+            best = cur = 0
+            for e in empty[i]:
+                cur = cur + 1 if e else 0
+                best = max(best, cur)
+            band[i] = best / ah
+        bd = [(s0, l) for s0, l in runs(band > 0.30) if l / fps > 1.0]
+        gate("band", not bd, f"largest empty band {band.max() * 100:.0f}% of the height (30% or less)" if not bd else
+             "empty band over 30% of the height at " + ", ".join(f"{s0 / fps:.2f} to {(s0 + l) / fps:.2f} s (up to {band[s0:s0 + l].max() * 100:.0f}%)" for s0, l in bd[:6])
+             + ": make the subject group fill the safe area from top to bottom")
 
     if meta:
         slow = []

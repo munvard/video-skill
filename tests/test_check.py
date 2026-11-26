@@ -64,6 +64,14 @@ class Gates(unittest.TestCase):
         self.assertEqual(check(film, str(self.tmp / "c5"))[1]["slab"], "FAIL")
         self.assertEqual(check(self.good, str(self.tmp / "c6"))[1]["slab"], "PASS")
 
+    def test_band(self):
+        # 9:16 with a moving pattern in the top 40% and a flat colour below: band fails.
+        film = self.tmp / "band.mp4"
+        ff("-f", "lavfi", "-i", "testsrc2=s=540x960:r=30:d=3", "-vf", "drawbox=x=0:y=384:w=540:h=576:color=0xe8dcc8:t=fill",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", str(film))
+        self.assertEqual(check(film, str(self.tmp / "c7"))[1]["band"], "FAIL")
+        self.assertEqual(check(self.good, str(self.tmp / "c8"))[1]["band"], "PASS")
+
     def test_contrast(self):
         # "Letters" (bars) in a text box: pale teal on teal fails, white on navy passes.
         def film(name, bg, fg):

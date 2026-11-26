@@ -61,6 +61,10 @@ The rules every concept and every frame keeps (`reference/craft.md` has the numb
   one plain line, where to get it) held at least 2.5 s with a slow drift, then the loop.
 - **Motion is motivated**: the camera follows something (a cursor, a thread, a hand, light) and settles on what must be
   read. No swinging panels, white flashes or whips added for energy. Moves use the measured eases in `kit.js`.
+- **A signature move in every launch film**: at least one moment a viewer could not make in a slide tool. A camera move
+  through the product, a lit 3D shot (Blender with real materials, or the kit's ray tracer), or a transform that carries
+  one object into the next beat. A film of flat 2D cards and fades is a social post, not a launch film. For hardware and
+  physical products, the product itself is a lit 3D model.
 - **Professional detailed 3D** when 3D: real materials, real light, high-detail models. No voxel, pixel or blocky toy
   characters unless the user asks for that look. No photoreal people.
 - **Craft surprise, never jokes**: hidden joins, a screen that becomes the next world, a perfect loop, a sound motif. No
