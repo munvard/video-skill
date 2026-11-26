@@ -273,7 +273,8 @@ def main():
                 best = max(best, cur)
             band[i] = best / ah
         bd = [(s0, l) for s0, l in runs(band > 0.30) if l / fps > 1.0]
-        gate("band", not bd, f"largest empty band {band.max() * 100:.0f}% of the height (30% or less)" if not bd else
+        gate("band", not bd, (f"no empty band over 30% of the height for more than 1 s (peak {band.max() * 100:.0f}%, shorter)" if band.max() > 0.30
+              else f"largest empty band {band.max() * 100:.0f}% of the height (30% or less)") if not bd else
              "empty band over 30% of the height at " + ", ".join(f"{s0 / fps:.2f} to {(s0 + l) / fps:.2f} s (up to {band[s0:s0 + l].max() * 100:.0f}%)" for s0, l in bd[:6])
              + ": make the subject group fill the safe area from top to bottom")
 

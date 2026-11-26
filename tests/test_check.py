@@ -159,6 +159,22 @@ class Gates(unittest.TestCase):
         code, g, out = check(frantic, str(self.tmp / "c16"), "--reel")
         self.assertEqual(g["hook"], "FAIL", out)
 
+    def test_input_open(self):
+        # Craft rule 10: a reel may open on its input being typed, then cut hard to the output by about 1.5 s. A 1.4 s
+        # typed open passes the hook gate; a 2.5 s one fails it, because the first big change comes after 2.0 s.
+        def reel(open_s, out):
+            ff("-f", "lavfi", "-i", f"color=c=0x1a1a1a:s=540x960:r=30:d={open_s}", "-f", "lavfi",
+               "-i", "testsrc2=s=540x960:r=30:d=6", "-f", "lavfi", "-i", "color=c=white:s=460x120:r=30", "-filter_complex",
+               "[0:v][2:v]overlay=x='min(40,-420+t*600)':y=520:shortest=1[a];"
+               "[1:v]negate=enable='between(t,0.8,1.4)+between(t,3,4)'[b];[a][b]concat=n=2:v=1[v]",
+               "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out))
+            return out
+        quick, slow = reel(1.4, self.tmp / "open_quick.mp4"), reel(2.5, self.tmp / "open_slow.mp4")
+        code, g, out = check(quick, str(self.tmp / "c17"), "--reel")
+        self.assertEqual(g["hook"], "PASS", out)
+        code, g, out = check(slow, str(self.tmp / "c18"), "--reel")
+        self.assertEqual(g["hook"], "FAIL", out)
+
     def test_loop_gate(self):
         code, g, out = check(self.good, str(self.tmp / "c4"), "--loop")
         self.assertEqual(g["loop"], "FAIL", out)

@@ -31,6 +31,13 @@ that did well, and is checked with `check.py --reel`:
 9. A before and after opens on the after, full bleed, with nothing covering it; the before is one short flash (about
    1.5 s) with one true mark, and the film returns to the after and never goes back. Labels are small corner tags,
    never a band over the payoff. Each side keeps its own sound.
+10. A showcase of a tool that turns one input into a finished thing (a prompt into a film, a sketch into an app) may
+   open on the input instead of the payoff, the one exception to rule 1: the real input being typed (a real screen
+   capture, cropped so no account, plan or path shows), readable with capitals of 42 px or more, under one hook line
+   that says what was typed where ("I typed one line into Claude Code:"). Then a hard cut to the output's strongest
+   frame by about 1.5 s, never after 2.0 s: the jump from one line to a finished thing is the hook. The output plays
+   as it was made, and the last 1.5 s gives the name and the link. A finished film is never edited to fit this open:
+   the open goes in front of it.
 A calm launch film for a site or a store page may be one slow take; it is not a reel and skips `--reel`.
 
 What fails, from experience:
