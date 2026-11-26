@@ -116,7 +116,7 @@ async function openBrowser() {
   };
   await call('Page.enable', {}); await call('Runtime.enable', {});
   await call('Page.addScriptToEvaluateOnNewDocument', { source: PRELUDE });
-  return { ch, ws, call, ev, close: () => { try { ws.close(); } catch {} ch.kill(); procs.delete(ch); } };
+  return { ch, ws, call, ev, close: () => { try { ws.close(); } catch {} killTree(ch); } };
 }
 
 async function openPage() {
@@ -150,12 +150,16 @@ const DRAW = t => `(async () => {
   return { texts: typeof window.TEXTS === 'function' ? (window.TEXTS(${t}) || []) : null, lost: window.__glLost || null, err: window.ERR || null };
 })()`;
 
-const kill = () => { for (const p of procs) try { p.kill(); } catch {} server.close(); setTimeout(() => { for (const p of profiles) try { fs.rmSync(p, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); } catch {} }, 300); };
-process.on('SIGINT', () => { kill(); process.exit(130); });
-// Every way out (done, die(), Ctrl-C, a crash) kills Chrome and removes its temporary profiles, so nothing is left
-// running or in the temp folder. Retries cover Windows holding the folder for a moment after the kill.
+// Every way out (done, die(), Ctrl-C, a crash) kills Chrome's whole process tree and removes its temporary profiles,
+// so nothing is left running or in the temp folder. On Windows, ch.kill() ends only the main process: its GPU,
+// renderer and crash handler children keep the profile locked for a moment, so the tree is killed and the removal
+// retries for up to 5 s.
 const killTree = p => { if (p.exitCode !== null || p.signalCode !== null) return; try { if (process.platform === 'win32') execFileSync('taskkill', ['/T', '/F', '/PID', String(p.pid)], { stdio: 'ignore' }); else p.kill('SIGKILL'); } catch {} };
-process.on('exit', () => { for (const p of procs) killTree(p); for (const p of profiles) try { fs.rmSync(p, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 }); } catch {} });
+const nap = ms => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const cleanProfiles = () => { for (const p of profiles.splice(0)) for (let i = 0; i < 25; i++) { try { fs.rmSync(p, { recursive: true, force: true }); break; } catch { nap(200); } } };
+const kill = () => { for (const p of procs) killTree(p); server.close(); cleanProfiles(); };
+process.on('SIGINT', () => { kill(); process.exit(130); });
+process.on('exit', () => { for (const p of procs) killTree(p); cleanProfiles(); });
 
 async function shot(b, fmt) {
   const r = await b.call('Page.captureScreenshot', { format: fmt, quality: fmt === 'jpeg' ? QUALITY : undefined, clip: { x: 0, y: 0, width: W, height: H, scale: 1 }, captureBeyondViewport: false, optimizeForSpeed: fmt === 'jpeg' });

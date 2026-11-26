@@ -76,6 +76,15 @@ class Render(unittest.TestCase):
         self.assertEqual(sorted(p.name for p in (self.tmp / "png").glob("*.png")), ["0000.png", "0005.png"])
         self.assertEqual(json.loads((self.tmp / "png/info.json").read_text())["n"], 10)
 
+    def test_success_leaves_no_chrome_profile(self):
+        (self.tmp / "ok.html").write_text("<script>window.DUR=1;window.render=t=>{}</script>", encoding="utf-8")
+        before = set(Path(tempfile.gettempdir()).glob("vs-chrome-*"))
+        p = subprocess.run(["node", str(KIT / "render.mjs"), str(self.tmp / "ok.html"), "--stills", "0.5", "--still-dir", str(self.tmp / "s"),
+                            "--size", "200x200"], capture_output=True, text=True, timeout=120)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        left = set(Path(tempfile.gettempdir()).glob("vs-chrome-*")) - before
+        self.assertEqual(left, set(), "a finished render must remove its Chrome profile")
+
     def test_bad_page_fails_clearly(self):
         (self.tmp / "bad.html").write_text("<script>window.DUR=1</script>", encoding="utf-8")
         before = set(Path(tempfile.gettempdir()).glob("vs-chrome-*"))
