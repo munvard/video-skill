@@ -80,6 +80,46 @@
       },
       "turns": 66,
       "output_tokens": 92460
+    },
+    {
+      "slug": "orbel",
+      "title": "Orbel",
+      "kind": "a hardware gadget (invented)",
+      "about": "Launch film for an invented glass focus light, made from its README alone. The product is modelled and lit in Blender (EEVEE); the type is laid on top in HTML.",
+      "alt": "A frosted glass orb on a wooden desk glows warm, drains as time passes, then breathes blue",
+      "prompt": "/video Make the launch film for this project: one 9:16 cut for Reels and TikTok and one 16:9 cut for the site. I am away, so do not stop to ask; make it beautiful.",
+      "minutes": 98.1,
+      "model": "Opus 5.5",
+      "plan": "Claude Max 20x",
+      "mode": "",
+      "input": "README.md (an invented product)",
+      "commit": "169f3bc",
+      "cuts": [
+        {
+          "label": "9:16",
+          "file": "orbel_9x16.mp4",
+          "w": 1080,
+          "h": 1920,
+          "dur": 24.0
+        },
+        {
+          "label": "16:9",
+          "file": "orbel_16x9.mp4",
+          "w": 1920,
+          "h": 1080,
+          "dur": 24.0
+        }
+      ],
+      "poster": "docs/films/media/orbel.webp",
+      "plan_note": "One slow take around the orb through a working day: twist the cap to set time, the light drains with the minutes, turns amber near the end, breathes blue for the break, then the end card with price and ship date.",
+      "gates": {
+        "Loudness": "-14.0 LUFS, -1.1 dBTP",
+        "Smallest text at 360 px": "15.3 px",
+        "Lowest text contrast": "5.4:1",
+        "All gates": "9:16 PASS. 16:9: end hold FAIL (the end card is almost still for 4 s)"
+      },
+      "turns": 9,
+      "output_tokens": 7239
     }
   ],
   "compare": null
