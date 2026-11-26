@@ -100,6 +100,8 @@ into a new folder and keep the old one).
 
 - Dark rooms, flat slabs, empty grey floors.
 - Toy, voxel or blocky models; photoreal people.
+- A world of bare primitives (spheres, cubes, rings, slabs) in a plain room: that is a test scene, not a product world.
+  Build or fetch real objects (Poly Haven models), with detail at the size they are seen, and something on every screen.
 - Glossy surfaces that mirror a light strip in the frame (make them rougher or move the light).
 - A tall column straight behind the hero (it grows out of its head).
 - Text or UI made in Blender.

@@ -90,6 +90,9 @@ Before the full build, render 3 hero stills at final quality and a 6 s moving te
 .video/<film>/look/move.mp4`. Judge them first by the beauty pass (`reference/checklist.md`, section 1) and the taste
 file. Show them to the user and wait for their yes. If the user said not to stop (or nobody is there), judge them
 yourself, write the verdict in `concept.md`, and continue. A look that is not clearly beautiful is redone now, not later.
+The gate has not run until `move.mp4` exists and was judged: never start a full render without it, even when nobody is
+there. With Blender, the stills and the test are the frames a viewer sees (plates with the type and UI on top), never
+raw plates. Frame 0 shows the product or its result on screen, not an empty device.
 
 ## 6. Build
 1. Copy `SK/kit/templates/film.html` into `.video/<film>/` and build the film there. Every frame is a pure function of

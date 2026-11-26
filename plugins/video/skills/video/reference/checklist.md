@@ -12,8 +12,8 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 4. Does the hero of every beat fill 70% of the width or more (in 9:16 push the camera in until it does), with real
    materials, depth and detail? Any UI it shows must be readable at 360 px wide, or it is decoration and must not
    look like text to read.
-5. Anything that looks cheap: a toy or voxel kit, flat clip art, a default gradient, a stock-looking icon row, a
-   placeholder, square corners where the design is round, line-art hands?
+5. Anything that looks cheap: bare 3D primitives in a plain room, a toy or voxel kit, flat clip art, a default
+   gradient, a stock-looking icon row, a placeholder, square corners where the design is round, line-art hands?
 6. Put frame 0 next to the end card: are they both postable on their own?
 7. Open the 100% crops (`crop_*.png`): any blocky texture, square speck, banding or stretched noise is a BLOCKER.
 
