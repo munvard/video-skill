@@ -1,0 +1,67 @@
+{
+  "name": "paperboat-control",
+  "prompt": "/video a paper boat in a storm, a 9:16 reel for Instagram, 15 seconds, with sound",
+  "notes": [],
+  "seed": null,
+  "model": "claude-opus-5-5",
+  "plugin": false,
+  "skill_commit": "none",
+  "minutes": 8.1,
+  "exit": 0,
+  "turns": 9,
+  "cost_usd_equiv": 0.6377322,
+  "usage": {
+    "input_tokens": 18,
+    "cache_creation_input_tokens": 27005,
+    "cache_read_input_tokens": 267801,
+    "output_tokens": 18403,
+    "output_tokens_details": {
+      "thinking_tokens": 7149
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 27005,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 722,
+        "cache_read_input_tokens": 39622,
+        "cache_creation_input_tokens": 548,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 548
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 18,
+      "outputTokens": 18403,
+      "cacheReadInputTokens": 267801,
+      "cacheCreationInputTokens": 27005,
+      "webSearchRequests": 0,
+      "costUSD": 0.6377322,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 7149,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 27005,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "Your reel is ready: **`/Users/Shared/vsproof/paperboat-control/paper_boat_storm_reel.mp4`**\n\n`/video` isn't installed in this session, so I made the reel from code: a Python script draws every frame and makes the sound, and ffmpeg encodes it.\n\n**File:** 1080×1920 (9:16), exactly 15 seconds, 30 fps, MP4 (H.264 video, AAC stereo audio), about 21 MB. It's set up to start playing quickly when uploaded and fits Instagram Reels specs.\n\n**What happens in it:**\n- **0-2 s:** fades in from black as the storm builds. A white paper boat rocks on dark waves in heavy, wind-blown rain, with foam and spray coming off the wave tops.\n- **2.4 s, 6.9 s, 10.3 s:** lightning strikes. Each one flickers, lights up the whole scene, and is followed by thunder.\n- **11-15 s:** the storm eases. The waves and rain settle, and a warm beam of light breaks through the clouds onto the boat. It fades out at the very end.\n\n**Sound:** everything is generated, with no recordings or licensed music. There's rain, gusting wind, waves that swell as the boat rises and falls, and thunder panned toward each lightning bolt. A quiet low chord plays underneath and shifts from minor to major as the storm clears. Peak level is about −0.8 dB.\n\nI looked at stills from several points in the video. The sound levels are measured, but I haven't listened to it, so play it once before posting.\n\n**Other files in the folder:**\n- `render.py`: the script that makes the video. Run `python3 render.py` to make it again; it takes about 2.5 minutes. You can change the lightning times, how strong the storm is, the boat size and the colors at the top of the script.\n- `storm_audio.wav`: the soundtrack on its own.\n- `contact.jpg`: a strip of five stills from the video.\n\nIf you'd like a text overlay or caption, a different ending, or a reel that loops seamlessly, I can make those changes.",
+  "started": "2026-11-26 19:12"
+}

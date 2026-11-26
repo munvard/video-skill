@@ -1,0 +1,68 @@
+{
+  "name": "paperboat-control-2",
+  "notes_skill_commits": [],
+  "prompt": "/video a paper boat in a storm, a 9:16 reel for Instagram, 15 seconds, with sound",
+  "notes": [],
+  "seed": null,
+  "model": "claude-opus-5-5",
+  "plugin": false,
+  "skill_commit": "",
+  "minutes": 28.3,
+  "exit": 0,
+  "turns": 4,
+  "cost_usd_equiv": 1.3630042000000007,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 3197,
+    "cache_read_input_tokens": 179967,
+    "output_tokens": 2009,
+    "output_tokens_details": {
+      "thinking_tokens": 278
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 3197,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 787,
+        "cache_read_input_tokens": 60681,
+        "cache_creation_input_tokens": 1846,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1846
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 56,
+      "outputTokens": 36391,
+      "cacheReadInputTokens": 1200321,
+      "cacheCreationInputTokens": 49362,
+      "webSearchRequests": 0,
+      "costUSD": 1.3630042000000007,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 16164,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 49362,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "Your 15-second reel is ready: **`paperboat_storm_reel.mp4`**. There's no `/video` command in this session, so I built it from scratch: the picture is drawn by code and the sound is synthesized, with no stock footage or AI video service.\n\n**Specs:** 1080×1920 (9:16), 30 fps, exactly 15.0 s, H.264 video with 48 kHz stereo AAC sound, 30 MB. Loudness is −12.8 LUFS with peaks at −1.5 dB. That's slightly above the −14 I aimed for, which doesn't matter because Instagram adjusts volume itself.\n\n**What happens:**\n- **0-3 s:** The reel fades in on a small white paper boat on a dark sea in light rain. Wind and waves pick up.\n- **3 s:** First lightning strike, with thunder about a third of a second later.\n- **3-8 s:** The storm builds: heavier rain, bigger swells, the boat pitching on the waves.\n- **8.1 s:** A close strike with a sharp crack, then a huge wave rises in the foreground, swallows the boat with a crash and spray, and rolls past.\n- **11.5 s:** One last distant rumble.\n- **12-15 s:** The rain eases, warm light breaks through the clouds onto the boat, a low drone resolves into a soft major chord, and the caption *\"still afloat.\"* fades in.\n\nI checked stills from the finished file and they look right. I haven't been able to listen to it myself: I only checked the sound's levels, timing and spectrogram. Play it once on a phone, since phone speakers lose much of the thunder's low rumble. The caption sits in the upper third, away from where Instagram puts its buttons and captions.\n\nThe folder also contains the scripts (`render.py`, `audio.py`, `common.py`, which holds the shared timeline), plus `video_only.mp4` and `storm.wav`. A full re-render takes a few minutes, so changes are easy: the caption, when the lightning strikes, how strong the storm gets, the colours, or taking out the music. Tell me what you'd like different.",
+  "started": "2026-11-26 22:04"
+}

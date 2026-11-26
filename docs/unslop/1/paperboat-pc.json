@@ -1,0 +1,68 @@
+{
+  "name": "paperboat-pc",
+  "notes_skill_commits": [],
+  "prompt": "/video a paper boat in a storm, a 9:16 reel for Instagram, 15 seconds, with sound",
+  "notes": [],
+  "seed": null,
+  "model": "claude-opus-5-5",
+  "plugin": true,
+  "skill_commit": "748a12d",
+  "minutes": 70.3,
+  "exit": 0,
+  "turns": 15,
+  "cost_usd_equiv": 4.075751399999999,
+  "usage": {
+    "input_tokens": 28,
+    "cache_creation_input_tokens": 18880,
+    "cache_read_input_tokens": 2166681,
+    "output_tokens": 9496,
+    "output_tokens_details": {
+      "thinking_tokens": 1799
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 18880,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 931,
+        "cache_read_input_tokens": 175662,
+        "cache_creation_input_tokens": 1418,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1418
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 114,
+      "outputTokens": 73159,
+      "cacheReadInputTokens": 6657377,
+      "cacheCreationInputTokens": 160080,
+      "webSearchRequests": 0,
+      "costUSD": 4.075751399999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 28796,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 160080,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "The reel is finished and passes every gate. Nobody has listened to the sound yet, and it doesn't reach the 9-out-of-10 bar on all six stranger questions, so please play it on your phone with sound before you post.\n\n**Film:** `.video/boat/deliver/paperboat_storm_9x16.mp4` (1080x1920, 15 s, 30 fps, with sound)\n\n**Concept:** a boat folded from ruled notebook paper rides a storm sea. Lightning hits, it drops into a dark trough, then climbs the biggest wave into a gold break in the clouds as the music drops at 10 s. It opens on \"It's only paper.\" and ends calm on \"Still afloat.\"\n\n**Checks:** all 15 gates in `check.py --reel` pass:\n- Frame 0 is the boat with the words, sharp and bright.\n- Text contrast is 7.3:1 and 6.5:1.\n- Loudness is -13.9 LUFS with a true peak of -1.5 dBTP.\n- It changes shot 4 times in the first 3 s.\n\nThe first two sound mixes were wrong: I read a 24-bit file as 16-bit, which turned the effects into loud noise. I caught it in the loudness numbers and rebuilt the mix. It now builds from quiet (-18 LUFS) to the drop (-11.7), with rain and wind under the music.\n\n**Stranger scores** (0-10, at phone size, sound off): stop 9, clarity 9, hold 8, beauty 8, share 7, trust 9.\n- **Beauty:** the close-up of the sail at 2-3 s has a pale, flat sky, and the end water looks a bit brown-grey.\n- **Share:** it's pretty and hopeful, but there's no strong reason to send it to a particular friend. That's a limit of the concept, and more fixes won't change it.\n\n**Also in `deliver/`:**\n- `poster.jpg`\n- `post.md`: the caption, a disclosure line (\"Made in 3D with Blender. Not real footage.\"), credits for the CC0 Poly Haven sky and the Fraunces font, and a before-you-post list.\n- `NOTE.md`: the gate numbers. The render took about 52 minutes; everything took about 1 h 45 min.\n\n**What I'd change next:**\n1. A warmer, more dramatic sky in the close-up and more teal in the end water (one more Blender pass on those two shots, about 15 min).\n2. A seamless loop. The calm gold ending cuts back to the storm opening with a visible jump.\n3. For more shares, a stronger twist. For example, the last shot pulls back to show the \"ocean\" is a rain puddle on a street.\n\nNothing has been posted or uploaded.",
+  "started": "2026-11-26 22:03"
+}
