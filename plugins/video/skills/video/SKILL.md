@@ -142,6 +142,10 @@ full render without the gate. Frame 0 shows the product or its result on screen,
    stranger who has never heard of the product, on the film at phone size, sound off first. Every score names the
    second it rests on; a score you cannot point to a frame for is not a 9. Fix and render again anything under 9. If it
    still cannot reach 9, write the six scores and why in `NOTE.md` and tell the user plainly. Never round up.
+6. When the request names exact specs (a time, a size, a number of lines, a place in the frame, a shot to use or to
+   leave out), list them one by one and hold the final against each, on the frame it applies to. Meet each one, or put
+   it in `NOTE.md` as not met, with the reason. A spec that is missed and not reported is the worst miss: the user
+   trusts the note and posts.
 
 ## 8. Deliver
 In `.video/<film>/deliver/`: each master (9:16, and 16:9 when made), the poster frame as a JPG, subtitles when there is a
