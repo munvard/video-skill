@@ -162,7 +162,7 @@ function ray(o) {
     if (o.post) o.post(im, i, t0);
     S.oc.putImageData(im, 0, 0);
     if (o.over) { S.oc.save(); o.over(S.oc, t0, i); S.oc.restore(); }
-    return S.out.toDataURL('image/png').slice(22);
+    return S.paintOnly ? undefined : S.out.toDataURL('image/png').slice(22);
   };
 }
 // Bake helpers for hops: height of a bouncing thing, squash around a contact.

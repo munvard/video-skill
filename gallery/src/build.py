@@ -22,6 +22,7 @@ from PIL import Image, ImageDraw
 
 SRC = Path(__file__).resolve().parent
 GAL = SRC.parent
+KIT = GAL.parent / "plugins/video/skills/video/kit"
 FR = GAL / ".frames"
 STILL = {"icon": GAL.parent / "plugins/video/.claude-plugin/icon.png", "social": GAL / "social.png"}
 LIMIT = {"hero": 5400, "anatomy": 1700, "isometric-city": 445, "comic-panels": 445, "map-journey": 445, "beat-cut": 430}
@@ -31,7 +32,8 @@ def render(slug, step=1):
     out = FR / slug
     if not any((SRC / d / f"{slug}.js").exists() for d in ("2d", "lit")):
         sys.exit("unknown piece: " + slug)
-    if subprocess.run(["node", str(SRC / "lib/render.mjs"), slug, str(out), str(step)]).returncode:
+    scene = next(SRC / d / f"{slug}.js" for d in ("2d", "lit") if (SRC / d / f"{slug}.js").exists())
+    if subprocess.run(["node", str(KIT / "render.mjs"), "--scene", str(scene), "--png-dir", str(out), "--every", str(step)]).returncode:
         sys.exit(1)
     return out
 

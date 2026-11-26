@@ -1,0 +1,8 @@
+/* The kit's fonts, all under the SIL Open Font License (the OFL files are in this folder). Link it from a film page:
+   <link rel="stylesheet" href="/kit/fonts.css"> */
+@font-face{font-family:Inter;src:url(/kit/fonts/Inter-Variable-latin.woff2);font-weight:100 900}
+@font-face{font-family:Fraunces;src:url(/kit/fonts/Fraunces-Variable-latin.woff2);font-weight:100 900}
+@font-face{font-family:Mono;src:url(/kit/fonts/JetBrainsMono-Bold.woff2);font-weight:700}
+@font-face{font-family:Mono;src:url(/kit/fonts/JetBrainsMono-Regular.woff2);font-weight:400}
+@font-face{font-family:Hand;src:url(/kit/fonts/Caveat-Variable.ttf);font-weight:400 700}
+@font-face{font-family:Comic;src:url(/kit/fonts/Bangers-Regular.ttf)}

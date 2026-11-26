@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- A starter film page for kit/render.mjs. Copy it into the project (for example video/film.html), keep the contract,
+     replace the content. Everything on screen is a pure function of t: render(t) sets every style from t alone.
+     Render:  node <skill>/kit/render.mjs video/film.html --out video/out/draft1.mp4
+     Stills:  node <skill>/kit/render.mjs video/film.html --stills 0.5,3,7 --still-dir video/out/look -->
+<meta charset="utf-8">
+<link rel="stylesheet" href="/kit/fonts.css">
+<script src="/kit/kit.js"></script>
+<style>
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #0d1530; }
+  #bg { position: absolute; inset: 0; }
+  .line { position: absolute; left: 60px; right: 140px; text-align: center; color: #fff; font: 800 120px/1.05 Inter; letter-spacing: -2px; will-change: transform, opacity; }
+  .sub { font: 600 58px/1.2 Inter; color: #dfe6ff; letter-spacing: 0; }
+</style>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="line" id="hook" data-say="hook" style="top: 520px">Your words<br>here</div>
+<div class="line sub" id="sub" data-say="sub" style="top: 1180px">One plain line that says what it is</div>
+<script>
+window.DUR = 8; window.FPS = 30; window.SIZE = [1080, 1920];
+// Sound events: the sound script places an effect at each time. Keep them on the beat grid of the music.
+window.EV = [{ t: 0.0, type: 'impact', gain: 0.9 }, { t: 3.0, type: 'whoosh' }, { t: 3.5, type: 'hit' }, { t: 7.0, type: 'shimmer', gain: 0.6 }];
+window.TEXTS = domTexts;
+const bg = document.getElementById('bg').getContext('2d'), hook = document.getElementById('hook'), sub = document.getElementById('sub');
+window.render = t => {
+  // The world: a lit gradient with slow light, never an empty dark void.
+  const g = bg.createLinearGradient(0, 0, 1080, 1920);
+  g.addColorStop(0, mix('#2b48ff', '#7a2bff', seg(t, 0, DUR))); g.addColorStop(1, '#0d1530');
+  bg.fillStyle = g; bg.fillRect(0, 0, 1080, 1920);
+  const r = bg.createRadialGradient(540 + 200 * Math.sin(t * .6), 760, 0, 540, 760, 900);
+  r.addColorStop(0, 'rgba(255,190,120,.55)'); r.addColorStop(1, 'rgba(255,190,120,0)'); bg.fillStyle = r; bg.fillRect(0, 0, 1080, 1920);
+  // The hook is on screen and readable at frame 0, then it moves out with a leaving curve.
+  hook.style.opacity = 1 - seg(t, 2.6, 3.0);
+  hook.style.transform = `translateY(${mv(t, 2.6, 3.0, 0, -240, 'accelExit')}px) scale(${1 + .04 * E.softInOut(seg(t, 0, 2.6))})`;
+  // The second line lands with a measured ease.
+  sub.style.opacity = seg(t, 3.2, 3.5);
+  sub.style.transform = `translateY(${mv(t, 3.2, 3.6, 120, 0, 'snapSettle')}px)`;
+};
+</script>
