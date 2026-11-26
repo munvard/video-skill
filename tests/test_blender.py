@@ -121,6 +121,24 @@ class BlenderTier(unittest.TestCase):
             self.assertGreater(mean, 0.15, f"{p} is too dark: mean {mean:.3f}")
             self.assertGreater(std, 0.05, f"{p} is flat or blank: std {std:.3f}")
 
+    def test_one_render_per_folder(self):
+        busy = os.path.join(self.tmp, "busy")
+        os.makedirs(busy)
+        pathlib.Path(busy, ".lock").write_text(str(os.getpid()), encoding="utf-8")  # this test process is alive
+        r = self.run_shot(busy, "--builtin")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("is already rendering in process", r.stdout + r.stderr)
+        self.assertFalse(any(f.endswith(".png") for f in os.listdir(busy)))
+        stale = os.path.join(self.tmp, "stale")
+        os.makedirs(stale)
+        pathlib.Path(stale, ".lock").write_text("999999", encoding="utf-8")  # a process that is gone
+        pathlib.Path(stale, ".f0002.part.png").write_bytes(b"half")  # a frame cut off mid-write
+        r = self.run_shot(stale, "--builtin")
+        self.assertEqual(r.returncode, 0, r.stdout[-3000:] + r.stderr[-2000:])
+        names = sorted(os.listdir(stale))
+        self.assertEqual([n for n in names if n.endswith(".png")], ["f0001.png", "f0002.png", "f0003.png"])
+        self.assertNotIn(".lock", names)
+
     def test_output_refuses_wrong_folder(self):
         final = os.path.join(self.tmp, "final")
         os.makedirs(final)

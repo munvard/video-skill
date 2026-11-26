@@ -717,7 +717,7 @@ def output(w=1080, h=1920, fps=30, frames=(1, 90), folder="renders/shot", scale=
     folder = os.path.abspath(folder)
     kind = "final" if scale >= 1 else "test"
     marker = os.path.join(folder, ".shot.json")
-    has_frames = os.path.isdir(folder) and any(f.endswith(".png") for f in os.listdir(folder))
+    has_frames = os.path.isdir(folder) and any(f.endswith(".png") and not f.startswith(".") for f in os.listdir(folder))
     if has_frames:
         if not os.path.exists(marker):
             raise SystemExit(f"kit3d: {folder} already holds frames from an unknown shot. Use a new folder.")
@@ -739,12 +739,66 @@ def output(w=1080, h=1920, fps=30, frames=(1, 90), folder="renders/shot", scale=
 
 
 def _render_one(folder, f):
+    """Render one frame to a temporary name and rename it when complete, so a stopped render never leaves a
+    half-written PNG that a resumed render would skip as done."""
     s = bpy.context.scene
     s.frame_set(f)
-    s.render.filepath = os.path.join(folder, f"f{f:04d}.png")
+    part = os.path.join(folder, f".f{f:04d}.part.png")
+    s.render.filepath = part
     t = time.time()
     bpy.ops.render.render(write_still=True)
+    if os.path.exists(part):
+        os.replace(part, os.path.join(folder, f"f{f:04d}.png"))
     return time.time() - t
+
+
+def _alive(pid):
+    if pid == os.getpid():
+        return True
+    if sys.platform == "win32":
+        import ctypes
+        h = ctypes.windll.kernel32.OpenProcess(0x1000, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+        if not h:
+            return False
+        code = ctypes.c_ulong()
+        ok = ctypes.windll.kernel32.GetExitCodeProcess(h, ctypes.byref(code))
+        ctypes.windll.kernel32.CloseHandle(h)
+        return bool(ok) and code.value == 259  # STILL_ACTIVE
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _lock(folder):
+    """One render per folder. Two renders of the same folder each skip the frames on disk and then render the
+    same missing frames, at half speed. A live owner makes the second render stop with its pid; a lock left by
+    a process that died is taken over."""
+    path = os.path.join(folder, ".lock")
+    for _ in range(2):
+        try:
+            fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        except FileExistsError:
+            try:
+                with open(path, encoding="utf-8") as fh:
+                    pid = int(fh.read().strip() or 0)
+            except (OSError, ValueError):
+                pid = 0
+            if pid and _alive(pid):
+                raise SystemExit(f"kit3d: {folder} is already rendering in process {pid}. Wait for its .done "
+                                 "marker, or stop that process first; never start a second render of a folder.")
+            try:
+                os.remove(path)
+            except FileNotFoundError:
+                pass
+            continue
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(str(os.getpid()))
+        return path
+    raise SystemExit(f"kit3d: could not take the render lock {path}")
 
 
 def render(frames=None):
@@ -755,6 +809,18 @@ def render(frames=None):
         raise SystemExit("kit3d: call output() before render()")
     s = bpy.context.scene
     frames = list(frames or range(s.frame_start, s.frame_end + 1))
+    lock = _lock(folder)
+    try:
+        return _render_frames(folder, frames)
+    finally:
+        try:
+            os.remove(lock)
+        except FileNotFoundError:
+            pass
+
+
+def _render_frames(folder, frames):
+    s = bpy.context.scene
     done = os.path.join(folder, ".done")
     if os.path.exists(done):
         os.remove(done)
