@@ -80,9 +80,8 @@ Licences of the fonts and other third-party files used here: [`LICENSES.md`](LIC
 
 # ---------- README.md ----------
 BADGES = (f'<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> '
-          f'<a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a> '
-          f'<a href="https://github.com/{REPO}/stargazers"><img src="https://img.shields.io/github/stars/{REPO}?color=1f2328" '
-          f'alt="GitHub stars"></a>')
+          f'<a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a>')
+# A stars badge comes back once the repo has 100 or more stars: a small number is proof against it.
 
 cells = ""
 shown = [f for f in films if f.get("loop")]
@@ -120,7 +119,7 @@ rules came from an earlier run), so it shows the result fairly but it is not a b
 cover = data.get("cover")
 readme = f"""<div align="center">
 
-{f'<a href="{PAGES}"><img src="{cover}" width="100%" alt="Moments from films made by /video: a plant app on a sunny windowsill, release notes flying through a tunnel of commits, a beach seen from above"></a>' if cover else ""}
+{f'<a href="{PAGES}"><img src="{cover}" width="100%" alt="Moments from films made by /video: a beach seen from above, a plant app on a sunny windowsill, release notes flying through a tunnel of commits"></a>' if cover else ""}
 
 # /video
 

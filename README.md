@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://munvard.github.io/video-skill"><img src="docs/films/media/cover.webp" width="100%" alt="Moments from films made by /video: a plant app on a sunny windowsill, release notes flying through a tunnel of commits, a beach seen from above"></a>
+<a href="https://munvard.github.io/video-skill"><img src="docs/films/media/cover.webp" width="100%" alt="Moments from films made by /video: a beach seen from above, a plant app on a sunny windowsill, release notes flying through a tunnel of commits"></a>
 
 # /video
 
@@ -9,7 +9,7 @@
 A Claude Code skill that makes launch and product videos (motion design, 3D, music) and checks every frame.<br>
 Free and open source.
 
-<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a> <a href="https://github.com/munvard/video-skill/stargazers"><img src="https://img.shields.io/github/stars/munvard/video-skill?color=1f2328" alt="GitHub stars"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a>
 
 </div>
 
