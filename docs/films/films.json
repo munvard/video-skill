@@ -122,5 +122,68 @@
       "output_tokens": 7239
     }
   ],
-  "compare": null
+  "compare": {
+    "slug": "tidepool",
+    "title": "Tidepool: without and with /video",
+    "kind": "the awesome list's Tidepool brief (16:9)",
+    "about": "The same Tidepool brief, the same model, one prompt each: on the left Claude Code with no video skill, on the right with /video. Both are 15 s at 1920x1080 with sound.",
+    "alt": "Left: a pale card that says Good. Right: an aerial beach with Good, Fair and Stay out badges",
+    "prompt": "/video Make the promo video described in ./brief.md. Do not ask me any questions; where you would ask, take the option that best fits the brief and continue to a rendered file. Use the copy in the brief exactly and add nothing to it. Render the final file to ./output/video.mp4 and keep the project you rendered it from in ./project.",
+    "minutes": 6.4,
+    "model": "Opus 5.5",
+    "plan": "Claude Max 20x",
+    "mode": "",
+    "input": "brief.md from the awesome list's Tidepool test",
+    "commit": "527e0f6",
+    "cuts": [
+      {
+        "label": "side by side",
+        "file": "tidepool-compare.mp4",
+        "w": 1920,
+        "h": 1080,
+        "dur": 15.0
+      },
+      {
+        "label": "with /video",
+        "file": "tidepool-with-video-final.mp4",
+        "w": 1920,
+        "h": 1080,
+        "dur": 15.0
+      },
+      {
+        "label": "without a skill",
+        "file": "tidepool-without.mp4",
+        "w": 1920,
+        "h": 1080,
+        "dur": 15.0
+      }
+    ],
+    "poster": "docs/films/media/tidepool.webp",
+    "plan_note": "Five beats on one aerial coastline: sunlit shallows, the whole coast lighting up beach by beach, one beach turning green, amber and murky red, rain with a countdown ring, then the end card over clear water.",
+    "gates": {},
+    "turns": 26,
+    "output_tokens": 29383,
+    "rows": [
+      [
+        "Minutes, prompt to file",
+        "3.3",
+        "6.4"
+      ],
+      [
+        "Turns",
+        "20",
+        "26"
+      ],
+      [
+        "Gates failed (check.py)",
+        "4 of 8: frame 0, dead, end hold, slab",
+        "0 of 8"
+      ],
+      [
+        "Loudness",
+        "-14.5 LUFS",
+        "-13.8 LUFS"
+      ]
+    ]
+  }
 }

@@ -238,7 +238,7 @@ def main():
     blk = g[:, : hb * B, : wb * B].reshape(nf, hb, B, wb, B)
     slab = ((blk.std(axis=(2, 4)) < 2.5) & (blk.mean(axis=(2, 4)) < 80)).mean(axis=(1, 2))
     sl = [(s, l) for s, l in runs(slab > 0.25) if l / fps > 1.5 and not any(s / fps >= a0 - 0.1 and (s + l) / fps <= b0 + 0.1 for a0, b0 in night)]
-    gate("slab", not sl, f"largest flat dark area {slab.max() * 100:.0f}% of the frame (25% or less)" if not sl else
+    gate("slab", not sl, f"no flat dark area over 25% of the frame for more than 1.5 s (peak {slab.max() * 100:.0f}%, shorter)" if not sl else
          "flat dark area over 25% of the frame at " + ", ".join(f"{s / fps:.2f} to {(s + l) / fps:.2f} s (up to {slab[s:s + l].max() * 100:.0f}%)" for s, l in sl[:6])
          + ": light it, texture it or fill it with the subject")
 

@@ -17,6 +17,20 @@ watch it with sound and see its prompt, its plan and its gate numbers.
 </tr>
 </table>
 
+## With and without the skill
+
+The same 15 second brief (five lines of copy, 1920x1080, no voice), given to Claude Code twice in a clean folder:
+once with nothing installed, once with `/video`. Same model, one prompt each, no help.
+
+<a href="https://munvard.github.io/video-skill/films/tidepool.html"><img src="docs/films/media/tidepool.webp" width="100%" alt="Left: a pale card that says Good. Right: an aerial beach with Good, Fair and Stay out badges"></a>
+
+| | Without | With `/video` |
+|---|---|---|
+| Minutes, prompt to file | 3.3 | 6.4 |
+| Turns | 20 | 26 |
+| Gates failed (check.py) | 4 of 8: frame 0, dead, end hold, slab | 0 of 8 |
+| Loudness | -14.5 LUFS | -13.8 LUFS |
+
 ## Install
 
 Inside Claude Code:
