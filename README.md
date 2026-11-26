@@ -9,7 +9,10 @@ watch it with sound and see its prompt, its plan and its gate numbers.
 
 <table>
 <tr>
+<td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/munu.html"><img src="docs/films/media/munu.webp" width="100%" alt="A glossy 3D droid with a black glass face smiles under the words Say Munu"></a><br><b>Munu</b>: a real desktop voice assistant<br><sub>One prompt, 118 min, Opus 5.5. 9:16 and 16:9.</sub></td>
 <td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/mossbook.html"><img src="docs/films/media/mossbook.webp" width="100%" alt="A monstera grows in a round photo that becomes the app&#x27;s plant screen"></a><br><b>Mossbook</b>: a mobile app (invented)<br><sub>One prompt, 31 min, Opus 5.5. 9:16 and 16:9.</sub></td>
+</tr>
+<tr>
 <td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/quillstack.html"><img src="docs/films/media/quillstack.webp" width="100%" alt="Commit messages fly past in a tunnel of light and land as a clean changelog"></a><br><b>quillstack</b>: a developer tool (invented)<br><sub>One prompt, 32 min, Opus 5.5. 9:16 and 16:9.</sub></td>
 </tr>
 </table>
