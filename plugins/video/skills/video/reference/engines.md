@@ -1,15 +1,25 @@
 # Engines
 
-Check what is installed before choosing. Prefer the engine that fits the picture.
+Use what ships in the kit first. Measure before you promise a render time.
 
-| Need | Engine | Check first |
+| Need | Engine | Speed on a normal gaming PC (measure yours) |
 |---|---|---|
-| Type, shapes, interface | HTML, SVG or canvas in headless Chrome, frame by frame | every frame is a pure function of time |
-| Depth with live screens | WebGL | fixed time step, texture size, same GPU settings |
-| Real light and material | Blender Cycles | one final still, then 10 frames to measure cost |
-| Long stylised 3D | Blender EEVEE | shadows and reflections at final size |
-| Real proof | scripted screen recording or camera footage | a test account, no private data |
-| Generated images or video | only when the user accepts the cost and the platform label | rights, hands, text, identity between shots |
-| Edit, mix, check | ffmpeg | frame count, loudness, peak, color range |
+| Motion design, type, UI, product screens, 2D worlds | HTML page + `kit/render.mjs` (DOM, CSS, canvas, SVG) | often 0.02 to 0.1 s a frame with 3 workers |
+| Canvas scenes with real motion blur | `scene({...})` in `kit.js` | 0.05 to 0.5 s a frame (blur samples cost) |
+| Depth with live screens, abstract 3D | WebGL in the page (your own shaders, or `ray.js`) | `ray.js` path tracing: seconds a frame at 1080x1920 |
+| Real objects, rich 3D worlds, products | Blender EEVEE (`reference/blender.md`) with CC0 assets | about 1 to 5 s a frame |
+| Two or three hero shots with physical light | Blender Cycles | about 30 to 150 s a frame at 1080x1920 |
+| Real proof (the app doing the job) | a scripted screen recording on a test account, played inside the film | real time |
+| Music, effects, voice, master | `scripts/sound.py`, `voice.py`, `finish.py` | seconds |
+| Checks | `scripts/check.py`, `study.py` | seconds |
 
-Never estimate a long render from a guess. Measure seconds per final frame, multiply, and tell the user before a render longer than 2 hours. Render one heavy job at a time. Keep free disk space for frames and the encode. Assets need a licence that allows the intended use, kept beside the asset with its source.
+Rules:
+- QUICK films stay in the HTML kit. STUDIO films may add Blender plates; type and UI stay in HTML on top so words stay
+  sharp and can change.
+- `ray.js` is for short abstract shots (glass, light, a hero object made of shapes). It cannot make a rich world: for
+  that, place real assets in Blender.
+- Before any render slower than real time: render 10 frames at final size, measure seconds a frame, multiply, and write
+  it in the plan. Tell the user before a render over 2 hours. One heavy render at a time.
+- Use `--workers 1` or `2` for heavy WebGL pages; Chrome keeps only 16 WebGL contexts.
+- Generated images or video from a paid model only when the user accepts the cost and the platform label.
+- Keep 10 GB or more free. Big frame folders go where there is space; delete only your own temporary files.

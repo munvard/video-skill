@@ -4,3 +4,5 @@ out/
 *.env
 .video/
 .claude/
+tests/pii_terms.local.txt
+tests/pii_allow.local.txt

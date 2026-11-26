@@ -1,6 +1,6 @@
 # Myth and turn
 
-Family: Story and comedy. Status: studied.
+Family: Story and comedy. Status: draft.
 
 An argument with a turn in the middle.
 
