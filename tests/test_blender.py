@@ -91,6 +91,18 @@ class BlenderTier(unittest.TestCase):
         self.assertIn("KIT_OK 0.5 (1.0, 1.0, 1.0)", r.stdout)
         self.assertIn("kit3d: gpu", r.stdout)
 
+    def test_handheld_without_aim_keys(self):
+        # handheld drift must work when only the camera position is keyed (no "aim" in start and end).
+        code = (f"import sys; sys.path.insert(0, {str(KIT)!r}); import kit3d as K; K.reset(); "
+                "cam = K.camera((0, -6, 1.5), (0, 0, 1)); "
+                "K.move(cam, 1, 30, {'loc': (0, -6, 1.5)}, {'loc': (1, -5, 1.6)}, handheld=0.002); "
+                "aim = cam.constraints[0].target; "
+                "n = sum(len(fc.modifiers) for fc in K.fcurves(aim) if fc.data_path == 'location'); "
+                "print('HANDHELD_MODS', n)")
+        r = blender("--python-expr", code)
+        self.assertEqual(r.returncode, 0, r.stdout[-2000:] + r.stderr[-2000:])
+        self.assertIn("HANDHELD_MODS 3", r.stdout)
+
     def test_shot_renders_three_frames(self):
         out = os.path.join(self.tmp, "frames")
         r = self.run_shot(out)
