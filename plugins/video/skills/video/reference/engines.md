@@ -14,8 +14,10 @@ Use what ships in the kit first. Measure before you promise a render time.
 | Checks | `scripts/check.py`, `study.py` | seconds |
 
 Rules:
-- QUICK films stay in the HTML kit. STUDIO films may add Blender plates; type and UI stay in HTML on top so words stay
-  sharp and can change.
+- QUICK films stay in the HTML kit, with one exception: when the subject is physical (water, weather, light, real
+  objects, materials), the hero shot is a Blender plate even in QUICK, because a drawn storm or a drawn object never
+  reads as real at phone size. STUDIO films may add Blender plates anywhere. Type and UI stay in HTML on top so words
+  stay sharp and can change.
 - `ray.js` is for short abstract shots (glass, light, a hero object made of shapes). It cannot make a rich world: for
   that, place real assets in Blender.
 - Before any render slower than real time: render 10 frames at final size, measure seconds a frame, multiply, and write

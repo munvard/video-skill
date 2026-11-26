@@ -131,7 +131,7 @@ readme = f"""<div align="center">
 ## Type /video. Get your launch film.
 
 A Claude Code skill that makes launch and product videos (motion design, 3D, music) and checks every frame.<br>
-Free and open source.
+Open source, MIT.
 
 {BADGES}
 
@@ -243,7 +243,7 @@ grid = "".join(
 (docs / "index.html").write_text(page("/video: launch videos made in Claude Code", f"""
 <h1><code>/video</code></h1>
 <p class="sub">Launch videos and product videos for your app, made in Claude Code: motion design and 3D, with sound,
-checked frame by frame. Free and open source (MIT). <a href="https://github.com/{REPO}">Get it on GitHub</a>.</p>
+checked frame by frame. Open source, MIT. <a href="https://github.com/{REPO}">Get it on GitHub</a>.</p>
 <div class="grid">{grid}</div>"""), encoding="utf-8", newline="\n")
 
 for f in films + ([compare] if compare else []):

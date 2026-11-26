@@ -18,7 +18,9 @@ before building), `SK/scripts/` (check, sound, voice, finish, assets, study, doc
 2. Run `python SK/scripts/doctor.py` once. If a needed tool is missing, say which and the one command to add it.
 3. Pick the mode:
    - **QUICK**: a short brief, a social post, "quick", "fast", "no stops", or nobody is there to answer. One concept, an
-     HTML or 2D look that renders in seconds, music and effects, gates, done. Aim for under 10 minutes in total.
+     HTML or 2D look that renders in seconds, music and effects, gates, done. Aim for under 10 minutes in total. When the
+     subject is physical (water, weather, light, real objects, materials), the hero shot is Blender even in QUICK: a reel
+     made for views has to read as real at phone size, so plan the time for it.
    - **STUDIO**: a launch film, a hero film, an ad, or the user asks for the best. Four concepts, a look gate, a beauty
      pass, then the full build and a frame by frame review.
    Say the mode in one line and go. Ask nothing else unless the work cannot start (real spending, a private asset that is

@@ -7,7 +7,7 @@
 ## Type /video. Get your launch film.
 
 A Claude Code skill that makes launch and product videos (motion design, 3D, music) and checks every frame.<br>
-Free and open source.
+Open source, MIT.
 
 <a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a>
 
