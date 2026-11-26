@@ -10,7 +10,10 @@ Score each 0 to 10 as a stranger scrolling a phone who has never heard of the pr
 A score of 9 or 10 needs a second you can name; when in doubt, score lower. Never round up.
 1. **Stop.** At 0.0 s, sound off: is frame 0 big, striking and already moving, so a fast thumb stops? No empty band, no
    title card, no slow fade in.
-2. **Clarity.** By 2 s, sound off: does the stranger know what this is and what it does for them?
+2. **Clarity.** By 2 s, sound off: does the stranger know what this is and what it does for them? Hold each key
+   word of the request against frame 0 and the hero stills: would a stranger name it unprompted? "A storm" reads as a
+   storm (a dark, heavy sky, wind, foam on high crests), not bright water with rain drawn on top. A key word that does
+   not read is a fail, however good the rest looks.
 3. **Hold.** Is there a second where they would swipe? Name it. Something new happens at least every 2 s, and the best
    moment is still ahead until the end.
 4. **Beauty.** Is every frame worth looking at for its picture alone, at phone size? Is the payoff the most striking

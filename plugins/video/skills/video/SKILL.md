@@ -104,7 +104,7 @@ frames and write the render time down; tell the user before any render over 2 ho
 Before the full build, render 3 hero stills at final quality and a 6 s moving test of the hardest move:
 `node SK/kit/render.mjs film.html --stills 1,9,17 --still-dir .video/<film>/look` and `--from 8 --to 14 --out
 .video/<film>/look/move.mp4`. Judge them first by the beauty pass (`reference/checklist.md`, section 1) and the taste
-file. Show them to the user and wait for their yes. If the user said not to stop (or nobody is there), judge them
+file, and hold each key word of the request against them (a storm must read as a storm, a night as night). Show them to the user and wait for their yes. If the user said not to stop (or nobody is there), judge them
 yourself, write the verdict in `concept.md`, and continue. A look that is not clearly beautiful is redone now, not later.
 The gate has not run until `move.mp4` exists and was judged: never start a full render without it. "Do not stop" skips
 waiting for the user, never the gate itself: judge the moving test by the beauty pass and redo the look if it is not
