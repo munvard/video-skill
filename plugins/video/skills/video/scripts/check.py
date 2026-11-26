@@ -13,6 +13,7 @@ Gates (numbers come from the file, never from the plan):
   dead        no stretch over 1.5 s where nothing on screen changes (except the end hold)
   endhold     the picture is not frozen at the end for more than 1.4 s (an end card keeps a slow drift)
   dark        no stretch over 2 s with mean luma under 40 (unless --night marks a planned night beat)
+  slab        no flat dark area (a dark panel, an empty dark sky) over 25% of the frame for more than 1.5 s
   reading     every line stays fully on screen long enough to read: 0.3 s a word plus 0.4 s, at least 1.0 s
   textsize    every word is at least 14 px tall when the frame is 360 px wide
   safearea    9:16 only: text stays inside the area the Reels, Shorts and TikTok buttons and captions leave free
@@ -155,6 +156,16 @@ def main():
     luma = g.mean(axis=(1, 2))
     dk = [(s, l) for s, l in runs(luma < 40) if l / fps > 2 and not any(s / fps >= a0 - 0.1 and (s + l) / fps <= b0 + 0.1 for a0, b0 in night)]
     gate("dark", not dk, f"mean luma {luma.mean():.0f}" if not dk else "dark at " + ", ".join(f"{s / fps:.2f} to {(s + l) / fps:.2f} s" for s, l in dk[:6]))
+
+    # slab: a big flat dark area (a dark panel or an empty dark sky) that covers a quarter of the frame for over 1.5 s
+    B = 6
+    hb, wb = ah // B, AW // B
+    blk = g[:, : hb * B, : wb * B].reshape(nf, hb, B, wb, B)
+    slab = ((blk.std(axis=(2, 4)) < 2.5) & (blk.mean(axis=(2, 4)) < 80)).mean(axis=(1, 2))
+    sl = [(s, l) for s, l in runs(slab > 0.25) if l / fps > 1.5 and not any(s / fps >= a0 - 0.1 and (s + l) / fps <= b0 + 0.1 for a0, b0 in night)]
+    gate("slab", not sl, f"largest flat dark area {slab.max() * 100:.0f}% of the frame (25% or less)" if not sl else
+         "flat dark area over 25% of the frame at " + ", ".join(f"{s / fps:.2f} to {(s + l) / fps:.2f} s (up to {slab[s:s + l].max() * 100:.0f}%)" for s, l in sl[:6])
+         + ": light it, texture it or fill it with the subject")
 
     if meta:
         slow = []

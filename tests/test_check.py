@@ -56,6 +56,14 @@ class Gates(unittest.TestCase):
         for name in ("empty", "endhold", "loudness"):
             self.assertEqual(g[name], "FAIL", out)
 
+    def test_slab(self):
+        # A moving pattern with a flat navy panel over its top half for 3 s: slab fails; the plain pattern passes.
+        film = self.tmp / "slab.mp4"
+        ff("-f", "lavfi", "-i", "testsrc2=s=540x960:r=30:d=3", "-vf", "drawbox=x=0:y=0:w=540:h=480:color=0x1e2a5a:t=fill",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", str(film))
+        self.assertEqual(check(film, str(self.tmp / "c5"))[1]["slab"], "FAIL")
+        self.assertEqual(check(self.good, str(self.tmp / "c6"))[1]["slab"], "PASS")
+
     def test_meta_gates(self):
         meta = {"w": 540, "h": 960, "fps": 30, "dur": 4, "frames": 120, "events": [], "texts": [
             {"id": "a", "text": "Fine line here", "t0": 0, "t1": 4, "run": 4, "full": True, "px": 60, "box": [40, 200, 460, 270]},

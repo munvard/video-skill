@@ -5,7 +5,7 @@ licence of the repository. No stock footage, no models, no textures, no music an
 
 Third-party files:
 
-| Files in `src/fonts` | Font | Source | Licence |
+| Files in `plugins/video/skills/video/kit/fonts` | Font | Source | Licence |
 | --- | --- | --- | --- |
 | `Inter-Variable-latin.woff2` | Inter | github.com/rsms/inter | SIL Open Font License 1.1, see `Inter-OFL.txt` |
 | `Fraunces-Variable-latin.woff2` | Fraunces | github.com/undercasetype/Fraunces | SIL Open Font License 1.1, see `Fraunces-OFL.txt` |

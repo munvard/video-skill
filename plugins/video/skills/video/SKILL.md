@@ -100,6 +100,11 @@ yourself, write the verdict in `concept.md`, and continue. A look that is not cl
    passing never means the film is good.
 3. A fix never makes the film flatter, darker or more ordinary: re-render bigger instead of swapping a scene for a flat
    panel. Compare each scene with the last version the user liked.
+4. QUICK films get the beauty pass too. Write down what you would change next. Every item a viewer would see (a flat or
+   empty area, a dull or grey scene, a still camera, tiny content, a weak frame 0) is fixed now and rendered again,
+   before delivery. Only what needs the user (a real asset, a taste call) goes in the delivery note. The motion line of
+   check.py under 3 means the film feels static: add a camera move, parallax or a moving light, unless the style is calm
+   on purpose.
 
 ## 8. Deliver
 In `.video/<film>/deliver/`: each master (9:16, and 16:9 when made), the poster frame as a JPG, subtitles when there is a
