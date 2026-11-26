@@ -30,6 +30,7 @@ before building), `SK/scripts/` (check, sound, voice, finish, assets, study, doc
 With no request in a project folder, the film is this project's launch film. With a URL, it is that site's product.
 1. Read the README, docs, the site (its copy, exact colours from the CSS, its fonts, its logo, screenshots), store text,
    and the app's own screens and components when they can be rendered. The product in use beats any description of it.
+   When the UI exists as HTML, use the live page in the film (an iframe zoomed with CSS), not a screenshot of it.
 2. Write `.video/<film>/brief.md`: what it is in one sentence, who it is for, the 3 to 6 abilities that make a stranger say
    "wait, it can do that?", the one visual hook, and a truth list: every claim with its source (file:line or URL).
    An invented or unreleased product gets no install command, package name, domain, store link or store availability a

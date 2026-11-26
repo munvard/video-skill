@@ -28,7 +28,8 @@ A score of 9 or 10 needs a second you can name; when in doubt, score lower. Neve
 4. Does the hero of every beat fill 70% of the width or more (in 9:16 push the camera in until it does), title beats and
    wides included: a device at 5% of a bare wall is a dead shot, push in or cut it. With real
    materials, depth and detail? Any UI it shows must be readable at 360 px wide, or it is decoration and must not
-   look like text to read. In 9:16, a whole 16:9 page shown small is a fail: crop to regions that fill the frame.
+   look like text to read. In 9:16, a 16:9 page that does not fill the safe area top to bottom is a fail, and so is
+   UI text under 42 px tall at 1080 wide that the viewer must read. Zoom live HTML, never a screenshot past 1:1.
 5. Anything that reads as AI slop: purple or violet gradient backdrops, soft glows, neon edges, cute glossy blob or droid
    mascots, floating glass cards (a BLOCKER however clean the render)? Anything that looks cheap: bare 3D primitives
    in a plain room, a toy or voxel kit, flat clip art, a default gradient, a stock-looking icon row, a placeholder,
