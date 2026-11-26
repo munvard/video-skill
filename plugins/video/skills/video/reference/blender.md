@@ -104,6 +104,11 @@ into a new folder and keep the old one).
 - Text or UI made in Blender.
 - Test renders in the final folder; overwriting a draft you may still need.
 - A full Cycles render planned before measuring.
+- Trying a new idea in a final render. Each idea gets a half-size test (`--res 0.5`) of only the frames it changes;
+  a final render is for a decided shot. Before a final, multiply frames by the measured seconds a frame for every
+  cut: two cuts at 720 frames and 2.5 s a frame is already an hour.
+- An end card where only dust moves. On a defocused wide frame that reads as frozen; keep a real slow camera
+  move (a 3 to 5% push in or a small arc) through the whole hold.
 
 ## Put the frames under the HTML type
 

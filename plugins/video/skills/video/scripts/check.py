@@ -200,11 +200,17 @@ def main():
     # frame 0: full, settled, with words
     h360 = max(2, round(360 * H / W / 2) * 2)
     f0 = frames_gray(film, 360, h360, first=True)[0]
+    # settled = as sharp as the opening shot it starts (first 3 s), and not a blur next to the whole film.
+    # Comparing only with the film let a crisp end card on a dark shade fail a soft, focused 3D opener.
     sh = [sharp(x) for x in frames_gray(film, 360, h360, fps_out=2)]
-    s0, s90 = sharp(f0), float(np.percentile(sh, 90)) if sh else 0.0
+    s0 = sharp(f0)
+    s90 = float(np.percentile(sh, 90)) if sh else 0.0
+    sop = float(np.percentile(sh[:6], 90)) if sh else 0.0
     words0 = [t for t in texts if t["t0"] <= 0.001]
-    ok0 = f0.mean() >= 40 and f0.std() >= 18 and s0 >= 0.5 * s90 and (not texts or words0)
-    gate("frame0", ok0, f"mean luma {f0.mean():.0f} (40+), contrast {f0.std():.0f} (18+), sharpness {s0:.0f} vs film {s90:.0f} (50%+)"
+    ok0 = (f0.mean() >= 40 and f0.std() >= 18 and s0 >= 0.5 * sop and s0 >= 0.25 * s90
+           and (not texts or words0))
+    gate("frame0", ok0, f"mean luma {f0.mean():.0f} (40+), contrast {f0.std():.0f} (18+), sharpness {s0:.0f} "
+         f"vs opening {sop:.0f} (50%+) and film {s90:.0f} (25%+)"
          + (f", words at frame 0: {len(words0)}" if meta else ", no meta: words not checked"))
 
     flat = (g.std(axis=(1, 2)) < 1.5) & ((g.max(axis=(1, 2)) - g.min(axis=(1, 2))) < 8)

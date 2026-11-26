@@ -56,6 +56,21 @@ class Gates(unittest.TestCase):
         for name in ("empty", "endhold", "loudness"):
             self.assertEqual(g[name], "FAIL", out)
 
+    def test_frame0_soft_opener(self):
+        # A soft but settled 3 s opener, then a very crisp end: frame 0 passes (it is as sharp as its own shot).
+        # The same film starting on 0.5 s of heavy blur fails (frame 0 caught mid-blur).
+        soft = "testsrc2=s=540x960:r=30:d=3,gblur=sigma=0.8"  # about 35% of the end's sharpness
+        crisp = "testsrc2=s=540x960:r=30:d=3"
+        ok = self.tmp / "soft_open.mp4"
+        ff("-f", "lavfi", "-i", soft, "-f", "lavfi", "-i", crisp, "-filter_complex", "[0][1]concat=n=2:v=1[v]",
+           "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(ok))
+        self.assertEqual(check(ok, str(self.tmp / "c9"))[1]["frame0"], "PASS")
+        bad = self.tmp / "blur_open.mp4"
+        ff("-f", "lavfi", "-i", "testsrc2=s=540x960:r=30:d=0.5,gblur=sigma=25", "-f", "lavfi", "-i", soft,
+           "-f", "lavfi", "-i", crisp, "-filter_complex", "[0][1][2]concat=n=3:v=1[v]",
+           "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(bad))
+        self.assertEqual(check(bad, str(self.tmp / "c10"))[1]["frame0"], "FAIL")
+
     def test_slab(self):
         # A moving pattern with a flat navy panel over its top half for 3 s: slab fails; the plain pattern passes.
         film = self.tmp / "slab.mp4"

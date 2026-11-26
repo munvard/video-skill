@@ -22,12 +22,14 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 9. By the middle, do they know what the product is? By the end, where to get it?
 10. One idea, one spine, one peak. No caption cards between beats, no headline list.
 11. Nothing small, expected or about safety is shown. Nothing cringe: no slogan, no wink, no fake quote.
+    The picture shows what the line says: a line that names a colour, a count or a state is checked on its frame.
 
 ## 3. Picture and joins
 12. Every join at 10 or more frames a second, then the exact two frames: ghost, jump, flash, double text?
 13. Every move: what does it follow? Does it settle on what must be read? Does it go in and straight back out?
 14. Every subject fully in frame when it matters. Nothing cut at the edge by accident.
 15. Crop UI and characters at 720 px: unfinished icons, empty panes, broken text, wrong hands or eyes?
+    Line breaks in every cut: a price, a date or a name never splits across two lines ("Ships March / 2027").
 16. No labels burned in ("3D render", "Real app", "Sped up", debug text).
 
 ## 4. Text at 360 px wide

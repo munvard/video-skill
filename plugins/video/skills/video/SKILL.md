@@ -99,7 +99,8 @@ yourself, write the verdict in `concept.md`, and continue. A look that is not cl
 
 ## 7. Check
 1. `python SK/scripts/check.py film.mp4 --meta draft.meta.json` (with `--loop` for a loop). Every gate prints PASS or FAIL
-   with its numbers. Fix every FAIL.
+   with its numbers. Fix every FAIL in every cut before you deliver. Never ship a FAIL with a reason why it is fine:
+   the viewer sees what the gate measured (a frozen end is frozen on a phone). If the fix is a re-render, do it.
 2. Then look at every sheet and every 100% crop yourself: the beauty pass first, then `reference/checklist.md` on exact
    frames. Numbers passing never means the film is good.
 3. A fix never makes the film flatter, darker or more ordinary: re-render bigger instead of swapping a scene for a flat
