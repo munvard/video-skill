@@ -26,7 +26,8 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 9. By the middle, do they know what the product is? By the end, where to get it? Every command or link on screen works
    as typed on a fresh machine: copy it from the README with every step it needs (add a plugin marketplace before the
    install), or show the plain link. A command that fails on first try is a false claim. For an invented or unreleased
-   product, no install command, package name, domain or store link a stranger could type or register: a BLOCKER.
+   product, no install command, package name, domain, store link or store availability ("Free on iOS and Android") a
+   stranger could act on or register: a BLOCKER.
 10. One idea, one spine, one peak. No caption cards between beats, no headline list.
 11. Nothing small, expected or about safety is shown. Nothing cringe: no slogan, no wink, no fake quote.
     The picture shows what the line says: a line that names a colour, a count or a state is checked on its frame.
