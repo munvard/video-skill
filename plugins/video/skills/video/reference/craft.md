@@ -25,6 +25,9 @@ that did well, and is checked with `check.py --reel`:
 5. Sound from 0.00 s, with a hit on the first big change.
 6. No logo, handle or URL before 3 s. The brand goes on the last 2 s card and in the caption.
 7. 15 to 30 s, with an ending that loops into frame 0.
+8. A claim the viewer could doubt is shown, not said, by about 1 s: the real input (the exact prompt, the command,
+   the file) readable on screen next to its real result. A frame 0 that looks like any other ad of its kind (devices
+   on a shelf, a phone on a desk) gets swiped at 0.5 to 1 s; open on the thing only this product can show.
 A calm launch film for a site or a store page may be one slow take; it is not a reel and skips `--reel`.
 
 What fails, from experience:
