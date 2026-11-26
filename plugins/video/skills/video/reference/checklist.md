@@ -16,7 +16,8 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
    look like text to read.
 5. Anything that reads as AI slop: purple or violet gradient backdrops, soft glows, neon edges, cute glossy blob or droid
    mascots, floating glass cards (a BLOCKER however clean the render)? Anything that looks cheap: bare 3D primitives
-   in a plain room, a toy or voxel kit, flat clip art, a default gradient, a stock-looking icon row, a placeholder, square corners where the design is round, line-art hands?
+   in a plain room, a toy or voxel kit, flat clip art, a default gradient, a stock-looking icon row, a placeholder,
+   square corners where the design is round, line-art hands?
 6. Put frame 0 next to the end card: are they both postable on their own?
 7. Open the 100% crops (`crop_*.png`): any blocky texture, square speck, banding or stretched noise is a BLOCKER.
 

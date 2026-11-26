@@ -79,45 +79,60 @@ Licences of the fonts and other third-party files used here: [`LICENSES.md`](LIC
 (ROOT / "gallery/README.md").write_text(gallery, encoding="utf-8", newline="\n")
 
 # ---------- README.md ----------
+BADGES = (f'<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> '
+          f'<a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a> '
+          f'<a href="https://github.com/{REPO}/stargazers"><img src="https://img.shields.io/github/stars/{REPO}?color=1f2328" '
+          f'alt="GitHub stars"></a>')
+
 cells = ""
-for i in range(0, len(films), 2):
+shown = [f for f in films if f.get("loop")]
+for i in range(0, len(shown) - len(shown) % 2, 2):  # even cells only: an odd last film waits for its pair
     cells += "<tr>\n"
-    for f in films[i:i + 2]:
-        cuts = " and ".join(c["label"] for c in f["cuts"])
+    for f in shown[i:i + 2]:
         cells += (f'<td width="50%" valign="top"><a href="{PAGES}/films/{f["slug"]}.html">'
-                  f'<img src="{f["poster"]}" width="100%" alt="{esc(f["alt"])}"></a><br>'
-                  f'<b>{esc(f["title"])}</b>: {esc(f["kind"])}<br>'
-                  f'<sub>{asks(f)}, {mins(f)},{esc(f["model"])}. {cuts}.</sub></td>\n')
+                  f'<img src="{f["loop"]}" width="100%" alt="{esc(f["alt"])}"></a><br>'
+                  f'<sub><b>{esc(f.get("caption") or f["title"])}</b>. {asks(f)}, {mins(f)}.</sub></td>\n')
     cells += "</tr>\n"
 
 cmp = ""
-if compare:
+if compare and compare.get("loop"):
+    r = {k: (a, b) for k, a, b in compare["rows"]}
+    t_out, t_in = r.get("Minutes, prompt to file", ("", ""))
+    g_out, g_in = r.get("Gates failed (check.py)", ("", ""))
     cmp = f"""
-## With and without the skill
+## Same prompt, with and without
 
-The same 15 second brief (five lines of copy, 1920x1080, no voice), given to Claude Code twice in a clean folder:
-once with nothing installed, once with `/video`. Same model, one prompt each, no help.
-This brief was also used while the skill was built (two of its rules came from an earlier run of it), so read it
-as a fair test of the result, not a blind one.
+<a href="{PAGES}/films/{compare['slug']}.html"><img src="{compare['loop']}" width="100%" alt="{esc(compare['alt'])}"></a>
 
-<a href="{PAGES}/films/{compare['slug']}.html"><img src="{compare['poster']}" width="100%" alt="{esc(compare['alt'])}"></a>
+The same 15 second brief, the same model, one prompt each. Without a skill: {t_out} minutes and {g_out.split(':')[0]}
+checks failed. With `/video`: {t_in} minutes and {g_in.split(':')[0]} failed.
 
-| | Without | With `/video` |
-|---|---|---|
-""" + "".join(f"| {esc(k)} | {esc(a)} | {esc(b)} |\n" for k, a, b in compare["rows"])
+<details><summary>How this was tested</summary>
 
-readme = f"""<h1 align="center"><code>/video</code></h1>
+Claude Code got the brief twice in a clean folder: once with nothing installed, once with `/video`. The failed checks
+without the skill were {esc(g_out.split(': ', 1)[-1])}. This brief was also used while the skill was built (two of its
+rules came from an earlier run), so it shows the result fairly but it is not a blind test. The
+[film page]({PAGES}/films/{compare['slug']}.html) has both prompts, both films and every number.
 
-<p align="center"><b>Launch videos and product videos for your app, made in Claude Code.</b><br>
-Advanced motion design and 3D, with sound, checked frame by frame. 9:16 for Reels, Shorts and TikTok, 16:9 for your
-site and X.<br>Free and open source (MIT). Runs on your computer. Needs Claude Code.</p>
+</details>
+"""
 
-Every film below was made by this skill from **one prompt** in a clean folder, with no editing by hand (a film that
-also got a round of notes says so). Click one to watch it with sound and see its prompt, its plan and its gate numbers.
+cover = data.get("cover")
+readme = f"""<div align="center">
 
-<table>
-{cells}</table>
-{cmp}
+{f'<a href="{PAGES}"><img src="{cover}" width="100%" alt="Moments from films made by /video: a plant app on a sunny windowsill, release notes flying through a tunnel of commits, a beach seen from above"></a>' if cover else ""}
+
+# /video
+
+## Type /video. Get your launch film.
+
+A Claude Code skill that makes launch and product videos (motion design, 3D, music) and checks every frame.<br>
+Free and open source.
+
+{BADGES}
+
+</div>
+
 ## Install
 
 Inside Claude Code:
@@ -127,42 +142,46 @@ Inside Claude Code:
 /plugin install video@video-skill
 ```
 
-> **You need**
-> - Claude Code, with a Claude plan (Pro, Max, Team or Enterprise) or an API account
-> - ffmpeg and Python 3 with numpy
-> - Optional: Node 22 and Chrome for motion design, Blender for 3D
->
-> The first run checks your tools and tells you what is missing. Everything else is free and runs on your computer:
-> no API keys, no paid services.
+Then open your project and type `/video`. With no other words, it reads your README, site and screenshots and makes
+that product's launch film.
 
-## Use
+## Films it made
+
+Each one came from a single prompt in a clean folder, with no editing by hand. Click a film to watch it with sound and
+see its prompt, its plan and its numbers. More in the [gallery]({PAGES}).
+
+<table>
+{cells}</table>
+{cmp}
+## What it does
+
+- **Thinks like a director.** It pitches four very different ideas, shows you stills and a moving test before the
+  full render, and redoes a look that is not clearly beautiful.
+- **Motion design in code.** HTML and canvas pages with measured easing, rendered frame by frame in headless Chrome.
+- **Real 3D.** Blender with free CC0 materials, models and light from Poly Haven and ambientCG.
+- **Sound made in code.** Music on a beat grid, a sound for every event on screen, an optional local voice.
+- **Checks every frame like a phone viewer.** Frame 0, reading time, text size, the 9:16 safe area, loudness, the
+  first 3 seconds of a reel: PASS or FAIL with numbers, and it fixes every FAIL before it delivers.
+- **Learns your taste.** Your reactions go to `.video/taste.md` in your project and win over its defaults.
 
 ```text
-/video
 /video a 20 second launch post for our search, 9:16
 /video a 16:9 hero film for the site, make it 3D
 /video learn the style of reference.mp4
 ```
 
-With no text, in a project folder, it reads the README, the site and the screenshots, and makes that product's launch
-film.
+<details><summary><b>What you need</b></summary>
 
-## How it works
+- Claude Code, with a Claude plan (Pro, Max, Team or Enterprise) or an API account
+- ffmpeg and Python 3 with numpy
+- Optional: Node 22 and Chrome for motion design, Blender for 3D
 
-- **QUICK or STUDIO.** QUICK is one concept and a render in minutes. STUDIO writes four very different concepts, shows
-  you stills before it builds (the look gate), and judges the result for beauty before it checks the numbers.
-- **Motion design in code.** Film pages in HTML and canvas with measured easing curves, rendered frame by frame in
-  headless Chrome, in parallel.
-- **Real 3D.** Blender with free CC0 materials, models and light from Poly Haven and ambientCG: EEVEE for most shots,
-  Cycles for the hero shots.
-- **Sound made in code.** Music on a beat grid, a sound for every event on screen, an optional local voice checked
-  word by word, and a master to -14 LUFS.
-- **Checked like a viewer on a phone.** `check.py` prints PASS or FAIL with numbers: frame 0 not empty, no dead or
-  frozen stretches, the end hold, reading time for every line, text height at 360 px wide, the 9:16 safe area,
-  loudness and true peak, the loop seam.
-- **It learns your taste.** Your reactions go to `.video/taste.md` in your project and win over its defaults.
+The first run checks your tools and tells you what is missing. Everything else is free and runs on your computer: no
+API keys, no paid services.
 
-## What is inside
+</details>
+
+<details><summary><b>What is inside</b></summary>
 
 | Part | What it does |
 |---|---|
@@ -172,13 +191,20 @@ film.
 | [`styles/`](gallery/README.md) | {n} style cards, {full} at full depth, with a preview each |
 | [`reference/`](plugins/video/skills/video/reference) | craft rules, sound, Blender, engines, the checklist |
 
-## Honest status
+</details>
 
-- The films above are the proof. Each page shows the exact prompt, the minutes, the model and the plan used.
-- Styles: {count['proven']} proven, {count['studied']} studied, {count['draft']} drafts. See the [style library](gallery/README.md).
-- Tested on Windows 11 with an AMD GPU. Mac and Linux paths are written but less tested.
-- A STUDIO film is a long, heavy run that uses a lot of your Claude plan. QUICK is the cheap path.
-- Live-action styles need your own footage. No skill can promise views, and this one will not pretend to.
+<details><summary><b>Questions and limits</b></summary>
+
+- **How long does a film take?** In the tests above, a motion design film took 6 to 32 minutes. A Blender 3D film
+  takes one to two hours on a laptop GPU. QUICK mode is one idea and a render in minutes.
+- **Does it use a lot of my plan?** A STUDIO film is a long run and uses a fair part of a Claude plan's limits.
+  QUICK is the cheap path.
+- **Which computers?** Tested on Windows 11 and macOS on Apple silicon. Linux paths are written but less tested.
+- **Styles:** {count['proven']} proven by a film, {count['studied']} measured from real work, {count['draft']} drafts.
+  See the [style library](gallery/README.md).
+- Live-action styles need your own footage. No skill can promise views.
+
+</details>
 
 MIT licence. Borrowed code and its licences: [`NOTICE.md`](plugins/video/skills/video/NOTICE.md). Fonts and gallery
 files: [`gallery/LICENSES.md`](gallery/LICENSES.md). Release notes: [`RELEASE_NOTES.md`](RELEASE_NOTES.md).

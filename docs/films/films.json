@@ -39,7 +39,9 @@
         "All gates": "PASS (both cuts)"
       },
       "turns": 57,
-      "output_tokens": 138409
+      "output_tokens": 138409,
+      "loop": "docs/films/media/mossbook-loop.webp",
+      "caption": "Mossbook, an invented plant app"
     },
     {
       "slug": "quillstack",
@@ -79,7 +81,9 @@
         "All gates": "PASS (both cuts)"
       },
       "turns": 66,
-      "output_tokens": 92460
+      "output_tokens": 92460,
+      "loop": "docs/films/media/quillstack-loop.webp",
+      "caption": "quillstack, an invented developer tool"
     }
   ],
   "compare": {
@@ -144,6 +148,8 @@
         "-14.5 LUFS",
         "-13.8 LUFS"
       ]
-    ]
-  }
+    ],
+    "loop": "docs/films/media/tidepool-sbs.webp"
+  },
+  "cover": "docs/films/media/cover.webp"
 }

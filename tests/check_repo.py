@@ -18,7 +18,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 SKILL = ROOT / "plugins/video/skills/video"
 PARTS = ["Use it for", "Not for", "Look", "Motion", "Type", "Sound", "Build with", "Hook", "It fails when"]
 DEEP = ["## The world", "## Camera grammar", "## Three ways to shape it", "## Signature moves", "## Build notes", "## Make it yours"]
-README_MEDIA_MAX = 4.5e6
+README_MEDIA_MAX = 8e6
 problems = []
 
 
