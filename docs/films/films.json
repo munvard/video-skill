@@ -41,49 +41,8 @@
       "turns": 57,
       "output_tokens": 138409,
       "loop": "docs/films/media/mossbook-loop.webp",
-      "caption": "Mossbook, an invented plant app"
-    },
-    {
-      "slug": "quillstack",
-      "title": "quillstack",
-      "kind": "a developer tool (invented)",
-      "about": "Launch film for an invented command line tool that writes release notes from git commits, made from its README and source.",
-      "alt": "Commit messages fly past in a tunnel of light and land as a clean changelog",
-      "prompt": "/video Make the launch film for this project: one 9:16 cut for Reels and TikTok and one 16:9 cut for the site. I am away, so do not stop to ask; make it beautiful.",
-      "minutes": 31.9,
-      "model": "Opus 5.5",
-      "plan": "Claude Max 20x",
-      "mode": "",
-      "input": "README.md, src/quillstack/cli.py (an invented tool)",
-      "commit": "3e2eb2a",
-      "cuts": [
-        {
-          "label": "9:16",
-          "file": "quillstack-9x16.mp4",
-          "w": 1080,
-          "h": 1920,
-          "dur": 24.0
-        },
-        {
-          "label": "16:9",
-          "file": "quillstack-16x9.mp4",
-          "w": 1920,
-          "h": 1080,
-          "dur": 24.0
-        }
-      ],
-      "poster": "docs/films/media/quillstack.webp",
-      "plan_note": "The camera flies through a storm of commit messages; they sort themselves into Added, Fixed and Changed and pour into a clean changelog card, which stacks into versions and becomes the quill logo.",
-      "gates": {
-        "Loudness": "-13.9 LUFS, -1.4 dBTP",
-        "Smallest text at 360 px": "15.0 px",
-        "Lowest text contrast": "5.9:1",
-        "All gates": "PASS (both cuts)"
-      },
-      "turns": 66,
-      "output_tokens": 92460,
-      "loop": "docs/films/media/quillstack-loop.webp",
-      "caption": "quillstack, an invented developer tool"
+      "caption": "Mossbook, an invented plant app",
+      "loop_wide": "docs/films/media/mossbook-wide.webp"
     }
   ],
   "compare": {

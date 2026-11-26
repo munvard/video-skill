@@ -105,6 +105,10 @@ What fails, from experience:
 - Every ability shown is real today and traceable to a source. A beat that is not real is changed to a true one, never
   faked. Real footage goes where viewers would doubt.
 - Never: invented numbers, "first", "only", "fastest", user or star counts, prices unless checked today.
+- A film for an invented or unreleased product never shows an install command, package name, domain, handle or store
+  link a stranger could type or register: anyone could claim the free name and ship malware to people who copy it. Use
+  a placeholder that is clearly fake, or no command at all. For a real product, show only commands and links copied
+  from its own README or site.
 - Unnamed people are they/them. No personal data in any frame (names, emails, home folders, hostnames, notifications,
   tokens). Search the finals by eye and with OCR when one is available.
 

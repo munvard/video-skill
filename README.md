@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://munvard.github.io/video-skill"><img src="docs/films/media/cover.webp" width="100%" alt="Moments from films made by /video: a beach seen from above, a plant app on a sunny windowsill, release notes flying through a tunnel of commits"></a>
+<a href="https://munvard.github.io/video-skill"><img src="docs/films/media/cover.webp" width="100%" alt="Moments from films made by /video: a beach seen from above and a plant app on a sunny windowsill"></a>
 
 # /video
 
@@ -31,10 +31,7 @@ Each one came from a single prompt in a clean folder, with no editing by hand. C
 see its prompt, its plan and its numbers. More in the [gallery](https://munvard.github.io/video-skill).
 
 <table>
-<tr>
-<td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/mossbook.html"><img src="docs/films/media/mossbook-loop.webp" width="100%" alt="A monstera grows in a round photo that becomes the app&#x27;s plant screen"></a><br><sub><b>Mossbook, an invented plant app</b>. One prompt, 31 min.</sub></td>
-<td width="50%" valign="top"><a href="https://munvard.github.io/video-skill/films/quillstack.html"><img src="docs/films/media/quillstack-loop.webp" width="100%" alt="Commit messages fly past in a tunnel of light and land as a clean changelog"></a><br><sub><b>quillstack, an invented developer tool</b>. One prompt, 32 min.</sub></td>
-</tr>
+<tr><td valign="top"><a href="https://munvard.github.io/video-skill/films/mossbook.html"><img src="docs/films/media/mossbook-wide.webp" width="100%" alt="A monstera grows in a round photo that becomes the app&#x27;s plant screen"></a><br><sub><b>Mossbook, an invented plant app</b>. One prompt, 31 min.</sub></td></tr>
 </table>
 
 ## Same prompt, with and without

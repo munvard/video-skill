@@ -85,7 +85,12 @@ BADGES = (f'<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT
 
 cells = ""
 shown = [f for f in films if f.get("loop")]
-for i in range(0, len(shown) - len(shown) % 2, 2):  # even cells only: an odd last film waits for its pair
+if len(shown) == 1:  # one film fills the row on its own; from two on, an even grid, and an odd last film waits
+    f = shown[0]
+    cells = (f'<tr><td valign="top"><a href="{PAGES}/films/{f["slug"]}.html"><img src="{f.get("loop_wide") or f["loop"]}" '
+             f'width="100%" alt="{esc(f["alt"])}"></a><br>'
+             f'<sub><b>{esc(f.get("caption") or f["title"])}</b>. {asks(f)}, {mins(f)}.</sub></td></tr>\n')
+for i in range(0, len(shown) - len(shown) % 2 if len(shown) > 1 else 0, 2):
     cells += "<tr>\n"
     for f in shown[i:i + 2]:
         cells += (f'<td width="50%" valign="top"><a href="{PAGES}/films/{f["slug"]}.html">'
@@ -119,7 +124,7 @@ rules came from an earlier run), so it shows the result fairly but it is not a b
 cover = data.get("cover")
 readme = f"""<div align="center">
 
-{f'<a href="{PAGES}"><img src="{cover}" width="100%" alt="Moments from films made by /video: a beach seen from above, a plant app on a sunny windowsill, release notes flying through a tunnel of commits"></a>' if cover else ""}
+{f'<a href="{PAGES}"><img src="{cover}" width="100%" alt="Moments from films made by /video: a beach seen from above and a plant app on a sunny windowsill"></a>' if cover else ""}
 
 # /video
 
