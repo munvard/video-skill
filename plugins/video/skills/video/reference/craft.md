@@ -34,6 +34,11 @@ What fails, from experience:
 - Doing exactly the words of the request and nothing more. Think like a creative director: what is the one bold form
   idea that IS this product?
 - An opening so fast the viewer cannot tell what they see.
+- The AI look: purple and violet gradient backdrops, soft glows and neon edges, cute glossy blob or droid mascots,
+  floating glass cards. However clean the render, people read it as AI slop and scroll. Take colour and light from the
+  product's own brand and from real places and materials instead.
+- A film nobody would share. Before any gate, ask: would a stranger stop on this and send it to a friend? If the
+  honest answer is "it is fine", the film is not done.
 
 ## 2. Joins (the "how did they do that")
 - Best first: no join (one camera move); a screen or shape that fills the frame and becomes the next world; a matched

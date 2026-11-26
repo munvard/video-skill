@@ -6,15 +6,17 @@ sound, a needed word that cannot be read, or a film that is not beautiful. **Maj
 misunderstand or feel something is cheap. Fix both. Note the rest.
 
 ## 1. The beauty pass (first, before any number)
-1. Look at the 1 fps sheet at phone size. Would a stranger stop on each frame for its picture alone?
+1. Look at the 1 fps sheet at phone size. Would a stranger stop on each frame for its picture alone, and send the film
+   to a friend? "It is fine" is a fail.
 2. A sheet that reads as grey, black or beige panels with caption bands is a BLOCKER, even with every gate green.
 3. Is every world rich, lit and coloured? Does the light change between acts?
 4. Does the hero of every beat fill 70% of the width or more (in 9:16 push the camera in until it does), title beats and
    wides included: a device at 5% of a bare wall is a dead shot, push in or cut it. With real
    materials, depth and detail? Any UI it shows must be readable at 360 px wide, or it is decoration and must not
    look like text to read.
-5. Anything that looks cheap: bare 3D primitives in a plain room, a toy or voxel kit, flat clip art, a default
-   gradient, a stock-looking icon row, a placeholder, square corners where the design is round, line-art hands?
+5. Anything that reads as AI slop: purple or violet gradient backdrops, soft glows, neon edges, cute glossy blob or droid
+   mascots, floating glass cards (a BLOCKER however clean the render)? Anything that looks cheap: bare 3D primitives
+   in a plain room, a toy or voxel kit, flat clip art, a default gradient, a stock-looking icon row, a placeholder, square corners where the design is round, line-art hands?
 6. Put frame 0 next to the end card: are they both postable on their own?
 7. Open the 100% crops (`crop_*.png`): any blocky texture, square speck, banding or stretched noise is a BLOCKER.
 
