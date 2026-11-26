@@ -1,0 +1,12 @@
+motionmaxxing: looksmaxxing for motion graphics
+Made by Tejas Makwana (x.com/makwanatejas170) · github.com/Tejashmakwana/motionmaxxing
+Lives inside FinalMotion · finalmotion.video
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+That license covers the original work in this repository: SKILL.md, references/,
+scripts/, templates/, examples/, taste/, library/, docs/, runtime/motion.js,
+runtime/hero3d/hero3d.js, runtime/native-ui/ and the original images and films
+in docs/media/ and studies/.
+
+(Only the attribution part of the motionmaxxing NOTICE is kept here: this skill copies only the easing curves of
+runtime/motion.js and includes none of the third-party components that NOTICE lists.)

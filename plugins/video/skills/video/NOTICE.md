@@ -10,7 +10,7 @@ copied file keeps its own notice at the top.
   trading as LemoLab, MIT License. https://github.com/lemomo-ai/lemo-opuscar
 - `kit/kit.js`: the twelve measured eases (`E.crashIn` to `E.crashOut`, `EASE_FRAMES`) are copied from motionmaxxing
   (`runtime/motion.js`), Copyright Tejas Makwana, Apache License 2.0. The full licence is in
-  `kit/LICENSE-motionmaxxing.txt`. Changes: the curves were moved into the kit's `E` object; nothing else of
+  `kit/LICENSE-motionmaxxing.txt` and its NOTICE in `kit/NOTICE-motionmaxxing.txt`. Changes: the curves were moved into the kit's `E` object; nothing else of
   motionmaxxing is included (in particular not its bundled GSAP). https://github.com/Tejashmakwana/motionmaxxing
 
 ## Fonts
