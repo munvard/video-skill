@@ -159,21 +159,25 @@ class Gates(unittest.TestCase):
         code, g, out = check(frantic, str(self.tmp / "c16"), "--reel")
         self.assertEqual(g["hook"], "FAIL", out)
 
-    def test_input_open(self):
-        # Craft rule 10: a reel may open on its input being typed, then cut hard to the output by about 1.5 s. A 1.4 s
-        # typed open passes the hook gate; a 2.5 s one fails it, because the first big change comes after 2.0 s.
-        def reel(open_s, out):
-            ff("-f", "lavfi", "-i", f"color=c=0x1a1a1a:s=540x960:r=30:d={open_s}", "-f", "lavfi",
-               "-i", "testsrc2=s=540x960:r=30:d=6", "-f", "lavfi", "-i", "color=c=white:s=460x120:r=30", "-filter_complex",
-               "[0:v][2:v]overlay=x='min(40,-420+t*600)':y=520:shortest=1[a];"
-               "[1:v]negate=enable='between(t,0.8,1.4)+between(t,3,4)'[b];[a][b]concat=n=2:v=1[v]",
-               "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out))
-            return out
-        quick, slow = reel(1.4, self.tmp / "open_quick.mp4"), reel(2.5, self.tmp / "open_slow.mp4")
-        code, g, out = check(quick, str(self.tmp / "c17"), "--reel")
-        self.assertEqual(g["hook"], "PASS", out)
-        code, g, out = check(slow, str(self.tmp / "c18"), "--reel")
-        self.assertEqual(g["hook"], "FAIL", out)
+    def test_output_first(self):
+        # Craft rule 10: a tool showcase opens on its output, never on the input. A reel that opens on a dark terminal
+        # being typed fails frame 0; the same terminal shown after the output (at 3 s) passes frame 0 and the hook.
+        out_src = "testsrc2=s=540x960:r=30"
+        typing = ("color=c=0x1a1a1a:s=540x960:r=30:d={d}", "[{n}:v][{m}:v]overlay=x='min(40,-420+t*600)':y=520:shortest=1")
+        bar = ("-f", "lavfi", "-i", "color=c=white:s=460x120:r=30")
+        first = self.tmp / "input_first.mp4"
+        ff("-f", "lavfi", "-i", typing[0].format(d=1.4), *bar, "-f", "lavfi", "-i", out_src + ":d=4", "-filter_complex",
+           typing[1].format(n=0, m=1) + "[a];[2:v]negate=enable='between(t,0.8,1.4)'[b];[a][b]concat=n=2:v=1[v]",
+           "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(first))
+        later = self.tmp / "output_first.mp4"
+        ff("-f", "lavfi", "-i", out_src + ":d=3", "-f", "lavfi", "-i", typing[0].format(d=1), *bar, "-f", "lavfi",
+           "-i", out_src + ":d=2", "-filter_complex",
+           "[0:v]negate=enable='between(t,1,1.5)'[a];" + typing[1].format(n=1, m=2) + "[t];[a][t][3:v]concat=n=3:v=1[v]",
+           "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(later))
+        code, g, out = check(first, str(self.tmp / "c17"), "--reel")
+        self.assertEqual(g["frame0"], "FAIL", out)
+        code, g, out = check(later, str(self.tmp / "c18"), "--reel")
+        self.assertEqual((g["frame0"], g["hook"]), ("PASS", "PASS"), out)
 
     def test_loop_gate(self):
         code, g, out = check(self.good, str(self.tmp / "c4"), "--loop")

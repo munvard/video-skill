@@ -25,19 +25,20 @@ that did well, and is checked with `check.py --reel`:
 5. Sound from 0.00 s, with a hit on the first big change.
 6. No logo, handle or URL before 3 s. The brand goes on the last 2 s card and in the caption.
 7. 15 to 30 s, with an ending that loops into frame 0.
-8. A claim the viewer could doubt is shown, not said, by about 1 s: the real input (the exact prompt, the command,
-   the file) readable on screen next to its real result. A frame 0 that looks like any other ad of its kind (devices
+8. A claim the viewer could doubt is shown, not said: the real result on screen by about 1 s, and the real input (the
+   exact prompt, the command, the file) readable next to it or after it, never in its place on frame 0 (rule 10). A frame 0 that looks like any other ad of its kind (devices
    on a shelf, a phone on a desk) gets swiped at 0.5 to 1 s; open on the thing only this product can show.
 9. A before and after opens on the after, full bleed, with nothing covering it; the before is one short flash (about
    1.5 s) with one true mark, and the film returns to the after and never goes back. Labels are small corner tags,
    never a band over the payoff. Each side keeps its own sound.
-10. A showcase of a tool that turns one input into a finished thing (a prompt into a film, a sketch into an app) may
-   open on the input instead of the payoff, the one exception to rule 1: the real input being typed (a real screen
-   capture, cropped so no account, plan or path shows), readable with capitals of 42 px or more, under one hook line
-   that says what was typed where ("I typed one line into Claude Code:"). Then a hard cut to the output's strongest
-   frame by about 1.5 s, never after 2.0 s: the jump from one line to a finished thing is the hook. The output plays
-   as it was made, and the last 1.5 s gives the name and the link. A finished film is never edited to fit this open:
-   the open goes in front of it.
+10. A showcase of a tool that turns one input into a finished thing (a prompt into a film, a sketch into an app) opens
+   on the output, never the input: frame 0 is the finished result, bright, full frame and already moving, with 5 to 9
+   words at the top that name the tool and state a claim the viewer can check, or ask a question ("Claude Code
+   rendered this in Blender."). A prompt box or setup screen first is a flop pattern: one creator got 4,086 views with
+   a setup screen on frame 0 and 196,900 with moving output on frame 0. "Made with one prompt" as the message no longer
+   surprises anyone. The input (the exact prompt) comes only after the output is on screen, after about 3 s, small and
+   readable (capitals of 42 px or more), or in the caption. A finished film is never edited to fit: anything added is
+   a label over it or a shot before or after it.
 A calm launch film for a site or a store page may be one slow take; it is not a reel and skips `--reel`.
 
 What fails, from experience:
