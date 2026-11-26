@@ -12,7 +12,7 @@ Gates (numbers come from the file, never from the plan):
   empty       no run of more than 3 frames that are one flat field (a blank or a solid colour)
   dead        no stretch over 1.5 s where nothing on screen changes (except the end hold)
   endhold     the picture is not frozen at the end for more than 1.4 s (an end card keeps a slow drift)
-  dark        no stretch over 2 s with mean luma under 40 (unless --night marks a planned night beat)
+  dark        no stretch over 2 s with mean luma under 40 (unless --night marks a planned night scene; never a dark UI)
   slab        no flat dark area (a dark panel, an empty dark sky) over 25% of the frame for more than 1.5 s
   reading     every line stays fully on screen long enough to read: 0.3 s a word plus 0.4 s, at least 1.0 s
   textsize    every word is at least 14 px tall when the frame is 360 px wide

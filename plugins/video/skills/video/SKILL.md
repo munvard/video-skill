@@ -120,6 +120,7 @@ full render without the gate. Frame 0 shows the product or its result on screen,
    post made for views: see the hook rules in `reference/craft.md` section 1). Every gate prints PASS or FAIL
    with its numbers. Fix every FAIL in every cut before you deliver. Never ship a FAIL with a reason why it is fine:
    the viewer sees what the gate measured (a frozen end is frozen on a phone). If the fix is a re-render, do it.
+   An exemption flag is not a fix: `--night` is only for a night scene in the story, never to pass a dark screen.
 2. Then look at every sheet and every 100% crop yourself: the beauty pass first, then `reference/checklist.md` on exact
    frames. Numbers passing never means the film is good.
 3. A fix never makes the film flatter, darker or more ordinary: re-render bigger instead of swapping a scene for a flat

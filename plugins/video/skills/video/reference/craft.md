@@ -56,7 +56,9 @@ What fails, from experience:
   morning. Plan the worlds from where the product is really used.
 - A white or bright world needs depth: haze, soft shadows, parallax. Otherwise it reads as a zoomed screenshot.
 - Dark is allowed only as a planned night beat with a lit subject. A stretch of mean luma under 40 for more than 2 s
-  fails the gate.
+  fails the gate. `--night` marks a night scene in the story (a storm, a city at night), never a dark product screen:
+  a dark UI sits on a lit surround (a desk, a grey or paper ground) at a size where it fills under a quarter of the
+  frame with flat dark, and it is never zoomed until its pixels show.
 - The subject of every beat fills at least 70% of the frame width. A slab at 20% of the width with tiny content is a fail.
 - Real UI or rebuilt UI lives inside the world (on a device, as a lit glass layer), never pasted flat on top.
 - Fewer, cleaner materials with real light beat busy procedural detail. Two or three surfaces (a soft gradient, one
