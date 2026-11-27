@@ -136,8 +136,8 @@ and light come from Poly Haven and ambientCG (CC0), and the music and sound are 
   films above took 6.4 and 31 minutes.
 - **Does it use a lot of my plan?** Yes, a 3D film is a long run and uses a fair part of a Claude plan's limits. At API
   list price the `/video` runs above cost $3.63 to $11.08. QUICK mode is one idea and a short render.
-- **Does it always work?** No. One of the eleven `/video` runs there failed: the [fox](docs/unslop/8) spent its time testing the fox's run and
-  was stopped at 150 minutes with no film. In [The Great Wave](docs/unslop/10) pair the plain run looks closer to the
+- **Does it always work?** No. One of the eleven `/video` runs there failed: the [fox](docs/unslop/8) spent its time on motion tests for the
+  running fox and was stopped at 150 minutes with no film. In [The Great Wave](docs/unslop/10) pair the plain run looks closer to the
   print, because it used the print's own pixels. Both are published with the rest.
 - **Which computers?** Tested on Windows 11 and macOS on Apple silicon. Linux paths are written but less tested.
 - **Styles:** 0 proven by a film, 0 measured from real work, 46 drafts. See the [style library](gallery/README.md).
