@@ -7,7 +7,8 @@ misunderstand or feel something is cheap. Fix both. Note the rest.
 
 ## 0. The stranger's six (reels, ads, posts made for views)
 Score each 0 to 10 as a stranger scrolling a phone who has never heard of the product. The bar is 9 or 10 on all six.
-A score of 9 or 10 needs a second you can name; when in doubt, score lower. Never round up.
+A score of 9 or 10 needs a second you can name; when in doubt, score lower. Never round up. A score of 8 or more also
+names the real hit it matches in `reference/calibration.md`; without one it is 7 at most.
 1. **Stop.** At 0.0 s, sound off: is frame 0 big, striking and already moving, so a fast thumb stops? No empty band, no
    title card, no slow fade in.
 2. **Clarity.** By 2 s, sound off: does the stranger know what this is and what it does for them? Hold each key

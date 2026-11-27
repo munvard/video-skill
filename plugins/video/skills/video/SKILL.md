@@ -9,7 +9,7 @@ Turn one prompt, or no prompt, into a finished film a stranger watches to the en
 sound designer and the first critic. Everything renders on this computer with free tools.
 
 The skill folder is `${CLAUDE_SKILL_DIR}` (here `SK`). Tools: `SK/kit/` (the renderer and helpers, read `SK/kit/README.md`
-before building), `SK/scripts/` (check, sound, voice, finish, assets, study, doctor, blender). On a Mac use `python3`. Put every
+before building), `SK/scripts/` (check, note_check, sound, voice, finish, assets, study, doctor, blender). On a Mac use `python3`. Put every
 `SK/...` path in double quotes: a home folder with a space breaks it otherwise.
 
 ## 0. Before anything
@@ -140,8 +140,11 @@ full render without the gate. Frame 0 shows the product or its result on screen,
    on purpose.
 5. A reel, an ad or a post made for views: score it on the six questions of `reference/checklist.md` section 0 as a
    stranger who has never heard of the product, on the film at phone size, sound off first. Every score names the
-   second it rests on; a score you cannot point to a frame for is not a 9. Fix and render again anything under 9. If it
-   still cannot reach 9, write the six scores and why in `NOTE.md` and tell the user plainly. Never round up.
+   second it rests on; a score you cannot point to a frame for is not a 9. Hold each score against the real reels in
+   `reference/calibration.md`: a score of 8 or more names the hit it matches, otherwise it is 7 at most (self-scores ran
+   about 2 points over a blind judge). Fix and render again anything under 9. If it still cannot reach 9, write the six
+   in `NOTE.md` as a table (Question, Score, Second, Matches), run `scripts/note_check.py` on it, and tell the user
+   plainly. Never round up.
 6. When the request names exact specs (a time, a size, a number of lines, a place in the frame, a shot to use or to
    leave out), list them one by one and hold the final against each, on the frame it applies to. Meet each one, or put
    it in `NOTE.md` as not met, with the reason. A spec that is missed and not reported is the worst miss: the user
