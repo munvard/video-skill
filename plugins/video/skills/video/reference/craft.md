@@ -32,7 +32,10 @@ that did well, and is checked with `check.py --reel`:
    on a shelf, a phone on a desk) gets swiped at 0.5 to 1 s; open on the thing only this product can show.
 9. A before and after opens on the after, full bleed, with nothing covering it; the before is one short flash (about
    1.5 s) with one true mark, and the film returns to the after and never goes back. Labels are small corner tags,
-   never a band over the payoff. Each side keeps its own sound.
+   never a band over the payoff. Each side keeps its own sound. When the before is a real run (the same request
+   without the tool), it shows that run's first real shot (after any black lead-in) or a frame typical of the whole
+   run, never its weakest moment: viewers read "cut from two real runs" as a fair test. If the after is not clearly
+   better from its own opening, there is no comparison to post; say both runs were good.
 10. A showcase of a tool that turns one input into a finished thing (a prompt into a film, a sketch into an app) opens
    on the output, never the input: frame 0 is the finished result, bright, full frame and already moving, with 5 to 9
    words at the top that name the tool and state a claim the viewer can check, or ask a question ("Claude Code
