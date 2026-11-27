@@ -63,10 +63,14 @@ def bottle(top):
         return ob
 
     glass = K.pbr("glass", "#ffffff", kind="glass")
-    # the liquid is glossy amber with subsurface, not a second refractive glass: EEVEE cannot refract
-    # one glass through another, and this reads as liquid in both engines
-    liquid = K.pbr("liquid", "#f39a2e", roughness=0.05, coat=1.0)
-    liquid.node_tree.nodes["Principled BSDF"].inputs["Subsurface Weight"].default_value = 0.8
+    # Cycles: the liquid refracts (IOR 1.33 inside the glass), so the wall behind bends through it and it reads as
+    # liquid, not orange plastic. EEVEE cannot refract one glass through another, so there it is glossy amber with
+    # subsurface; render bottle hero shots in Cycles.
+    if bpy.context.scene.render.engine == "CYCLES":
+        liquid = K.pbr("liquid", "#f39a2e", roughness=0.02, transmission=1.0, ior=1.33)
+    else:
+        liquid = K.pbr("liquid", "#f39a2e", roughness=0.05, coat=1.0)
+        liquid.node_tree.nodes["Principled BSDF"].inputs["Subsurface Weight"].default_value = 0.8
     gold = K.pbr("gold", "#e8b96a", kind="brushed", roughness=0.25)
     cap = K.pbr("cap", "#1b1a1f", kind="lacquer", roughness=0.3)
     rounded("bottle", (0.075, 0.05, 0.10), top + 0.05, 0.014, glass)
