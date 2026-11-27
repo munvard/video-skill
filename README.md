@@ -33,7 +33,7 @@ session's own last message).
 </table>
 
 Costs are at API list price, from each session's own log. `/video` takes longer and costs more: it plans, tests a
-look, builds in Blender and checks the result before it delivers. All ten pairs, including a failed run, are in
+look, builds in Blender and checks the result before it delivers. All eleven pairs, including a failed run, are in
 [docs/unslop](docs/unslop).
 
 <details><summary>A motion design test with a fixed checklist</summary>
@@ -65,7 +65,7 @@ reel format part is cut short). Click a film for its run.
 </tr>
 <tr>
 <td valign="top"><a href="docs/unslop/4"><img src="docs/films/media/readme/film-orbel.webp" width="100%" alt="A glass desk light glowing blue"></a><br><sub><code>Make the launch film for this project</code> (an invented desk light that works as a focus timer)</sub></td>
-<td valign="top"><a href="docs/unslop/5"><img src="docs/films/media/readme/film-duck.webp" width="100%" alt="A rubber duck on a desk"></a><br><sub><code>a rubber duck on a desk helping debug code</code></sub></td>
+<td valign="top"><a href="docs/unslop/11"><img src="docs/films/media/readme/film-watch.webp" width="100%" alt="A steel watch with a green sunburst dial on a leather strap, in warm light"></a><br><sub><code>a luxury wristwatch product film</code> (an invented brand)</sub></td>
 <td valign="top"><a href="docs/unslop/6"><img src="docs/films/media/readme/film-keyboard.webp" width="100%" alt="A mechanical keyboard seen from above on blue"></a><br><sub><code>a product shot of a mechanical keyboard</code></sub></td>
 </tr>
 </table>
@@ -136,7 +136,7 @@ and light come from Poly Haven and ambientCG (CC0), and the music and sound are 
   films above took 6.4 and 31 minutes.
 - **Does it use a lot of my plan?** Yes, a 3D film is a long run and uses a fair part of a Claude plan's limits. At API
   list price the `/video` runs above cost $3.63 to $11.08. QUICK mode is one idea and a short render.
-- **Does it always work?** No. One of the eleven `/video` runs there failed: the [fox](docs/unslop/8) spent its time on motion tests for the
+- **Does it always work?** No. One of the twelve `/video` runs there failed: the [fox](docs/unslop/8) spent its time on motion tests for the
   running fox and was stopped at 150 minutes with no film. In [The Great Wave](docs/unslop/10) pair the plain run looks closer to the
   print, because it used the print's own pixels. Both are published with the rest.
 - **Which computers?** Tested on Windows 11 and macOS on Apple silicon. Linux paths are written but less tested.
