@@ -1,0 +1,68 @@
+{
+  "name": "orbel-plain",
+  "notes_skill_commits": [],
+  "prompt": "/video Make the launch film for this project: one 9:16 cut for Reels and TikTok and one 16:9 cut for the site. I am away, so do not stop to ask; make it beautiful.",
+  "notes": [],
+  "seed": "orbel",
+  "model": "claude-opus-5-5",
+  "plugin": false,
+  "skill_commit": "",
+  "minutes": 172.0,
+  "exit": 0,
+  "turns": 5,
+  "cost_usd_equiv": 4.738178200000001,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 5519,
+    "cache_read_input_tokens": 609107,
+    "output_tokens": 2485,
+    "output_tokens_details": {
+      "thinking_tokens": 181
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 5519,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 1208,
+        "cache_read_input_tokens": 155416,
+        "cache_creation_input_tokens": 830,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 830
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 134,
+      "outputTokens": 74377,
+      "cacheReadInputTokens": 5707111,
+      "cacheCreationInputTokens": 263585,
+      "webSearchRequests": 0,
+      "costUSD": 4.738178200000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 24509,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 263585,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "Both launch films are done, in `film/out/`:\n\n| File | Use |\n|---|---|\n| `Orbel_Launch_9x16.mp4` | Reels / TikTok: 1080×1920, 31 s, 24 fps, H.264 + AAC, 89 MB |\n| `Orbel_Launch_16x9.mp4` | Site master: 1920×1080, same specs, 90 MB |\n| `Orbel_Launch_16x9_web.mp4` | Lighter copy for embedding on the site, 26 MB |\n| `Orbel_cover_9x16.jpg`, `Orbel_poster_16x9.jpg` | Cover image for the vertical post and poster frame for the site player |\n\n`/video` isn't installed in this session, so I made the films directly. The project only had the README, so everything is original: a 3D Orbel modelled in Blender to the README's specs and brand colours, an original synthesized score with sound effects, and type set in Avenir Next.\n\n**The film**, on a dark walnut desk at night:\n1. **\"Focus, without a screen.\"** A macro shot of the cap as a warm glow wakes inside the dark glass.\n2. **\"Twist to start.\"** The knurled cap turns through 12 clicks. Each click has a metallic tick and a rising note, and the light fills the orb step by step.\n3. **\"Watch it drain.\"** A wide shot as the light sinks from the top down.\n4. **\"Amber means five minutes left.\"** Low angle; the last sliver of light turns amber.\n5. **\"Then, a soft blue break.\"** The orb breathes blue, and the music swells in time with it.\n6. **\"Tap to pause. Lift to stop.\"** A glass-tap sound and a dip in the light, then the orb lifts off its base and goes dark, with a beat of silence.\n7. **End card:** ORBEL in thin, widely spaced type, \"Focus you can see.\", \"149 USD · Ships March 2027\".\n\nThe two cuts were rendered separately with their own camera framing and text layout; neither is a crop of the other. In the vertical cut the text stays in the upper part of the frame, clear of the TikTok and Reels buttons. The audio is at −14 LUFS with a −1 dBFS peak, which is right for social platforms.\n\n**What I checked:** I reviewed frames from every shot of both final files. After the first full render I re-rendered three 16:9 close-ups and the vertical end card, because titles overlapped the product. I couldn't listen to the audio. I checked the score only through loudness measurements and a spectrogram, so give it a listen before posting.\n\n**Before you publish:**\n- **Fictional product:** the README says Orbel is invented for a demo. The film presents it as real, with a price and ship date and no disclaimer, so think about that before posting publicly.\n- **Simplified timing:** the twist shot fills the orb in 12 clicks (60 minutes), not the README's 90-minute maximum. I traded accuracy for pacing.\n- **Rebuilding:** the build scripts are in `film/src/`. To change a title or timing, edit `timeline.py` and re-run `post.py`; only shots whose camera or light changes need a new Blender render. The frames in `film/build/` take up 2.1 GB and can be deleted if you won't edit again.",
+  "started": "2026-11-27 03:11"
+}

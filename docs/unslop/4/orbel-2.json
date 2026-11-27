@@ -1,0 +1,68 @@
+{
+  "name": "orbel-2",
+  "notes_skill_commits": [],
+  "prompt": "/video Make the launch film for this project: one 9:16 cut for Reels and TikTok and one 16:9 cut for the site. I am away, so do not stop to ask; make it beautiful.",
+  "notes": [],
+  "seed": "orbel",
+  "model": "claude-opus-5-5",
+  "plugin": true,
+  "skill_commit": "fb061c2",
+  "minutes": 430.0,
+  "exit": 0,
+  "turns": 12,
+  "cost_usd_equiv": 11.075263600000001,
+  "usage": {
+    "input_tokens": 26,
+    "cache_creation_input_tokens": 16654,
+    "cache_read_input_tokens": 2717890,
+    "output_tokens": 9654,
+    "output_tokens_details": {
+      "thinking_tokens": 1765
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 16654,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 1068,
+        "cache_read_input_tokens": 235328,
+        "cache_creation_input_tokens": 373,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 373
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 242,
+      "outputTokens": 94876,
+      "cacheReadInputTokens": 16614438,
+      "cacheCreationInputTokens": 731736,
+      "webSearchRequests": 0,
+      "costUSD": 11.075263600000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 32168,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 731736,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "Both cuts of the Orbel launch film are finished. Every check passes on both, but as a reel the 9:16 cut is below the 9-out-of-10 bar on three of the six \"stranger\" questions (details below).\n\n**The concept:** one desk, one day, and the light in the glass is the clock. It opens on the orb glowing warm against a blue evening wall with \"Time you can see.\" The cap clicks and the light rises. It drains through a sunlit morning, turns amber in golden afternoon light, then breathes blue at dusk for the break. It ends on the ORBEL card in the same blue room it opened in. It's 24 s, rendered in 3D with Blender (real glass, brushed aluminium, walnut, sunlight through a window), with the text, music and effects added on top.\n\n**Files** (in `.video/launch/deliver/`):\n- `orbel_9x16.mp4`, 1080x1920 for Reels and TikTok (123 MB), plus `orbel_9x16_web.mp4`, a smaller copy that looks the same (83 MB).\n- `orbel_16x9.mp4`, 1920x1080 for the site (114 MB), plus `orbel_16x9_web.mp4` (75 MB). It's framed separately for widescreen, not cropped from the vertical cut.\n- A poster image for each cut, `post.md` (post text, a disclosure line, credits, a before-you-post list) and `NOTE.md` (all check results).\n\n**Checks:** every automated check passes on both cuts and both smaller copies, including sound at -14 LUFS. Getting there took a second Blender pass on the dusk and golden scenes (the evening wall read as a flat dark block) and on both end cards (the 9:16 one looked frozen; the 16:9 one let the orb drift off the edge). I also checked every frame by eye.\n\n**My honest reel scores (out of 10):**\n\n| Question | Score | Why |\n|---|---|---|\n| Stop | 8 | Frame 0 is beautiful but calm |\n| Clarity | 9 | By 2.4 s it's clearly a light that is a timer |\n| Hold | 7 | The golden shots at 7 to 9 s are where people would swipe |\n| Beauty | 9 | |\n| Share | 7 | |\n| Trust | 9 | |\n\nMore fixes to this concept won't lift Stop, Hold and Share; a reel built for views would need a faster, sharper concept. As a launch film for the site, it does its job well.\n\n**Left out on purpose:** the README marks Orbel as an invented demo product, so the film has no price, ship date or store link. `post.md` includes a line saying it's a concept product shown in 3D; keep it, and turn on the platform's AI/altered-content label.\n\n**What I'd change next:**\n- Replace the 7 to 9 s golden shots with one orbit where the window shadows slide across the glass.\n- Use a closer shot for the amber stretch.\n- Make a 15 s reel edit for feeds.\n\nNobody has listened to the mix on a phone speaker yet. The test and draft renders take up 5.3 GB in `.video/launch/renders/`, which you can delete once you're happy. Nothing has been posted or uploaded.",
+  "started": "2026-11-27 00:44"
+}
