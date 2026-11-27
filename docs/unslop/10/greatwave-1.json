@@ -1,0 +1,68 @@
+{
+  "name": "greatwave-1",
+  "notes_skill_commits": [],
+  "prompt": "/video Hokusai's The Great Wave off Kanagawa rebuilt as a 3D scene, matching the painting's composition, then the camera flies into the wave, a 9:16 reel for Instagram, 15 seconds, with sound",
+  "notes": [],
+  "seed": "great-wave",
+  "model": "claude-opus-5-5",
+  "plugin": true,
+  "skill_commit": "4b5c8cd",
+  "minutes": 75.0,
+  "exit": 0,
+  "turns": 21,
+  "cost_usd_equiv": 6.700479599999999,
+  "usage": {
+    "input_tokens": 40,
+    "cache_creation_input_tokens": 26468,
+    "cache_read_input_tokens": 3857269,
+    "output_tokens": 13826,
+    "output_tokens_details": {
+      "thinking_tokens": 6274
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 26468,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 815,
+        "cache_read_input_tokens": 216259,
+        "cache_creation_input_tokens": 1897,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1897
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 190,
+      "outputTokens": 112019,
+      "cacheReadInputTokens": 14047218,
+      "cacheCreationInputTokens": 206237,
+      "webSearchRequests": 0,
+      "costUSD": 6.700479599999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 57062,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 206237,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "I've made the reel: 9:16, exactly 15 seconds, with sound. It passes every automated check. The Blender scene is a 3D rebuild of the print with flat woodblock colours and ink outlines. It opens in the print's composition, the real print flashes up in the same framing, and then the camera flies under the claws, through the spray and into the curl. It ends with Mount Fuji framed inside the wave.\n\nNobody has listened to it yet, so play it once with sound on your phone before posting.\n\n**How it plays (music at 100 bpm, every cut on a beat):**\n- **0 to 1.2 s:** the 3D wave in the print's composition, with \"The Great Wave, in 3D\" in a paper title box like the one on the print.\n- **1.2 to 2.4 s:** Hokusai's actual print in the same framing, tagged \"Hokusai's original\", so viewers can compare.\n- **2.4 to 12 s:** the flight into the wave. Short jump cuts on the beat keep it moving; Instagram reels need frequent cuts to hold attention.\n- **12 to 15 s:** end card over Fuji seen from inside the curl: \"Under the Wave off Kanagawa / Katsushika Hokusai, c. 1831\".\n\n**Where it falls short of your request:**\n- **Composition:** the print is landscape, so frame 0 matches a vertical crop of it (the curl, the claws, Fuji, the boats), not the whole picture.\n- **Quality bar:** I scored it as a stranger scrolling past would, and it doesn't reach the 9/10 the process aims for. It gets 8 for stopping the scroll, clarity and trust, and 7 for holding attention, beauty and shareability.\n- **Main weakness:** up close (about 5 to 10 s) the foam claws look like chunky striped tubes, and the middle of the flight is mostly dark blue wave wall.\n\n**What I'd change next:**\n1. Finer, tapered claws with more fingers.\n2. Smaller spray dots near the camera.\n3. A side shot showing the wave as a solid sculpture.\n\nEach would mean re-rendering in Blender (the full film took about 35 minutes).\n\nBefore posting, turn on Instagram's AI label. The caption, credits and that reminder are in `post.md`. The print is public domain (Met Open Access).\n\nFiles are in `.video/wave/deliver/`:\n- great-wave-reel-9x16.mp4\n- poster.jpg\n- post.md\n- NOTE.md",
+  "started": "2026-11-27 15:27"
+}
