@@ -1,4 +1,4 @@
-"""Builds README.md, gallery/README.md and the GitHub Pages site in docs/ from two sources of truth:
+"""Builds gallery/README.md and the GitHub Pages site in docs/ from two sources of truth:
 the style index (plugins/video/skills/video/styles/index.md) and the proof films (docs/films/films.json).
 
     python tests/build_readme.py
@@ -14,7 +14,6 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 STYLES = "plugins/video/skills/video/styles"
 REPO = "munvard/video-skill"
-PAGES = "https://munvard.github.io/video-skill"
 COLUMNS = 4
 
 data = json.loads((ROOT / "docs/films/films.json").read_text(encoding="utf-8"))
@@ -78,142 +77,7 @@ Licences of the fonts and other third-party files used here: [`LICENSES.md`](LIC
 """
 (ROOT / "gallery/README.md").write_text(gallery, encoding="utf-8", newline="\n")
 
-# ---------- README.md ----------
-BADGES = (f'<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> '
-          f'<a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a>')
-# A stars badge comes back once the repo has 100 or more stars: a small number is proof against it.
-
-cells = ""
-shown = [f for f in films if f.get("loop")]
-if len(shown) == 1:  # one film fills the row on its own; from two on, an even grid, and an odd last film waits
-    f = shown[0]
-    cells = (f'<tr><td valign="top"><a href="{PAGES}/films/{f["slug"]}.html"><img src="{f.get("loop_wide") or f["loop"]}" '
-             f'width="100%" alt="{esc(f["alt"])}"></a><br>'
-             f'<sub><b>{esc(f.get("caption") or f["title"])}</b>. {asks(f)}, {mins(f)}.</sub></td></tr>\n')
-for i in range(0, len(shown) - len(shown) % 2 if len(shown) > 1 else 0, 2):
-    cells += "<tr>\n"
-    for f in shown[i:i + 2]:
-        cells += (f'<td width="50%" valign="top"><a href="{PAGES}/films/{f["slug"]}.html">'
-                  f'<img src="{f["loop"]}" width="100%" alt="{esc(f["alt"])}"></a><br>'
-                  f'<sub><b>{esc(f.get("caption") or f["title"])}</b>. {asks(f)}, {mins(f)}.</sub></td>\n')
-    cells += "</tr>\n"
-
-cmp = ""
-if compare and compare.get("loop"):
-    r = {k: (a, b) for k, a, b in compare["rows"]}
-    t_out, t_in = r.get("Minutes, prompt to file", ("", ""))
-    g_out, g_in = r.get("Gates failed (check.py)", ("", ""))
-    cmp = f"""
-## Same prompt, with and without
-
-<a href="{PAGES}/films/{compare['slug']}.html"><img src="{compare['loop']}" width="100%" alt="{esc(compare['alt'])}"></a>
-
-The same 15 second brief, the same model, one prompt each. Without a skill: {t_out} minutes and {g_out.split(':')[0]}
-checks failed. With `/video`: {t_in} minutes and {g_in.split(':')[0]} failed.
-
-<details><summary>How this was tested</summary>
-
-Claude Code got the brief twice in a clean folder: once with nothing installed, once with `/video`. The failed checks
-without the skill were {esc(g_out.split(': ', 1)[-1])}. This brief was also used while the skill was built (two of its
-rules came from an earlier run), so it shows the result fairly but it is not a blind test. The
-[film page]({PAGES}/films/{compare['slug']}.html) has both prompts, both films and every number.
-
-</details>
-"""
-
-cover = data.get("cover")
-readme = f"""<div align="center">
-
-{f'<a href="{PAGES}"><img src="{cover}" width="100%" alt="Moments from films made by /video: a beach seen from above and a plant app on a sunny windowsill"></a>' if cover else ""}
-
-# /video
-
-## Type /video. Get your launch film.
-
-A Claude Code skill that makes launch and product videos (motion design, 3D, music) and checks every frame.<br>
-Open source, MIT.
-
-{BADGES}
-
-</div>
-
-## Install
-
-Inside Claude Code:
-
-```text
-/plugin marketplace add {REPO}
-/plugin install video@video-skill
-```
-
-Then open your project and type `/video`. With no other words, it reads your README, site and screenshots and makes
-that product's launch film.
-
-## Films it made
-
-Each one came from a single prompt in a clean folder, with no editing by hand. Click a film to watch it with sound and
-see its prompt, its plan and its numbers. More in the [gallery]({PAGES}).
-
-<table>
-{cells}</table>
-{cmp}
-## What it does
-
-- **Thinks like a director.** It pitches four very different ideas, shows you stills and a moving test before the
-  full render, and redoes a look that is not clearly beautiful.
-- **Motion design in code.** HTML and canvas pages with measured easing, rendered frame by frame in headless Chrome.
-- **Real 3D.** Blender with free CC0 materials, models and light from Poly Haven and ambientCG.
-- **Sound made in code.** Music on a beat grid, a sound for every event on screen, an optional local voice.
-- **Checks every frame like a phone viewer.** Frame 0, reading time, text size, the 9:16 safe area, loudness, the
-  first 3 seconds of a reel: PASS or FAIL with numbers, and it fixes every FAIL before it delivers.
-- **Learns your taste.** Your reactions go to `.video/taste.md` in your project and win over its defaults.
-
-```text
-/video a 20 second launch post for our search, 9:16
-/video a 16:9 hero film for the site, make it 3D
-/video learn the style of reference.mp4
-```
-
-<details><summary><b>What you need</b></summary>
-
-- Claude Code, with a Claude plan (Pro, Max, Team or Enterprise) or an API account
-- ffmpeg and Python 3 with numpy
-- Optional: Node 22 and Chrome for motion design, Blender for 3D
-
-The first run checks your tools and tells you what is missing. Everything else is free and runs on your computer: no
-API keys, no paid services.
-
-</details>
-
-<details><summary><b>What is inside</b></summary>
-
-| Part | What it does |
-|---|---|
-| [`SKILL.md`](plugins/video/skills/video/SKILL.md) | the director: understand, choose, plan, look gate, build, check, deliver, learn |
-| [`kit/`](plugins/video/skills/video/kit/README.md) | the render engine: a parallel headless Chrome renderer, a 2D canvas kit, a ray tracer |
-| [`scripts/`](plugins/video/skills/video/scripts) | `check.py` gates, `sound.py`, `voice.py`, `finish.py`, `assets.py`, `doctor.py`, `study.py`, the Blender kit |
-| [`styles/`](gallery/README.md) | {n} style cards, {full} at full depth, with a preview each |
-| [`reference/`](plugins/video/skills/video/reference) | craft rules, sound, Blender, engines, the checklist |
-
-</details>
-
-<details><summary><b>Questions and limits</b></summary>
-
-- **How long does a film take?** In the tests above, a motion design film took 6 to 32 minutes. A Blender 3D film
-  takes one to two hours on a laptop GPU. QUICK mode is one idea and a render in minutes.
-- **Does it use a lot of my plan?** A STUDIO film is a long run and uses a fair part of a Claude plan's limits.
-  QUICK is the cheap path.
-- **Which computers?** Tested on Windows 11 and macOS on Apple silicon. Linux paths are written but less tested.
-- **Styles:** {count['proven']} proven by a film, {count['studied']} measured from real work, {count['draft']} drafts.
-  See the [style library](gallery/README.md).
-- Live-action styles need your own footage. No skill can promise views.
-
-</details>
-
-MIT licence. Borrowed code and its licences: [`NOTICE.md`](plugins/video/skills/video/NOTICE.md). Fonts and gallery
-files: [`gallery/LICENSES.md`](gallery/LICENSES.md). Release notes: [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
-"""
-(ROOT / "README.md").write_text(readme, encoding="utf-8", newline="\n")
+# README.md is a hand-written launch page now (hero strip, with and without pairs, film gallery): not built here.
 
 # ---------- the Pages site (docs/) ----------
 CSS = """body{margin:0;font:17px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:#0f1115;color:#e9e6df}
@@ -266,4 +130,4 @@ for f in films + ([compare] if compare else []):
 saw only this plugin. No frame was edited by hand.</small></p>"""
     (docs / "films" / f"{f['slug']}.html").write_text(page(f["title"], inner, 1), encoding="utf-8", newline="\n")
 
-print(f"README.md, gallery/README.md, docs/: {len(films)} films, {n} styles ({full} full)")
+print(f"gallery/README.md, docs/: {len(films)} films, {n} styles ({full} full)")

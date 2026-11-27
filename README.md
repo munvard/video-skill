@@ -6,14 +6,14 @@
 
 ### Type `/video` in Claude Code. Get a finished film: 3D, motion design and sound, with every frame checked.
 
+<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a>
+
+</div>
+
 ```text
 /plugin marketplace add munvard/video-skill
 /plugin install video@video-skill
 ```
-
-<a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-1f2328" alt="MIT licence"></a> <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-d97757" alt="Claude Code plugin"></a>
-
-</div>
 
 ## Same prompt, with and without
 
