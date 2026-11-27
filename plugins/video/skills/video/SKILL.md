@@ -98,7 +98,10 @@ shot, the words and their times, and the sound. Pick the music tempo now (`pytho
 --dur 24`) and put every cut and hit on a beat or bar. Pick the engine per shot (`reference/engines.md`): the HTML kit for
 type, UI and motion design; `ray.js` for short abstract lit shots; Blender (`reference/blender.md`) for real objects and
 rich 3D worlds, with type always on top in HTML. For anything slower than real time, measure seconds per frame on 10
-frames and write the render time down; tell the user before any render over 2 hours.
+frames and write the render time down; tell the user before any render over 2 hours. A background command in Claude
+Code is stopped after at most 2 hours, so start every render that may pass about 90 minutes as several background
+commands of one shot or frame range each, with a render script that skips frames already on disk. If a render is
+stopped anyway, start the same script again at once and keep going: never end the run with frames missing.
 
 ## 5. Look gate (STUDIO)
 Before the full build, render 3 hero stills at final quality and a 6 s moving test of the hardest move:
