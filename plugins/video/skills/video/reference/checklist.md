@@ -40,37 +40,43 @@ names the real hit it matches in `reference/calibration.md`; without one it is 7
    square corners where the design is round, line-art hands?
 6. Put frame 0 next to the end card: are they both postable on their own?
 7. Open the 100% crops (`crop_*.png`): any blocky texture, square speck, banding or stretched noise is a BLOCKER.
+8. A product on a surface: at the hero frame, does it stand on it? No gap, a contact shadow that starts at the base,
+   nothing sunk in, and the shot script's `K.rests()` line says `ok`. A floating product is a BLOCKER: a viewer who is
+   told a price looks for exactly this.
+9. Glass and liquid at 100%: a visible liquid line, the background bent through the glass, no dark or silver band at
+   the base or the walls, a liquid that is not flat opaque colour, and no bright halo outside the edges. Every macro
+   sharp on its subject.
 
 ## 2. Story
-8. Frame 0 alone on a phone, sound off: would a stranger stop? Do they know what the film is about by 2 s?
-9. By the middle, do they know what the product is? By the end, where to get it? Every command or link on screen works
+10. Frame 0 alone on a phone, sound off: would a stranger stop? Do they know what the film is about by 2 s?
+11. By the middle, do they know what the product is? By the end, where to get it? Every command or link on screen works
    as typed on a fresh machine: copy it from the README with every step it needs (add a plugin marketplace before the
    install), or show the plain link. A command that fails on first try is a false claim. For an invented or unreleased
    product, no install command, package name, domain, store link or store availability ("Free on iOS and Android") a
    stranger could act on or register: a BLOCKER.
-10. One idea, one spine, one peak. No caption cards between beats, no headline list.
-11. Nothing small, expected or about safety is shown. Nothing cringe: no slogan, no wink, no fake quote.
+12. One idea, one spine, one peak. No caption cards between beats, no headline list.
+13. Nothing small, expected or about safety is shown. Nothing cringe: no slogan, no wink, no fake quote.
     The picture shows what the line says: a line that names a colour, a count or a state is checked on its frame.
 
 ## 3. Picture and joins
-12. Every join at 10 or more frames a second, then the exact two frames: ghost, jump, flash, double text?
-13. Every move: what does it follow? Does it settle on what must be read? Does it go in and straight back out?
-14. Every subject fully in frame when it matters. Nothing cut at the edge by accident.
-15. Crop UI and characters at 720 px: unfinished icons, empty panes, broken text, wrong hands or eyes?
+14. Every join at 10 or more frames a second, then the exact two frames: ghost, jump, flash, double text?
+15. Every move: what does it follow? Does it settle on what must be read? Does it go in and straight back out?
+16. Every subject fully in frame when it matters. Nothing cut at the edge by accident.
+17. Crop UI and characters at 720 px: unfinished icons, empty panes, broken text, wrong hands or eyes?
     Line breaks in every cut: a price, a date or a name never splits across two lines ("Ships March / 2027").
-16. No labels burned in ("3D render", "Real app", "Sped up", debug text).
+18. No labels burned in ("3D render", "Real app", "Sped up", debug text).
 
 ## 4. Text at 360 px wide
-17. Every needed word readable at 360 px, with contrast (scrim on bright screens), in the safe area, spelled right.
-18. Each line on screen long enough, no two captions overlapping, captions match the spoken words exactly.
+19. Every needed word readable at 360 px, with contrast (scrim on bright screens), in the safe area, spelled right.
+20. Each line on screen long enough, no two captions overlapping, captions match the spoken words exactly.
 
 ## 5. Sound
-19. Listen, or say clearly that nobody has. Effects on their events (a sound 7 frames early is a major), music cuts on
+21. Listen, or say clearly that nobody has. Effects on their events (a sound 7 frames early is a major), music cuts on
     bars, music and effects in the same key, nothing harsh.
-20. Voice at least 6 dB over music plus effects; no word under a riser.
-21. Loop: last frame and last sound flow into frame 0 with no blink and no click.
+22. Voice at least 6 dB over music plus effects; no word under a riser.
+23. Loop: last frame and last sound flow into frame 0 with no blink and no click.
 
 ## 6. Truth, rights and privacy
-22. Every claim against a source; every asset and font against a licence, credited in `post.md`.
-23. No names, emails, home paths, hostnames, notifications, keys or tokens in any frame or in the post text.
-24. Side by side with the last version the user liked: is any scene flatter, emptier or more ordinary? Then it is worse.
+24. Every claim against a source; every asset and font against a licence, credited in `post.md`.
+25. No names, emails, home paths, hostnames, notifications, keys or tokens in any frame or in the post text.
+26. Side by side with the last version the user liked: is any scene flatter, emptier or more ordinary? Then it is worse.

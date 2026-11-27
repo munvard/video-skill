@@ -48,6 +48,7 @@ What the kit gives you:
 - Light: `key()`, `rim()`, `fill()`, `area()`, `flag()` (a black card the camera cannot see).
 - Camera: `camera(loc, target, lens, fstop, focus)`, `move(cam, f0, f1, start, end, center)` with smooth eases,
   `animate()` for any other value.
+- Checks: `bounds(ob)`, `rests(ob, frame)` (does it stand on what is under it; see below).
 - Output: `output(w, h, fps, frames, folder, scale, shot)`, `render()`, `measure(n)`, `run(args)`.
 
 ## Engines
@@ -95,6 +96,35 @@ into a new folder and keep the old one).
 - A motivated camera: a slow push in that arcs a little around the hero, eased in and out. Background shapes then
   drift behind it (parallax). Keep the move small (10 to 20 degrees) so shapes never pass behind the hero's top.
 - Leave calm space above or below the hero for the HTML type.
+
+## A product that stands, glass that reads
+
+A viewer who is told a price looks hard at the product. These are the faults they find first, and each one caps the
+film however good the edit is.
+
+- **It stands on the surface.** Its lowest point touches the top of what is under it: no gap, not sunk in. Call
+  `K.rests(hero, frame=<hero frame>)` in every shot script once the scene is built (again for each frame where the
+  object or the camera moves past the base). It logs `ok`, `FLOATS` or `SINKS` with the gap in mm. Anything but `ok`
+  is fixed before a render.
+- **A contact shadow.** Where the base meets the surface there is a thin dark line, and the shadow starts at the base,
+  not beside it. A big soft key from high up gives a wide, light shadow, and from a low camera the product then looks
+  like it floats even with a gap of 0. Check the hero still at 100% where the base meets the surface. If the line is
+  missing, bring the key lower or make it smaller, or darken the surface right under the base.
+- **Glass is a shell, and the liquid fills it.** Give the glass a real wall thickness. Model the liquid as its own mesh
+  that ends just inside the inner wall, with no air gap between them (an air gap shows as a dark or silver band), and
+  a flat top as the liquid line, below the shoulder, where the viewer can see it.
+- **No dark bar at the base.** A thick solid glass base with nothing bright behind or under it renders as a dark bar.
+  Keep the base thin, or give it light to show: a bright surface under it, a rim from behind and low.
+- **Refraction shows.** Something with lines or contrast behind the bottle (the wall pattern, a rim strip) bends
+  through the glass and the liquid. Liquid that is flat opaque colour looks like plastic. In Cycles, give the liquid
+  transmission (IOR about 1.33) inside the glass (IOR about 1.45 to 1.5). EEVEE cannot refract one glass through
+  another, so render bottle hero shots in Cycles.
+- **No halo on the edges.** A rim light draws a thin bright line on the edge, inside the shape. A soft bright glow
+  outside the shape (on the cap, down the glass edge) reads as a cut-out pasted on the background. Make the rim
+  smaller or weaker, move it until the line sits on the edge, and add no glow or bloom. Check a 100% crop of the
+  hero still.
+- **A macro is sharp on its subject.** Focus on the nearest edge of the detail (the cap's front edge, the label) and
+  close the aperture for close-ups (f/5.6 to f/8) so the whole detail is sharp. Check a 100% crop.
 
 ## What fails
 

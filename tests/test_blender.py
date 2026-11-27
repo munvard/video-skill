@@ -103,6 +103,19 @@ class BlenderTier(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stdout[-2000:] + r.stderr[-2000:])
         self.assertIn("HANDHELD_MODS 3", r.stdout)
 
+    def test_rests_measures_the_gap(self):
+        # a 10 cm cube on a plane: on it, 5 mm above it, 5 mm sunk in.
+        code = (f"import sys; sys.path.insert(0, {str(KIT)!r}); import kit3d as K, bpy; K.reset(); "
+                "bpy.ops.mesh.primitive_plane_add(size=2); "
+                "bpy.ops.mesh.primitive_cube_add(size=0.1, location=(0, 0, 0.05)); c = bpy.context.object; "
+                "a = K.rests(c); c.location.z = 0.055; b = K.rests(c); c.location.z = 0.045; d = K.rests(c); "
+                "print('RESTS', round(a * 1000, 1), round(b * 1000, 1), round(d * 1000, 1))")
+        r = blender("--python-expr", code)
+        self.assertEqual(r.returncode, 0, r.stdout[-2000:] + r.stderr[-2000:])
+        self.assertIn("RESTS 0.0 5.0 -5.0", r.stdout)
+        self.assertIn("FLOATS", r.stdout)
+        self.assertIn("SINKS", r.stdout)
+
     def test_shot_renders_three_frames(self):
         out = os.path.join(self.tmp, "frames")
         r = self.run_shot(out)

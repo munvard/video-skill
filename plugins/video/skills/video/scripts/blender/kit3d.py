@@ -462,6 +462,38 @@ def bounds(ob):
     return (Vector([min(p[i] for p in pts) for i in range(3)]), Vector([max(p[i] for p in pts) for i in range(3)]))
 
 
+
+def rests(ob, frame=None, tol=0.001):
+    """Check that an object stands on what is under it: no gap (it floats, the shadow comes loose) and not sunk in.
+    Casts rays straight down at the centre and four inset points of its footprint, skipping the object's own meshes,
+    and compares its lowest point with the highest surface found. Returns the gap in metres (negative: sunk in) and
+    logs ok, FLOATS or SINKS. frame: check at this frame (call it for the hero frame of every shot that moves it)."""
+    scene = bpy.context.scene
+    if frame is not None:
+        scene.frame_set(frame)
+    bpy.context.view_layer.update()
+    own = {o.name for o in [ob] + list(ob.children_recursive)}
+    lo, hi = bounds(ob)
+    dg = bpy.context.evaluated_depsgraph_get()
+    top = None
+    for fx, fy in ((0.5, 0.5), (0.25, 0.25), (0.75, 0.25), (0.25, 0.75), (0.75, 0.75)):
+        origin = Vector((lo.x + fx * (hi.x - lo.x), lo.y + fy * (hi.y - lo.y), hi.z + 1.0))
+        for _ in range(64):  # step through the object's own faces until something else is hit
+            hit, loc, _n, _i, obj, _m = scene.ray_cast(dg, origin, Vector((0, 0, -1)))
+            if not hit:
+                break
+            if obj.original.name not in own:
+                top = loc.z if top is None else max(top, loc.z)
+                break
+            origin = loc - Vector((0, 0, 1e-5))
+    if top is None:
+        log(f"rests: nothing under {ob.name}")
+        return None
+    gap = lo.z - top
+    state = "ok" if abs(gap) <= tol else ("FLOATS" if gap > 0 else "SINKS")
+    log(f"rests: {ob.name} {state}, gap {gap * 1000:.1f} mm")
+    return gap
+
 def import_asset(path, size=None, location=(0, 0, 0), rotation=0.0, drop=(), name=None):
     """Import a .gltf, .glb or .blend (all its objects) under one parent empty and return the empty.
     size: scale so the largest side is this many meters. The asset then sits on `location`

@@ -110,6 +110,7 @@ def main():
         hero = K.import_asset(model, location=(0, 0, top), rotation=25, drop=("strap",))
     else:
         hero = bottle(top)
+    K.rests(hero)  # it must stand on the plinth: logs ok, FLOATS or SINKS with the gap
     lo, hi = K.bounds(hero)
     mid = (lo + hi) / 2
     front = (mid.x, lo.y + 0.25 * (hi.y - lo.y), mid.z + 0.08 * (hi.z - lo.z))

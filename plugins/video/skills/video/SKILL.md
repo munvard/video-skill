@@ -111,7 +111,9 @@ waiting for the user, never the gate itself: judge the moving test by the beauty
 clearly beautiful. With Blender, the stills and the test are the frames a viewer sees (plates with the type and UI on top), never
 raw plates. The Blender moving test is its own small render: only the frames of those 6 s, at half size (`--res 0.5`),
 made and judged before any full plate render starts. Rendering the full plates first and cutting the test from them is a
-full render without the gate. Frame 0 shows the product or its result on screen, not an empty device.
+full render without the gate. Frame 0 shows the product or its result on screen, not an empty device. With a product in Blender, judge beauty-pass items 8 and 9 (it stands, the glass
+reads, no halo) on the hero still at 100%, and write each shot script's `K.rests()` line in `concept.md`: a FLOATS or SINKS is
+fixed before any plate render.
 
 ## 6. Build
 1. Copy `SK/kit/templates/film.html` into `.video/<film>/` and build the film there. Every frame is a pure function of
