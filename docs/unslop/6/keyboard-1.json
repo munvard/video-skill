@@ -1,0 +1,68 @@
+{
+  "name": "keyboard-1",
+  "notes_skill_commits": [],
+  "prompt": "/video a product shot of a mechanical keyboard, a 9:16 reel for Instagram, 12 seconds, with sound",
+  "notes": [],
+  "seed": null,
+  "model": "claude-opus-5-5",
+  "plugin": true,
+  "skill_commit": "455d90e",
+  "minutes": 378.6,
+  "exit": 0,
+  "turns": 7,
+  "cost_usd_equiv": 9.865468199999995,
+  "usage": {
+    "input_tokens": 14,
+    "cache_creation_input_tokens": 6065,
+    "cache_read_input_tokens": 1308170,
+    "output_tokens": 4038,
+    "output_tokens_details": {
+      "thinking_tokens": 137
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 6065,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 987,
+        "cache_read_input_tokens": 221451,
+        "cache_creation_input_tokens": 304,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 304
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 268,
+      "outputTokens": 91896,
+      "cacheReadInputTokens": 17858541,
+      "cacheCreationInputTokens": 556846,
+      "webSearchRequests": 0,
+      "costUSD": 9.865468199999995,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 33901,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 556846,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "The reel is done and all of `check.py`'s gates pass, but it doesn't reach the 9-out-of-10 bar on every \"would a stranger stop, watch and share it\" score, and nobody has listened to the sound yet.\n\n**Video:** `.video/keys/deliver/keyboard_reel_9x16.mp4` (1080×1920, 30 fps, exactly 12.00 s, with sound)\n\n**Idea:** a keypress is the thread through the whole reel. It opens on an orange Enter key already going down, with \"Watch it type.\" Then it rides a typing wave along the home row. A keycap and its switch lift out of the board, then drop back in. A hero shot on butter yellow carries \"Swap switches. No solder.\" The fluted knob turns. At the peak (7.5 to 9.5 s), seen from above on blue felt, one press ripples out across every key. It ends on a teal card: \"Aluminium. Hot-swap. 75% layout, blank keycaps.\" Every visible press has its own click on a 120 bpm music track.\n\n**Things to know:**\n- **There is no real product in it.** You didn't name a brand, so the keyboard is an original design I built in Blender from scratch. The reel has no brand name, logo or link on purpose, and the lines on screen only describe what the render shows. If this is your keyboard, check that each line is true of it.\n- **Scores for a stranger seeing it for the first time:** grabs attention 8, clear what it is 9, holds attention 8, looks good 8, worth sharing 7, believable 8. It falls short mainly because it's a clean render, not a real product: blank caps, synthetic sound and no brand. All six scores are explained in `NOTE.md`.\n- **Movement is low.** The camera moves are gentle, which suits a calm product reel, but it reads quieter than most reels.\n- **You asked for 12 s.** That's what it is, though the reel guide prefers 15 to 30 s.\n- **I didn't publish anything.** Before posting, add your brand or handle, keep the \"3D render\" disclosure line, and listen once.\n\n**Main problems I fixed along the way:** the keycaps had their side faces inside out, the orange rendered as salmon, and some text fell outside Instagram's safe area. The worst was a broken cut in the case that buried the keys at both ends of the board. It showed on the top-down peak shot, so I rebuilt the case and re-rendered every shot.\n\n**What I'd change next:** use your real keyboard (a model or photos) and real recorded switch sounds, add legends on the keycaps, and put your brand on the end card. Those would lift every score.\n\nFiles are in `.video/keys/deliver/`:\n- `keyboard_reel_9x16.mp4`\n- `poster.jpg` (the cover frame)\n- `post.md` (the caption, disclosure line, credits and a before-you-post checklist)\n- `NOTE.md`\n- `CREDITS.md`",
+  "started": "2026-11-27 04:27"
+}
