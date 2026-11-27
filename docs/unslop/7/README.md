@@ -13,6 +13,6 @@ The plain run made one still 2D frame of a night skyline with a moon, and a glow
 
 This prompt was picked after a cheap plain run, as one of three scene prompts where plain Claude Code made flat 2D. Pairs where plain Claude Code already made good work are in [#4](../4) and [#5](../5).
 
-The Instagram reel is cut from these two films: 0.8 s of the plain film from its first frame, then four stretches of the /video film. Neither film was edited inside.
+The Instagram reel is cut from these two films. The screen is split: the plain film on top from its first frame, the /video film below from 2.0 s. At 2.4 s the /video film grows to full screen and plays on in one stretch. Neither film was edited inside.
 
 Each file is the run's summary: the prompt, the model, whether the plugin was installed, the skill commit, time, turns, cost, token usage, and the session's own final message. The full transcripts are not published because they contain local file paths. Changes to the summaries: the `plan` field (the account tier) was removed, long dashes were replaced with commas, and one local folder path in the plain run's final message was cut down to the file name.
