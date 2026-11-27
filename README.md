@@ -52,7 +52,8 @@ rules came from an earlier run), so it shows the result fairly but it is not a b
 
 Saw a reel that compares Claude Code's default video with `/video`? Each one is cut from two real runs of the same
 prompt, and the run summaries (time, turns, cost, the session's own last message) are in [docs/unslop](docs/unslop):
-[paper boat](docs/unslop/1), [tiny astronaut](docs/unslop/2).
+[paper boat](docs/unslop/1), [tiny astronaut](docs/unslop/2). Pairs where both runs were good are there too, with no
+reel: [rubber duck](docs/unslop/5).
 
 ## What it does
 

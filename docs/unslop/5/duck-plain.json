@@ -1,0 +1,68 @@
+{
+  "name": "duck-plain",
+  "notes_skill_commits": [],
+  "prompt": "/video a rubber duck on a desk helping debug code, a 9:16 reel for Instagram, 12 seconds, with sound",
+  "notes": [],
+  "seed": null,
+  "model": "claude-opus-5-5",
+  "plugin": false,
+  "skill_commit": "",
+  "minutes": 6.6,
+  "exit": 0,
+  "turns": 12,
+  "cost_usd_equiv": 1.2447599999999999,
+  "usage": {
+    "input_tokens": 18,
+    "cache_creation_input_tokens": 50636,
+    "cache_read_input_tokens": 405300,
+    "output_tokens": 37927,
+    "output_tokens_details": {
+      "thinking_tokens": 18966
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 50636,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 829,
+        "cache_read_input_tokens": 63691,
+        "cache_creation_input_tokens": 110,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 110
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-opus-5-5": {
+      "inputTokens": 18,
+      "outputTokens": 37927,
+      "cacheReadInputTokens": 405300,
+      "cacheCreationInputTokens": 50636,
+      "webSearchRequests": 0,
+      "costUSD": 1.2447599999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 18966,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 50636,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "result": "There's no `/video` command installed in this session, so I made the reel with a Python script instead. It draws an animated cartoon scene frame by frame and generates the whole soundtrack, with no AI video generator and no stock assets. The finished file is **`/Users/Shared/vsproof/duck-plain/rubber_duck_reel.mp4`**.\n\n**Specs:** 1080×1920 (9:16), 30 fps, exactly 12.0 seconds, H.264 video with stereo AAC audio. Audio loudness is −14 LUFS, a common target for Instagram. The file is about 5.2 MB.\n\n**What happens:**\n| Time | Scene |\n|---|---|\n| 0-3s | A cozy desk at night. \"python cart.py\" types out in the terminal, then an `IndexError` appears with a red flash, a screen shake and an error buzz. Caption: **\"3 hours. ONE bug.\"** |\n| 3-7s | **\"Time to explain it to the duck.\"** A speech bubble walks through the code while the duck tilts its head and the current line is highlighted, ending on `range(len(items) + 1)`. |\n| 7-9s | The music drops out, the duck **SQUEAKS** in a comic burst, and the camera zooms in. \"…PLUS ONE?! Oh no.\" The ` + 1` gets deleted one backspace at a time. |\n| 9-12s | Tests pass with a chime and the beat comes back. Confetti bursts and the duck hops three times, squeaking each time. End card: **\"RUBBER DUCK DEBUGGING, works every single time.\"** Then \"Thanks, duck.\" |\n\n**Sound:** an 80 BPM lo-fi beat, typing clicks, an error buzz, rubber-duck squeaks, a success chime, whooshes and pops. There's no voiceover; the dev's lines are in speech bubbles, so it still works with the sound off.\n\nI checked still frames from across the video, including two taken from the final file. I haven't listened to the audio, so play it once before posting. Captions sit in the top part of the frame and the bubbles in the middle, both away from the area Instagram covers at the bottom.\n\nTo change the text, timing or colours, edit `make_reel.py` in the same folder and run `python3 make_reel.py`, which re-renders in about 30 seconds. `python3 make_reel.py --preview` saves a quick sheet of still frames instead.",
+  "started": "2026-11-27 06:10"
+}
